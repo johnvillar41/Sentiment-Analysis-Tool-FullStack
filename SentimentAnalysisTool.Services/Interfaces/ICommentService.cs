@@ -1,4 +1,5 @@
-﻿using SentimentAnalysisTool.Data.Models;
+﻿using Microsoft.AspNetCore.Http;
+using SentimentAnalysisTool.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,6 @@ namespace SentimentAnalysisTool.Services.Interfaces
     public interface ICommentService
     {
         Task<ICollection<CommentModel>> FetchCommentsAsync(int pageSize, int pageNumber, string baseUrl, HttpClient httpClient);
-        Task<bool> SaveCommentsAsync(IEnumerable<CommentModel> comments, string baseUrl, HttpClient httpClient);
-        Task<bool> SaveCommentsAsync(CommentModel comment, string baseUrl, HttpClient httpClient);
+        Task<bool> UploadCsvFileAsync(IFormFile csv, string baseUrl, HttpClient httpClient);
     }
 }

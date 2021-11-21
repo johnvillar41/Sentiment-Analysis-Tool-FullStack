@@ -1,4 +1,5 @@
-﻿using SentimentAnalysisTool.Data.Models;
+﻿using Microsoft.AspNetCore.Http;
+using SentimentAnalysisTool.Data.Models;
 using SentimentAnalysisTool.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -22,22 +23,10 @@ namespace SentimentAnalysisTool.Services.Implementations
             return new List<CommentModel>();
         }
 
-        public async Task<bool> SaveCommentsAsync(IEnumerable<CommentModel> comments, string baseUrl, HttpClient httpClient)
+        public async Task<bool> UploadCsvFileAsync(IFormFile csv, string baseUrl, HttpClient httpClient)
         {
-            var response = await httpClient.PostAsJsonAsync<IEnumerable<CommentModel>>($"{baseUrl}/api/Comment", comments);
-            if (response.IsSuccessStatusCode)
-                return true;
-
-            return false;
-        }
-
-        public async Task<bool> SaveCommentsAsync(CommentModel comment, string baseUrl, HttpClient httpClient)
-        {
-            var response = await httpClient.PostAsJsonAsync<CommentModel>($"{baseUrl}/api/Comment", comment);
-            if (response.IsSuccessStatusCode)
-                return true;
-
-            return false;
+            throw new NotImplementedException();
+            //TODO 
         }
     }
 }
