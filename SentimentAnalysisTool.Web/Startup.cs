@@ -26,7 +26,7 @@ namespace SentimentAnalysisTool.Web
             services.AddControllersWithViews();
             services.AddHttpClient("SentimentAnalysisTool.Api", m =>
             {
-                m.BaseAddress = new Uri("");
+                m.BaseAddress = new Uri("https://localhost:44332/");
                 m.DefaultRequestHeaders.Add("Apikey", Configuration.GetValue<string>("Apikey"));
             });
         }
