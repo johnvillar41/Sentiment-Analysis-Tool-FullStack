@@ -17,20 +17,27 @@ namespace SentimentAnalysisTool.Services.Implementations
             response.EnsureSuccessStatusCode();
 
             if (response.IsSuccessStatusCode)
-            {
                 return await response.Content.ReadAsAsync<ICollection<CommentModel>>();
-            }
+
             return new List<CommentModel>();
         }
 
-        public Task<bool> SaveCommentsAsync(IEnumerable<CommentModel> comments, string baseUrl, HttpClient httpClient)
+        public async Task<bool> SaveCommentsAsync(IEnumerable<CommentModel> comments, string baseUrl, HttpClient httpClient)
         {
-            throw new NotImplementedException();
+            var response = await httpClient.PostAsJsonAsync<IEnumerable<CommentModel>>($"{baseUrl}/api/Comment", comments);
+            if (response.IsSuccessStatusCode)
+                return true;
+
+            return false;
         }
 
-        public Task<bool> SaveCommentsAsync(CommentModel comment, string baseUrl, HttpClient httpClient)
+        public async Task<bool> SaveCommentsAsync(CommentModel comment, string baseUrl, HttpClient httpClient)
         {
-            throw new NotImplementedException();
+            var response = await httpClient.PostAsJsonAsync<CommentModel>($"{baseUrl}/api/Comment", comment);
+            if (response.IsSuccessStatusCode)
+                return true;
+
+            return false;
         }
     }
 }
