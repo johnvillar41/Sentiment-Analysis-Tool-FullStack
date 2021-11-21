@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SentimentAnalysisTool.Services.Implementations;
+using SentimentAnalysisTool.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace SentimentAnalysisTool.Web
@@ -29,6 +32,8 @@ namespace SentimentAnalysisTool.Web
                 m.BaseAddress = new Uri("https://localhost:44332/");
                 m.DefaultRequestHeaders.Add("Apikey", Configuration.GetValue<string>("Apikey"));
             });
+            services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<HttpClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

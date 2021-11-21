@@ -11,23 +11,24 @@ namespace SentimentAnalysisTool.Services.Implementations
 {
     public class CommentService : ICommentService
     {
-        private readonly HttpClient _httpClient;
-        public CommentService(HttpClient httpClient)
+        public async Task<ICollection<CommentModel>> FetchCommentsAsync(int pageSize, int pageNumber, string baseUrl, HttpClient httpClient)
         {
-            _httpClient = httpClient;
+            var response = await httpClient.GetAsync($"{baseUrl}/api/Comment/{pageSize}/{pageNumber}");
+            response.EnsureSuccessStatusCode();
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<ICollection<CommentModel>>();
+            }
+            return new List<CommentModel>();
         }
 
-        public Task<IEnumerable<CommentModel>> FetchCommentsAsync(int pageSize, int pageNumber)
+        public Task<bool> SaveCommentsAsync(IEnumerable<CommentModel> comments, string baseUrl, HttpClient httpClient)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> SaveCommentsAsync(IEnumerable<CommentModel> comments)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> SaveCommentsAsync(CommentModel comment)
+        public Task<bool> SaveCommentsAsync(CommentModel comment, string baseUrl, HttpClient httpClient)
         {
             throw new NotImplementedException();
         }

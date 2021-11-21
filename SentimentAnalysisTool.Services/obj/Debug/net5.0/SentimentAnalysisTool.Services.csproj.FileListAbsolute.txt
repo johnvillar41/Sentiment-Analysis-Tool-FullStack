@@ -10,3 +10,6 @@ C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Serv
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Services\obj\Debug\net5.0\SentimentAnalysisTool.Services.dll
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Services\obj\Debug\net5.0\ref\SentimentAnalysisTool.Services.dll
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Services\obj\Debug\net5.0\SentimentAnalysisTool.Services.pdb
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Services\bin\Debug\net5.0\SentimentAnalysisTool.Data.dll
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Services\bin\Debug\net5.0\SentimentAnalysisTool.Data.pdb
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Services\obj\Debug\net5.0\SentimentAnalysisTool.Services.csproj.CopyComplete
