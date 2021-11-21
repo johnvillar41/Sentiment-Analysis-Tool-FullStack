@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "SentimentAnalysisTool.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/SentimentAnalysisTool.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SentimentAnalysisTool.Data.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "SentimentAnalysisTool.Data/1.0.0": {
+      "type": "project",
+      "path": "../SentimentAnalysisTool.Data/SentimentAnalysisTool.Data.csproj",
+      "msbuildProject": "../SentimentAnalysisTool.Data/SentimentAnalysisTool.Data.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "SentimentAnalysisTool.Data >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Villar\\.nuget\\packages\\": {},
@@ -38,7 +57,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Villar\\Desktop\\SentimentAnalysisToolFrontEnd\\SentimentAnalysisTool.Data\\SentimentAnalysisTool.Data.csproj": {
+              "projectPath": "C:\\Users\\Villar\\Desktop\\SentimentAnalysisToolFrontEnd\\SentimentAnalysisTool.Data\\SentimentAnalysisTool.Data.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
