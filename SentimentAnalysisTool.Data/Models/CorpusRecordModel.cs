@@ -8,8 +8,8 @@ namespace SentimentAnalysisTool.Data.Models
 {
     public class CorpusRecordModel
     {
-        public int CorpusRecordId { get; set; }
-        public RecordModel Record { get; set; }
-        public CorpusTypeModel CorpusType { get; set; }
+        public int CorpusRecordsId { get; set; }
+        public int RecordId { get; set; }
+        public int CorpusTypeId { get; set; }
     }
 }
