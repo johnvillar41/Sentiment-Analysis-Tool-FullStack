@@ -15,9 +15,9 @@ namespace SentimentAnalysisTool.Services.Implementations
         public async Task<ICollection<CommentModel>> FetchCommentsAsync(int pageSize, int pageNumber, string baseUrl, HttpClient httpClient)
         {
             var response = await httpClient.GetAsync($"{baseUrl}/api/Comment/{pageSize}/{pageNumber}");
-            response.EnsureSuccessStatusCode();
+            var responseCode = response.EnsureSuccessStatusCode();
 
-            if (response.IsSuccessStatusCode)
+            if (responseCode.IsSuccessStatusCode)
                 return await response.Content.ReadAsAsync<ICollection<CommentModel>>();
 
             return new List<CommentModel>();
