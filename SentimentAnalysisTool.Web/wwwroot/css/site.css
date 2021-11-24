@@ -37,6 +37,11 @@ p, h1 {
     background-image: url('../images/sentiment_analysis_image.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size:contain;
+    background-size: contain;
+    border-radius: 50%;
 }
 
+.body-container {
+    margin-left: 5%;
+    margin-right: 5%;
+}
