@@ -362,3 +362,9 @@ C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Features.dll
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\bin\Debug\net5.0\System.IO.Pipelines.dll
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\SentimentAnalysisTool.Web.RazorComponent.input.cache
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\RazorDeclaration\Components\_Imports.razor.g.cs
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\SentimentAnalysisTool.Web.RazorComponent.output.cache
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\RazorDeclaration\SentimentAnalysisTool.Web.dll
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Components\_Imports.razor.g.cs
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\Analytics\Index.cshtml.g.cs

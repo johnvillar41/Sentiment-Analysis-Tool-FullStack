@@ -27,6 +27,7 @@ namespace SentimentAnalysisTool.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddServerSideBlazor();
             services.AddHttpClient("SentimentAnalysisTool.Api", m =>
             {
                 m.BaseAddress = new Uri("https://localhost:44332/");
@@ -61,6 +62,7 @@ namespace SentimentAnalysisTool.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapBlazorHub();
             });
         }
     }
