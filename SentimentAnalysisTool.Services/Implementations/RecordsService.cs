@@ -32,5 +32,16 @@ namespace SentimentAnalysisTool.Services.Implementations
 
             return false;
         }
+
+        public async Task<RecordModel> FetchRecordsAsync(int recordId, string baseUrl, HttpClient httpClient)
+        {
+            var response = await httpClient.GetAsync($"{baseUrl}/api/Records/{recordId}");
+            var responseCode = response.IsSuccessStatusCode;
+
+            if (responseCode)
+                return await response.Content.ReadAsAsync<RecordModel>();
+
+            return null;
+        }
     }
 }
