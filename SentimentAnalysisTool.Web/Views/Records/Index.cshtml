@@ -4,20 +4,26 @@
     <div class="col-12">
         <div class="card mb-2">
             <div class="card-body">
-                <p class="text-black-50">Settings and Parameters here</p>
-            </div>            
+                <div class="row">
+                    <button type="button" class="btn btn-outline-primary m-1">Settings_1</button>
+                    <button type="button" class="btn btn-outline-primary m-1">Settings_2</button>
+                    <button type="button" class="btn btn-outline-primary m-1">Settings_3</button>
+                    <button type="button" class="btn btn-outline-primary m-1">Settings_4</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-6">
-        <div class="card">
+        <div class="card shadow-sm card-height">
             <div class="card-header">
-                Comment Results
+                Comments <br/>
+                Showing 10 Results
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table table-responsive table-height">
                     <thead class="thead-light">
                         <tr>
                             <th scope="col">Comment Id</th>
@@ -28,27 +34,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">10001</th>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
-                            <td><span class="badge badge-pill badge-success">5/5</span></td>
-                            <td><span class="badge badge-success">Positive</span></td>
-                            <td>30 Nov 2021</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">10002</th>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
-                            <td><span class="badge badge-pill badge-danger">1/5</span></td>
-                            <td><span class="badge badge-danger">Negative</span></td>
-                            <td>30 Nov 2021</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">10003</th>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
-                            <td><span class="badge badge-pill badge-dark">3/5</span></td>
-                            <td><span class="badge badge-dark">Neutral</span></td>
-                            <td>30 Nov 2021</td>
-                        </tr>
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            <tr>
+                                <th scope="row">10001</th>
+                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
+                                <td><span class="badge badge-pill badge-success">5/5</span></td>
+                                <td><span class="badge badge-success">Positive</span></td>
+                                <td>30 Nov 2021</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">10002</th>
+                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
+                                <td><span class="badge badge-pill badge-danger">1/5</span></td>
+                                <td><span class="badge badge-danger">Negative</span></td>
+                                <td>30 Nov 2021</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">10003</th>
+                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
+                                <td><span class="badge badge-pill badge-dark">3/5</span></td>
+                                <td><span class="badge badge-dark">Neutral</span></td>
+                                <td>30 Nov 2021</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
                 <nav aria-label="Page navigation example">
@@ -61,13 +70,13 @@
                     </ul>
                 </nav>
             </div>
-           
+
         </div>
     </div>
     <div class="col-6">
         <div class="row">
             <div class="col-6">
-                <div class="card mb-2">
+                <div class="card mb-2 shadow-sm card-chart-height">
                     <div class="card-body">
                         This is some text within a card body.
                     </div>
@@ -75,7 +84,7 @@
             </div>
 
             <div class="col-6">
-                <div class="card mb-2">
+                <div class="card mb-2 shadow-sm card-chart-height">
                     <div class="card-body">
                         This is some text within a card body.
                     </div>
@@ -84,7 +93,7 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <div class="card mb-2">
+                <div class="card mb-2 shadow-sm card-chart-height">
                     <div class="card-body">
                         This is some text within a card body.
                     </div>
@@ -92,7 +101,7 @@
             </div>
 
             <div class="col-6">
-                <div class="card mb-2">
+                <div class="card mb-2 shadow-sm card-chart-height">
                     <div class="card-body">
                         This is some text within a card body.
                     </div>
@@ -101,7 +110,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <div class="card mb-2">
+                <div class="card mb-2 shadow-sm card-chart-height">
                     <div class="card-body">
                         This is some text within a card body.
                     </div>

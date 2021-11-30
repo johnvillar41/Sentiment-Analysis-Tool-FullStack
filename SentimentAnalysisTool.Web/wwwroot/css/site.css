@@ -1,6 +1,6 @@
 ﻿body {
     margin-bottom: 60px;
-    background-color: darkblue;
+    background-color: #D3D3D3;
 }
 
 .footer {
@@ -12,24 +12,24 @@
 }
 
 .nav-item {
-    color: white;
+    color: black;
 }
 
 .navbar-brand {
-    color: white;
+    color: black;
 }
 
 .nav-link {
-    color: white;
+    color: black;
 }
 
 p, h1 {
-    color: white;
+    color: black;
 }
 
 .jumbotron {
     height: 100vh;
-    background-color: darkblue;
+    background-color: #D3D3D3;
 }
 
 .img-wrapper {
@@ -44,4 +44,16 @@ p, h1 {
 .body-container {
     margin-left: 5%;
     margin-right: 5%;
+}
+
+.card-height {
+    height: 100vh;
+}
+
+.card-chart-height {
+    height: 30vh;
+}
+
+.table-height {
+    height: 80vh;
 }
