@@ -34,6 +34,7 @@ namespace SentimentAnalysisTool.Web
                 m.DefaultRequestHeaders.Add("Apikey", Configuration.GetValue<string>("Apikey"));
             });
             services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<IRecordsService, RecordsService>();
             services.AddTransient<HttpClient>();
         }
 
