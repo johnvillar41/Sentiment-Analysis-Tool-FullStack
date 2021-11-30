@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SentimentAnalysisTool.Web.Enums;
+using System;
 
 namespace SentimentAnalysisTool.Web.Models
 {
@@ -8,5 +9,6 @@ namespace SentimentAnalysisTool.Web.Models
         public int CommentScore { get; set; }
         public string CommentDetail { get; set; }
         public DateTime Date { get; set; }
+        public SentimentType Sentiment { get; set; }
     }
 }
