@@ -54,6 +54,10 @@ p, h1 {
     height: 30vh;
 }
 
+.card-chart-height-2 {
+    height: 38vh;
+}
+
 .table-height {
     height: 80vh;
 }
