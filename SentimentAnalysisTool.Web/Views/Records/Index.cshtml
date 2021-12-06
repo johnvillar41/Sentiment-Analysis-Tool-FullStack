@@ -5,7 +5,11 @@
         <div class="card mb-2">
             <div class="card-body">
                 <div class="row">
-                    <button type="button" class="btn btn-outline-primary m-1">Upload Excel File</button>
+                    <form asp-controller="Records" asp-action="UploadCsvFile" method="post"
+                          enctype="multipart/form-data">
+                        <input type="file" name="file" />
+                        <button type="submit">Upload File</button>
+                    </form>
                     <button type="button" class="btn btn-outline-primary m-1">Settings_2</button>
                     <button type="button" class="btn btn-outline-primary m-1">Settings_3</button>
                     <button type="button" class="btn btn-outline-primary m-1">Settings_4</button>

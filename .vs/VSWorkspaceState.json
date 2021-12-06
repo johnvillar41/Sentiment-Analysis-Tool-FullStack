@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\SentimentAnalysisTool.Web"
   ],
+  "SelectedNode": "\\SentimentAnalysisTool.Web\\SentimentAnalysisTool.Web.sln",
   "PreviewInSolutionExplorer": false
 }

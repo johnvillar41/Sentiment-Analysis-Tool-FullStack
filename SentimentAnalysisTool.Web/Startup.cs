@@ -26,15 +26,10 @@ namespace SentimentAnalysisTool.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();           
-            services.AddHttpClient("SentimentAnalysisTool.Api", m =>
-            {
-                m.BaseAddress = new Uri("https://localhost:5000/");
-                m.DefaultRequestHeaders.Add("Apikey", Configuration.GetValue<string>("Apikey"));
-            });
+            services.AddControllersWithViews();          
+           
             services.AddTransient<ICommentService, CommentService>();
-            services.AddTransient<IRecordsService, RecordsService>();
-            services.AddTransient<HttpClient>();
+            services.AddTransient<IRecordsService, RecordsService>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
