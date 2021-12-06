@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace SentimentAnalysisTool.Services.Implementations
@@ -20,20 +21,21 @@ namespace SentimentAnalysisTool.Services.Implementations
         {
             _httpClient = new HttpClient();
         }
-        public async Task<bool> AddRecordAsync(IFormFile file, string baseUrl)
+        public async Task<CommentModel<T>> AddRecordAsync<T>(IFormFile file, string baseUrl)
         {
             _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
             var form = new MultipartFormDataContent();
             using var ms = new MemoryStream();
             file.CopyTo(ms);
             var fileBytes = ms.ToArray();
-            string s = Convert.ToBase64String(fileBytes);
+            var s = Convert.ToBase64String(fileBytes);
             form.Add(new ByteArrayContent(fileBytes, 0, fileBytes.Length), "file", file.FileName);
             var response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=Vader", form);
-            if (response.IsSuccessStatusCode)
-                return true;
-
-            return false;
+            var responseContent = await response.Content.ReadAsStreamAsync();
+            var jsonModel = await JsonSerializer.DeserializeAsync<CommentModel<T>>
+                          (responseContent,
+                 new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+            return jsonModel;           
         }
 
         public async Task<bool> DeleteRecordAsync(int recordId, string baseUrl)

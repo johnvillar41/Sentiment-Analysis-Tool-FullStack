@@ -11,7 +11,7 @@ namespace SentimentAnalysisTool.Services.Interfaces
 {
     public interface IRecordsService
     {
-        Task<bool> AddRecordAsync(IFormFile file, string baseUrl);
+        Task<CommentModel<T>> AddRecordAsync<T>(IFormFile file, string baseUrl);
         Task<bool> DeleteRecordAsync(int recordId, string baseUrl);
         Task<RecordModel> FetchRecordsAsync(int recordId, string baseUrl);
     }
