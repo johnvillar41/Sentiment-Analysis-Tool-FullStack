@@ -26,11 +26,10 @@ namespace SentimentAnalysisTool.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            services.AddServerSideBlazor();
+            services.AddControllersWithViews();           
             services.AddHttpClient("SentimentAnalysisTool.Api", m =>
             {
-                m.BaseAddress = new Uri("https://localhost:44332/");
+                m.BaseAddress = new Uri("https://localhost:5000/");
                 m.DefaultRequestHeaders.Add("Apikey", Configuration.GetValue<string>("Apikey"));
             });
             services.AddTransient<ICommentService, CommentService>();
@@ -62,8 +61,7 @@ namespace SentimentAnalysisTool.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapBlazorHub();
+                    pattern: "{controller=Home}/{action=Index}/{id?}");                
             });
         }
     }
