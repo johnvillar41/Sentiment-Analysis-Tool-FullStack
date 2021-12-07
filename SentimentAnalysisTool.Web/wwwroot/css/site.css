@@ -61,3 +61,7 @@ p, h1 {
 .table-height {
     height: 80vh;
 }
+
+.card {
+    background-color: #D3D3D3;
+}
