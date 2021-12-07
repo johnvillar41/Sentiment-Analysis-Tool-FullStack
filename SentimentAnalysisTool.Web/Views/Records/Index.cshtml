@@ -8,12 +8,15 @@
                     <form asp-controller="Records" asp-action="UploadCsvFile" method="post"
                           enctype="multipart/form-data">
                         <input type="file" name="file" />
-                        <input type="hidden" name="algorithmnType" value="@SentimentAnalysisTool.Web.Enums.AlgorithmnType.Hybrid" />
-                        <button type="submit">Upload File</button>
+                        <input type="radio" name="algorithmnType" value="@SentimentAnalysisTool.Web.Enums.AlgorithmnType.Hybrid" />
+                        <label>@nameof(SentimentAnalysisTool.Web.Enums.AlgorithmnType.Hybrid)</label>
+                        <input type="radio" name="algorithmnType" value="@SentimentAnalysisTool.Web.Enums.AlgorithmnType.SentiWordNet">
+                        <label>@nameof(SentimentAnalysisTool.Web.Enums.AlgorithmnType.SentiWordNet)</label>
+                        <input type="radio" name="algorithmnType" value="@SentimentAnalysisTool.Web.Enums.AlgorithmnType.Vader">
+                        <label>@nameof(SentimentAnalysisTool.Web.Enums.AlgorithmnType.Vader)</label>
+                        <button type="submit" class="btn btn-success">Upload File</button>
                     </form>
-                    <button type="button" class="btn btn-outline-primary m-1">Settings_2</button>
-                    <button type="button" class="btn btn-outline-primary m-1">Settings_3</button>
-                    <button type="button" class="btn btn-outline-primary m-1">Settings_4</button>
+                    
                 </div>
             </div>
         </div>
