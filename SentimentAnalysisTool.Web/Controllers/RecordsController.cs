@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using SentimentAnalysisTool.Data.Models;
 using SentimentAnalysisTool.Services.Interfaces;
 using SentimentAnalysisTool.Web.Enums;
-using SentimentAnalysisTool.Web.Models;
+using SentimentAnalysisTool.Web.Models.CommentViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

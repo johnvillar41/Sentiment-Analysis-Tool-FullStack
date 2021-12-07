@@ -1,7 +1,5 @@
-﻿using System;
+﻿using SentimentAnalysisTool.Web.Models.CommentViewModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SentimentAnalysisTool.Web.Models
 {

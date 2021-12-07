@@ -2,15 +2,10 @@
 using SentimentAnalysisTool.Web.Enums;
 using System;
 
-namespace SentimentAnalysisTool.Web.Models
+namespace SentimentAnalysisTool.Web.Models.CommentViewModels
 {
-    public class CommentVaderViewModel
-    {
-        public int CommentId { get; set; }
-        public int CommentScore { get; set; }
-        public string CommentDetail { get; set; }
-        public DateTime Date { get; set; }
-        public SentimentType CommentPolarity { get; set; }
+    public class CommentVaderViewModel : BaseCommentViewModel
+    {       
         public VaderModel VaderGrade { get; set; }
         public CommentVaderViewModel(CommentModel<VaderModel> comment)
         {
