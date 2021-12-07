@@ -4,12 +4,13 @@
     <div class="col-12">
         <div class="card mb-2">
             <div class="card-body">
+
                 <div class="row">
                     <form asp-controller="Records" asp-action="UploadCsvFile" method="post"
                           enctype="multipart/form-data">
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="file" id="customfile" />
+                                <input type="file" class="custom-file-input" name="file" id="customfile" required />
                                 <label class="custom-file-label" for="customfile">Choose file</label>
                             </div>
                         </div>
@@ -26,9 +27,14 @@
                             <label class="form-check-label">@nameof(SentimentAnalysisTool.Web.Enums.AlgorithmnType.Vader)</label>
                         </div>
 
-                        <button type="submit" class="btn btn-success">Upload File</button>
+                        <button type="submit" id="btnSubmitFile" class="btn btn-dark">Upload File</button>
                     </form>
 
+                </div>
+                <div class="row">
+                    <div class="alert alert-danger" id="warningMessage" role="alert" style="display:none;">
+                        Please upload csv files only
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,6 +123,15 @@
                 name += '\"' + files[i].name + '\"' + (i != files.length - 1 ? ", " : "");
             }
             $(".custom-file-label").html(name);
+        });
+        $('#customfile').change(function () {
+            var fileExtension = ['xlsx', 'csv'];
+            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                $('#warningMessage').show();
+                $('#customfile').val("");
+            } else {
+                $('#warningMessage').hide();
+            }
         });
     </script>
 }
