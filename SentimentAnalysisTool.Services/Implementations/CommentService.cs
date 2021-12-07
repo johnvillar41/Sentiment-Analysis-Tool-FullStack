@@ -12,15 +12,15 @@ namespace SentimentAnalysisTool.Services.Implementations
 {
     public class CommentService : ICommentService
     {
-        public async Task<ICollection<CommentModel>> FetchCommentsAsync(int pageSize, int pageNumber, string baseUrl, HttpClient httpClient)
+        public async Task<ICollection<CommentModel<T>>> FetchCommentsAsync<T>(int pageSize, int pageNumber, string baseUrl, HttpClient httpClient)
         {
             var response = await httpClient.GetAsync($"{baseUrl}/api/Comment/{pageSize}/{pageNumber}");
             var responseCode = response.EnsureSuccessStatusCode();
 
             if (responseCode.IsSuccessStatusCode)
-                return await response.Content.ReadAsAsync<ICollection<CommentModel>>();
+                return await response.Content.ReadAsAsync<ICollection<CommentModel<T>>>();
 
-            return new List<CommentModel>();
+            return new List<CommentModel<T>>();
         }
 
         public async Task<bool> UploadCsvFileAsync(IFormFile csv, string baseUrl, HttpClient httpClient)

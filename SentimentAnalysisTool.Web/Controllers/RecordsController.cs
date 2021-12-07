@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SentimentAnalysisTool.Data.Models;
 using SentimentAnalysisTool.Services.Interfaces;
+using SentimentAnalysisTool.Web.Enums;
 using SentimentAnalysisTool.Web.Models;
 using System.Threading.Tasks;
 
@@ -30,13 +32,17 @@ namespace SentimentAnalysisTool.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]        
-        public async Task<IActionResult> UploadCsvFile(IFormFile file)
+        public async Task<IActionResult> UploadCsvFile(
+            [FromForm] IFormFile file,
+            [FromForm] AlgorithmnType algorithmn)
         {
+            if(algorithmn == AlgorithmnType.Vader) 
+                return Ok(await _recordsService.AddRecordAsync<VaderModel>(file, _configuration.GetValue<string>("BaseUrl")));
+            if(algorithmn == AlgorithmnType.SentiWordNet)
+                return Ok(await _recordsService.AddRecordAsync<SentiWordNetModel>(file, _configuration.GetValue<string>("BaseUrl")));
+            if (algorithmn == AlgorithmnType.Hybrid)
+                return Ok(await _recordsService.AddRecordAsync<HybridModel>(file, _configuration.GetValue<string>("BaseUrl")));
             
-            var result = await _recordsService.AddRecordAsync(file, _configuration.GetValue<string>("BaseUrl"));
-            if (result)
-                return RedirectToAction(nameof(Index)); //TODO ADD Return for RecordViewModel after uploading file
-
             return BadRequest();
         }
     }

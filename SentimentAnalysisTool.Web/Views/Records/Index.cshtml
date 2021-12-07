@@ -8,6 +8,7 @@
                     <form asp-controller="Records" asp-action="UploadCsvFile" method="post"
                           enctype="multipart/form-data">
                         <input type="file" name="file" />
+                        <input type="hidden" name="algorithmnType" value="Vader" />
                         <button type="submit">Upload File</button>
                     </form>
                     <button type="button" class="btn btn-outline-primary m-1">Settings_2</button>

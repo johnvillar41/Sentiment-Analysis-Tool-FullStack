@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace SentimentAnalysisTool.Api.Helpers.AlgorithmModels
+namespace SentimentAnalysisTool.Data.Models
 {
     public class SentiWordNetModel
     {        
