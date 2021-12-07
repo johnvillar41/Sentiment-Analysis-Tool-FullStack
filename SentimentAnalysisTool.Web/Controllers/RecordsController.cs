@@ -36,8 +36,12 @@ namespace SentimentAnalysisTool.Web.Controllers
             [FromForm] IFormFile file,
             [FromForm] AlgorithmnType algorithmn)
         {
-            if(algorithmn == AlgorithmnType.Vader) 
-                return Ok(await _recordsService.AddRecordAsync<VaderModel>(file, _configuration.GetValue<string>("BaseUrl")));
+            if (algorithmn == AlgorithmnType.Vader)
+            {
+                var commentVaderObject = await _recordsService.AddRecordAsync<VaderModel>(file, _configuration.GetValue<string>("BaseUrl"));
+                return Ok(commentVaderObject);
+            }
+            
             if(algorithmn == AlgorithmnType.SentiWordNet)
                 return Ok(await _recordsService.AddRecordAsync<SentiWordNetModel>(file, _configuration.GetValue<string>("BaseUrl")));
             if (algorithmn == AlgorithmnType.Hybrid)

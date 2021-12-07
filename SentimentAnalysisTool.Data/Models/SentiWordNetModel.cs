@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace SentimentAnalysisTool.Data.Models
 {
     public class SentiWordNetModel
     {        
-        [JsonPropertyName("polarityScore")]
+        [JsonProperty("polarityScore")]
         public double PolarityScore { get; set; }
 
-        [JsonPropertyName("positiveScore")]
+        [JsonProperty("positiveScore")]
         public double PositiveScore { get; set; }
 
-        [JsonPropertyName("negativeScore")]
+        [JsonProperty("negativeScore")]
         public double NegativeScore { get; set; }
 
-        [JsonPropertyName("sentimentScore")]
+        [JsonProperty("sentimentScore")]
         public string SentimentScore { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,26 +10,26 @@ namespace SentimentAnalysisTool.Data.Models
 {    
     public class CommentModel<T>
     {
-        [JsonPropertyName("commentId")]
+        [JsonProperty("commentId")]
         public int CommentId { get; set; }
 
-        [JsonPropertyName("recordId")]
+        [JsonProperty("recordId")]
         public int RecordId { get; set; }
 
-        [JsonPropertyName("commentScore")]
+        [JsonProperty("commentScore")]
         public int CommentScore { get; set; }
 
-        [JsonPropertyName("commentPolarity")]
+        [JsonProperty("commentPolarity")]
         public string CommentPolarity { get; set; }
 
-        [JsonPropertyName("commentDetail")]
+        [JsonProperty("commentDetail")]
         public string CommentDetail { get; set; }
 
-        [JsonPropertyName("date")]
+        [JsonProperty("date")]
         public DateTime Date { get; set; }
-
-        [JsonPropertyName("algorithmnObject")]
-        T AlgorithmnModel { get; set; }
+        
+        [JsonProperty("algorithmnObject")]
+        public T AlgorithmnModel { get; set; }        
     }
 
 }

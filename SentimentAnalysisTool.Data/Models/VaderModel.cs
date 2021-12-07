@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace SentimentAnalysisTool.Data.Models
 {
     public class VaderModel
     {       
-        [JsonPropertyName("compoundScore")]
+        [JsonProperty("compoundScore")]
         public string CompoundScore { get; set; }
 
-        [JsonPropertyName("compoundValue")]
+        [JsonProperty("compoundValue")]
         public double CompoundValue { get; set; }
 
-        [JsonPropertyName("negativeValue")]
+        [JsonProperty("negativeValue")]
         public double NegativeValue { get; set; }
 
-        [JsonPropertyName("neutralValue")]
+        [JsonProperty("neutralValue")]
         public double NeutralValue { get; set; }
 
-        [JsonPropertyName("positiveValue")]
+        [JsonProperty("positiveValue")]
         public double PositiveValue { get; set; }        
     }
 }

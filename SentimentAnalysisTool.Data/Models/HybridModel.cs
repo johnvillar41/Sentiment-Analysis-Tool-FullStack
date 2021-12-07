@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace SentimentAnalysisTool.Data.Models
 {
@@ -11,12 +7,12 @@ namespace SentimentAnalysisTool.Data.Models
         /// <summary>
         /// This pertains to the value of the SentimentType
         /// </summary>
-        [JsonPropertyName("hybridScore")]
+        [JsonProperty("hybridScore")]
         public string HybridScore { get; set; }
         /// <summary>
         /// This pertains to the numerical value of the computed SentimentScore
         /// </summary>
-        [JsonPropertyName("hybridValue")]
+        [JsonProperty("hybridValue")]
         public double HybridValue { get; set; }
     }
 }
