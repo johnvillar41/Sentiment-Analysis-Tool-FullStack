@@ -1,4 +1,4 @@
-﻿@model SentimentAnalysisTool.Web.Models.RecordViewModel
+﻿@model IList<SentimentAnalysisTool.Web.Models.CommentVaderViewModel>
 
 <div class="row">
     <div class="col-12">
@@ -23,7 +23,7 @@
     <div class="col-6">
         <div class="card shadow-sm card-height">
             <div class="card-header">
-                Comments <br/>
+                Comments <br />
                 Showing 10 Results
             </div>
             <div class="card-body">
@@ -38,29 +38,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (int i = 0; i < 5; i++)
+                        @foreach (var item in Model)
                         {
                             <tr>
-                                <th scope="row">10001</th>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
-                                <td><span class="badge badge-pill badge-success">5/5</span></td>
-                                <td><span class="badge badge-success">Positive</span></td>
-                                <td>30 Nov 2021</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">10002</th>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
-                                <td><span class="badge badge-pill badge-danger">1/5</span></td>
-                                <td><span class="badge badge-danger">Negative</span></td>
-                                <td>30 Nov 2021</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">10003</th>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
-                                <td><span class="badge badge-pill badge-dark">3/5</span></td>
-                                <td><span class="badge badge-dark">Neutral</span></td>
-                                <td>30 Nov 2021</td>
-                            </tr>
+                                <th scope="row">@item.CommentId</th>
+                                <td>@item.CommentDetail</td>
+                                <td><span class="badge badge-pill badge-success">@item.CommentScore / 5</span></td>
+                                @if (item.CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Positive)
+                                {
+                                    <td><span class="badge badge-success">@item.CommentPolarity</span></td>
+                                }
+                                else if (item.CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Negative)
+                                {
+                                    <td><span class="badge badge-danger">@item.CommentPolarity</span></td>
+                                }
+                                else
+                                {
+                                    <td><span class="badge badge-dark">@item.CommentPolarity</span></td>
+                                }
+
+                                <td>@item.Date</td>
+                            </tr>                            
                         }
                     </tbody>
                 </table>

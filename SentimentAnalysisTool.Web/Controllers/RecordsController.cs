@@ -5,6 +5,8 @@ using SentimentAnalysisTool.Data.Models;
 using SentimentAnalysisTool.Services.Interfaces;
 using SentimentAnalysisTool.Web.Enums;
 using SentimentAnalysisTool.Web.Models;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SentimentAnalysisTool.Web.Controllers
@@ -22,16 +24,16 @@ namespace SentimentAnalysisTool.Web.Controllers
             _configuration = configuration;
         }
 
-        public IActionResult Index(RecordViewModel record)
+        public IActionResult Index(IList<CommentVaderViewModel> comments)
         {
-            if(record == null)
-                return View();
+            if (comments.Count == 0)
+                comments = new List<CommentVaderViewModel>();
 
-            return View(record);
+            return View(comments);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UploadCsvFile(
             [FromForm] IFormFile file,
             [FromForm] AlgorithmnType algorithmn)
@@ -39,14 +41,15 @@ namespace SentimentAnalysisTool.Web.Controllers
             if (algorithmn == AlgorithmnType.Vader)
             {
                 var commentVaderObject = await _recordsService.AddRecordAsync<VaderModel>(file, _configuration.GetValue<string>("BaseUrl"));
-                return Ok(commentVaderObject);
+                var commentViewModels = commentVaderObject.Select(m => new CommentVaderViewModel(m)).ToList();
+                return View(nameof(Index), commentViewModels);
             }
-            
-            if(algorithmn == AlgorithmnType.SentiWordNet)
+
+            if (algorithmn == AlgorithmnType.SentiWordNet)
                 return Ok(await _recordsService.AddRecordAsync<SentiWordNetModel>(file, _configuration.GetValue<string>("BaseUrl")));
             if (algorithmn == AlgorithmnType.Hybrid)
                 return Ok(await _recordsService.AddRecordAsync<HybridModel>(file, _configuration.GetValue<string>("BaseUrl")));
-            
+
             return BadRequest();
         }
     }

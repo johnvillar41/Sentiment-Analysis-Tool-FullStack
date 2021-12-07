@@ -11,7 +11,7 @@ namespace SentimentAnalysisTool.Web.Models
         public string RecordName { get; set; }
         public int PositivePercent { get; set; }
         public int NegativePercent { get; set; }
-        public IEnumerable<CommentViewModel> CommentViewModels { get; set; }
+        public IEnumerable<CommentVaderViewModel> CommentViewModels { get; set; }
         public IEnumerable<CorpusRecordViewModel> CorpusRecordViewModels { get; set; }
         public IEnumerable<WordFrequencyViewModel> WordFrequencyViewModels { get; set; }
         public IEnumerable<CorpusTypeViewModel> CorpusTypeViewModels { get; set; }
