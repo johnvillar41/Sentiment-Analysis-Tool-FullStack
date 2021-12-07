@@ -35,44 +35,44 @@ namespace SentimentAnalysisTool.Web.Controllers
             [FromForm] IFormFile file,
             [FromForm] AlgorithmnType algorithmnType)
         {
+            UploadCsvCommentViewModel uploadCsvCommentViewModel = null;
             if (algorithmnType == AlgorithmnType.Vader)
             {
                 var commentVaderObject = await _recordsService.AddRecordAsync<VaderModel>(file, _configuration.GetValue<string>("BaseUrl"));
                 var commentViewModelsVader = commentVaderObject.Select(m => new CommentVaderViewModel(m)).ToList();
-                var uploadCsvCommentViewModel = new UploadCsvCommentViewModel()
+                uploadCsvCommentViewModel = new UploadCsvCommentViewModel()
                 {
                     Vader = commentViewModelsVader,
-                    SentiWordNet = null
+                    SentiWordNet = null,
+                    Hybrid = null
                 };
-                return View(nameof(Index), uploadCsvCommentViewModel);
             }
 
             if (algorithmnType == AlgorithmnType.SentiWordNet)
             {
                 var commentVaderObject = await _recordsService.AddRecordAsync<SentiWordNetModel>(file, _configuration.GetValue<string>("BaseUrl"));
                 var commentViewModelsSentiWordnet = commentVaderObject.Select(m => new CommentSentiWordNetViewModel(m)).ToList();
-                var uploadCsvCommentViewModel = new UploadCsvCommentViewModel()
+                uploadCsvCommentViewModel = new UploadCsvCommentViewModel()
                 {
                     Vader = null,
-                    SentiWordNet = commentViewModelsSentiWordnet
+                    SentiWordNet = commentViewModelsSentiWordnet,
+                    Hybrid = null
                 };
-                return View(nameof(Index), uploadCsvCommentViewModel);
             }
 
             if (algorithmnType == AlgorithmnType.Hybrid)
             {
                 var commentVaderObject = await _recordsService.AddRecordAsync<HybridModel>(file, _configuration.GetValue<string>("BaseUrl"));
                 var commentViewModelsHybrid = commentVaderObject.Select(m => new CommentHybridViewModel(m)).ToList();
-                var uploadCsvCommentViewModel = new UploadCsvCommentViewModel()
+                uploadCsvCommentViewModel = new UploadCsvCommentViewModel()
                 {
                     Vader = null,
                     SentiWordNet = null,
                     Hybrid = commentViewModelsHybrid
-                };
-                return View(nameof(Index), uploadCsvCommentViewModel);
+                };               
             }
 
-            return BadRequest();
+            return View(nameof(Index), uploadCsvCommentViewModel);
         }
     }
 }
