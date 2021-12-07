@@ -363,3 +363,5 @@ C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\bin\Debug\net5.0\System.IO.Pipelines.dll
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\Records\Index.cshtml.g.cs
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\Records\_CommentsPartialVader.cshtml.g.cs
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\Records\_CommentsPartialSentiwordnet.cshtml.g.cs
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\Records\_CommentsPartialHybrid.cshtml.g.cs

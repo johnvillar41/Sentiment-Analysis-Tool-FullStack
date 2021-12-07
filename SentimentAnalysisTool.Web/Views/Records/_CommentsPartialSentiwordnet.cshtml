@@ -1,4 +1,4 @@
-﻿@model IList<SentimentAnalysisTool.Web.Models.CommentViewModels.CommentVaderViewModel>
+﻿@model IList<SentimentAnalysisTool.Web.Models.CommentViewModels.CommentSentiWordNetViewModel>
 @{
     bool isModelEmpty = false;
 }
@@ -81,17 +81,16 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Vader Computed Results</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">SentiWordNet Computed Results</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p><b>Compound Score: </b>@Model[i].VaderGrade.CompoundScore</p>
-                                        <p><b>Compound Value: </b>@Model[i].VaderGrade.CompoundValue</p>
-                                        <p><b>Negative Value: </b>@Model[i].VaderGrade.NegativeValue</p>
-                                        <p><b>Neutral Value: </b>@Model[i].VaderGrade.NeutralValue</p>
-                                        <p><b>Positive Value: </b>@Model[i].VaderGrade.PositiveValue</p>
+                                        <p><b>Negative Score: </b>@Model[i].SentiWordNetGrade.NegativeScore</p>
+                                        <p><b>Polarity Score: </b>@Model[i].SentiWordNetGrade.PolarityScore</p>
+                                        <p><b>Positive Score: </b>@Model[i].SentiWordNetGrade.PositiveScore</p>
+                                        <p><b>Sentiment Score: </b>@Model[i].SentiWordNetGrade.SentimentScore</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

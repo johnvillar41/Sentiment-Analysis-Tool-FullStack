@@ -18,18 +18,26 @@ namespace SentimentAnalysisTool.Services.Implementations
             _httpClient = new HttpClient();
         }
         public async Task<List<CommentModel<T>>> AddRecordAsync<T>(IFormFile file, string baseUrl)
-        {
-            _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
-            var form = new MultipartFormDataContent();
-            using var ms = new MemoryStream();
-            file.CopyTo(ms);
-            var fileBytes = ms.ToArray();            
-            var s = Convert.ToBase64String(fileBytes);
-            form.Add(new ByteArrayContent(fileBytes, 0, fileBytes.Length), "file", file.FileName);
-            var response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=Vader", form);
-            var jsonModel = await response.Content.ReadAsAsync<List<CommentModel<T>>>();            
-            return jsonModel;           
-        }
+        {           
+            var form = await ParseFile(file);
+            var genericType = typeof(T);
+            HttpResponseMessage response = null;
+            List<CommentModel<T>> jsonModel = null;
+            if (genericType.Name.Equals("SentiWordNetModel"))
+            {
+                response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=SentiWordNet", form);
+            }
+            if (genericType.Name.Equals("VaderModel"))
+            {
+                response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=Vader", form);
+            }
+            if (genericType.Name.Equals("HybridModel"))
+            {
+                response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=Hybrid", form);
+            }
+            jsonModel = await response.Content.ReadAsAsync<List<CommentModel<T>>>();
+            return jsonModel;
+        }       
 
         public async Task<bool> DeleteRecordAsync(int recordId, string baseUrl)
         {
@@ -51,6 +59,22 @@ namespace SentimentAnalysisTool.Services.Implementations
                 return await response.Content.ReadAsAsync<RecordModel<T>>();
 
             return null;
+        }
+        private async Task<MultipartFormDataContent> ParseFile(IFormFile file)
+        {
+            var task = await Task.Run(() =>
+            {
+                _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
+                var form = new MultipartFormDataContent();
+                var ms = new MemoryStream();
+                file.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+                //var s = Convert.ToBase64String(fileBytes);
+                form.Add(new ByteArrayContent(fileBytes, 0, fileBytes.Length), "file", file.FileName);
+                return form;
+            });
+
+            return task;
         }
     }
 }

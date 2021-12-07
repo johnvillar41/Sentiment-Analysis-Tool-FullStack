@@ -1,4 +1,4 @@
-﻿@model IList<SentimentAnalysisTool.Web.Models.CommentVaderViewModel>
+﻿@model SentimentAnalysisTool.Web.Models.CommentViewModels.UploadCsvCommentViewModel
 
 <div class="row">
     <div class="col-12">
@@ -8,7 +8,7 @@
                     <form asp-controller="Records" asp-action="UploadCsvFile" method="post"
                           enctype="multipart/form-data">
                         <input type="file" name="file" />
-                        <input type="hidden" name="algorithmnType" value="Vader" />
+                        <input type="hidden" name="algorithmnType" value="@SentimentAnalysisTool.Web.Enums.AlgorithmnType.Hybrid" />
                         <button type="submit">Upload File</button>
                     </form>
                     <button type="button" class="btn btn-outline-primary m-1">Settings_2</button>
@@ -20,8 +20,19 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-6">        
-        @await Html.PartialAsync("_CommentsPartialVader", Model)
+    <div class="col-6">
+        @if (Model.Vader != null && Model.Hybrid == null && Model.SentiWordNet == null)
+        {
+            @await Html.PartialAsync("_CommentsPartialVader", Model.Vader)
+        }
+        @if (Model.SentiWordNet != null && Model.Hybrid == null && Model.Vader == null)
+        {
+            @await Html.PartialAsync("_CommentsPartialSentiwordnet", Model.SentiWordNet)
+        }
+        @if (Model.Hybrid != null && Model.SentiWordNet == null && Model.SentiWordNet == null)
+        {
+            @await Html.PartialAsync("_CommentsPartialHybrid", Model.Hybrid)
+        }
     </div>
     <div class="col-6">
         <div class="row">
