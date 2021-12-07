@@ -35,41 +35,26 @@ namespace SentimentAnalysisTool.Web.Controllers
             [FromForm] IFormFile file,
             [FromForm] AlgorithmnType algorithmnType)
         {
-            UploadCsvCommentViewModel uploadCsvCommentViewModel = null;
+            UploadCsvCommentViewModel uploadCsvCommentViewModel = new UploadCsvCommentViewModel();
             if (algorithmnType == AlgorithmnType.Vader)
             {
-                var commentVaderObject = await _recordsService.AddRecordAsync<VaderModel>(file, _configuration.GetValue<string>("BaseUrl"));
-                var commentViewModelsVader = commentVaderObject.Select(m => new CommentVaderViewModel(m)).ToList();
-                uploadCsvCommentViewModel = new UploadCsvCommentViewModel()
-                {
-                    Vader = commentViewModelsVader,
-                    SentiWordNet = null,
-                    Hybrid = null
-                };
+                var commentVaderObjects = await _recordsService.AddRecordAsync<VaderModel>(file, _configuration.GetValue<string>("BaseUrl"));
+                var commentVaderViewModels = commentVaderObjects.Select(m => new CommentVaderViewModel(m));
+                return PartialView("_CommentsPartialVader", commentVaderViewModels.ToList());
             }
 
             if (algorithmnType == AlgorithmnType.SentiWordNet)
             {
-                var commentVaderObject = await _recordsService.AddRecordAsync<SentiWordNetModel>(file, _configuration.GetValue<string>("BaseUrl"));
-                var commentViewModelsSentiWordnet = commentVaderObject.Select(m => new CommentSentiWordNetViewModel(m)).ToList();
-                uploadCsvCommentViewModel = new UploadCsvCommentViewModel()
-                {
-                    Vader = null,
-                    SentiWordNet = commentViewModelsSentiWordnet,
-                    Hybrid = null
-                };
+                var commentSentiwordObjects = await _recordsService.AddRecordAsync<SentiWordNetModel>(file, _configuration.GetValue<string>("BaseUrl"));
+                var commentSentiwordViewModels = commentSentiwordObjects.Select(m => new CommentSentiWordNetViewModel(m));
+                return PartialView("_CommentsPartialSentiwordnet", commentSentiwordViewModels.ToList());
             }
 
             if (algorithmnType == AlgorithmnType.Hybrid)
             {
-                var commentVaderObject = await _recordsService.AddRecordAsync<HybridModel>(file, _configuration.GetValue<string>("BaseUrl"));
-                var commentViewModelsHybrid = commentVaderObject.Select(m => new CommentHybridViewModel(m)).ToList();
-                uploadCsvCommentViewModel = new UploadCsvCommentViewModel()
-                {
-                    Vader = null,
-                    SentiWordNet = null,
-                    Hybrid = commentViewModelsHybrid
-                };               
+                var commentHybridObjects = await _recordsService.AddRecordAsync<HybridModel>(file, _configuration.GetValue<string>("BaseUrl"));
+                var commentHybridViewModels = commentHybridObjects.Select(m => new CommentHybridViewModel(m));
+                return PartialView("_CommentsPartialHybrid", commentHybridViewModels.ToList());
             }
 
             return View(nameof(Index), uploadCsvCommentViewModel);

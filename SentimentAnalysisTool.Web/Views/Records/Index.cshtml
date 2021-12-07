@@ -6,8 +6,11 @@
             <div class="card-body">
 
                 <div class="row">
-                    <form asp-controller="Records" asp-action="UploadCsvFile" method="post"
-                          enctype="multipart/form-data">
+                    <form method="post" asp-controller="Records" asp-action="UploadCsvFile" enctype="multipart/form-data"
+                          data-ajax="true"
+                          data-ajax-method="post"
+                          data-ajax-update="#commentsPartial"
+                          data-ajax-loading="#spinner-upload">
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="file" id="customfile" required />
@@ -27,9 +30,11 @@
                             <label class="form-check-label">@nameof(SentimentAnalysisTool.Web.Enums.AlgorithmnType.Vader)</label>
                         </div>
 
-                        <button type="submit" id="btnSubmitFile" class="btn btn-dark">Upload File</button>
+                        <input id="formSubmit" type="submit" class="btn btn-dark" value="Submit file" />
                     </form>
-
+                    <div class="spinner-border ml-1 mt-1" role="status" id="spinner-upload" style="display:none;">
+                        <span class="sr-only">Loading...</span>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="alert alert-danger" id="warningMessage" role="alert" style="display:none;">
@@ -46,22 +51,16 @@
             <div class="card-header">
                 Comments <br />
             </div>
-            <div class="card-body">
-                @if (Model.Vader != null && Model.Hybrid == null && Model.SentiWordNet == null)
+            <div class="card-body" id="commentsPartial">
+                @if (Model.Hybrid == null || Model.SentiWordNet == null || Model.Vader == null)
+                {
+                    <p>No results found!</p>
+                }
+                else
                 {
                     @await Html.PartialAsync("_CommentsPartialVader", Model.Vader)
-                }
-                @if (Model.SentiWordNet != null && Model.Hybrid == null && Model.Vader == null)
-                {
                     @await Html.PartialAsync("_CommentsPartialSentiwordnet", Model.SentiWordNet)
-                }
-                @if (Model.Hybrid != null && Model.SentiWordNet == null && Model.SentiWordNet == null)
-                {
                     @await Html.PartialAsync("_CommentsPartialHybrid", Model.Hybrid)
-                }
-                @if (Model.Hybrid == null && Model.SentiWordNet == null && Model.SentiWordNet == null)
-                {
-                    <p>No Results Found!</p>
                 }
             </div>
         </div>
@@ -133,5 +132,6 @@
                 $('#warningMessage').hide();
             }
         });
-    </script>
+
+    </script>    
 }
