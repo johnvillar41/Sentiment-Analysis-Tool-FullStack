@@ -11,6 +11,7 @@ namespace SentimentAnalysisTool.Web.Models
         public string CommentDetail { get; set; }
         public DateTime Date { get; set; }
         public SentimentType CommentPolarity { get; set; }
+        public VaderModel VaderGrade { get; set; }
         public CommentVaderViewModel(CommentModel<VaderModel> comment)
         {
             CommentId = comment.CommentId;
@@ -18,6 +19,7 @@ namespace SentimentAnalysisTool.Web.Models
             CommentDetail = comment.CommentDetail;
             Date = comment.Date;
             CommentPolarity = (SentimentType)Enum.Parse(typeof(SentimentType), comment.CommentPolarity);
+            VaderGrade = comment.AlgorithmnModel;
         }
     }
 }

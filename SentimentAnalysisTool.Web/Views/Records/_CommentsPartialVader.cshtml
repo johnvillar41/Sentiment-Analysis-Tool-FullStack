@@ -1,0 +1,96 @@
+﻿@model IList<SentimentAnalysisTool.Web.Models.CommentVaderViewModel>
+<div class="card shadow-sm card-height">
+    <div class="card-header">
+        Comments <br />
+        Showing 10 Results
+    </div>
+    <div class="card-body">
+        <table class="table table-responsive table-height table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Comment Id</th>
+                    <th scope="col">Comment </th>
+                    <th scope="col">Score </th>
+                    <th scope="col">Sentiment </th>
+                    <th scope="col">Date </th>
+                    <th scope="col">Action </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@Model[i].CommentId</th>
+                        <td>@Model[i].CommentDetail</td>
+                        @if (Model[i].CommentScore >= 1 && Model[i].CommentScore <= 2)
+                        {
+                            <td><span class="badge badge-pill badge-danger">@Model[i].CommentScore / 5</span></td>
+                        }
+                        else if (Model[i].CommentScore >= 4 && Model[i].CommentScore <= 5)
+                        {
+                            <td><span class="badge badge-pill badge-success">@Model[i].CommentScore / 5</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge badge-pill badge-dark">@Model[i].CommentScore / 5</span></td>
+                        }
+
+                        @if (Model[i].CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Positive)
+                        {
+                            <td><span class="badge badge-success">@Model[i].CommentPolarity</span></td>
+                        }
+                        else if (Model[i].CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Negative)
+                        {
+                            <td><span class="badge badge-danger">@Model[i].CommentPolarity</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge badge-dark">@Model[i].CommentPolarity</span></td>
+                        }
+
+                        <td>@Model[i].Date</td>
+                        <td>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resultModal_@i">
+                                View computed results
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- Modal -->
+                    <div class="modal fade" id="resultModal_@i" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Vader Computed Results</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><b>Compound Score: </b>@Model[i].VaderGrade.CompoundScore</p>
+                                    <p><b>Compound Value: </b>@Model[i].VaderGrade.CompoundValue</p>
+                                    <p><b>Negative Value: </b>@Model[i].VaderGrade.NegativeValue</p>
+                                    <p><b>Neutral Value: </b>@Model[i].VaderGrade.NeutralValue</p>
+                                    <p><b>Positive Value: </b>@Model[i].VaderGrade.PositiveValue</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+
+</div>
