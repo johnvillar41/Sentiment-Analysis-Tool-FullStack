@@ -18,25 +18,32 @@ namespace SentimentAnalysisTool.Services.Implementations
             _httpClient = new HttpClient();
         }
         public async Task<List<CommentModel<T>>> AddRecordAsync<T>(IFormFile file, string baseUrl)
-        {           
-            var form = await ParseFile(file);
-            var genericType = typeof(T);
-            HttpResponseMessage response = null;
-            List<CommentModel<T>> jsonModel = null;
-            if (genericType.Name.Equals("SentiWordNetModel"))
+        {
+            try
             {
-                response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=SentiWordNet", form);
+                var form = await ParseFile(file);
+                var genericType = typeof(T);
+                HttpResponseMessage response = null;
+                List<CommentModel<T>> jsonModel = null;
+                if (genericType.Name.Equals("SentiWordNetModel"))
+                {
+                    response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=SentiWordNet", form);
+                }
+                if (genericType.Name.Equals("VaderModel"))
+                {
+                    response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=Vader", form);
+                }
+                if (genericType.Name.Equals("HybridModel"))
+                {
+                    response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=Hybrid", form);
+                }
+                jsonModel = await response.Content.ReadAsAsync<List<CommentModel<T>>>();
+                return jsonModel;
             }
-            if (genericType.Name.Equals("VaderModel"))
+            catch (HttpRequestException)
             {
-                response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=Vader", form);
-            }
-            if (genericType.Name.Equals("HybridModel"))
-            {
-                response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=Hybrid", form);
-            }
-            jsonModel = await response.Content.ReadAsAsync<List<CommentModel<T>>>();
-            return jsonModel;
+                throw new HttpRequestException("Not connected from server!");
+            }            
         }       
 
         public async Task<bool> DeleteRecordAsync(int recordId, string baseUrl)

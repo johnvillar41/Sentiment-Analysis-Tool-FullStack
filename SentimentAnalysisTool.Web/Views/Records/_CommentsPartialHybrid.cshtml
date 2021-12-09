@@ -19,34 +19,34 @@
                 <td>@Model[i].CommentDetail</td>
                 @if (Model[i].CommentScore >= 1 && Model[i].CommentScore <= 2)
                 {
-                    <td><span class="badge badge-pill badge-danger">@Model[i].CommentScore / 5</span></td>
+                    <td><span class="badge badge-pill badge-dark">@Model[i].CommentScore / 5</span></td>
                 }
                 else if (Model[i].CommentScore >= 4 && Model[i].CommentScore <= 5)
                 {
-                    <td><span class="badge badge-pill badge-success">@Model[i].CommentScore / 5</span></td>
+                    <td><span class="badge badge-pill badge-light">@Model[i].CommentScore / 5</span></td>
                 }
                 else
                 {
-                    <td><span class="badge badge-pill badge-dark">@Model[i].CommentScore / 5</span></td>
+                    <td><span class="badge badge-pill badge-secondary">@Model[i].CommentScore / 5</span></td>
                 }
 
                 @if (Model[i].CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Positive)
                 {
-                    <td><span class="badge badge-success">@Model[i].CommentPolarity</span></td>
+                    <td><span class="badge badge-light">@Model[i].CommentPolarity</span></td>
                 }
                 else if (Model[i].CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Negative)
                 {
-                    <td><span class="badge badge-danger">@Model[i].CommentPolarity</span></td>
+                    <td><span class="badge badge-dark">@Model[i].CommentPolarity</span></td>
                 }
                 else
                 {
-                    <td><span class="badge badge-dark">@Model[i].CommentPolarity</span></td>
+                    <td><span class="badge badge-secondary">@Model[i].CommentPolarity</span></td>
                 }
 
                 <td>@Model[i].Date</td>
                 <td>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resultModal_@i">
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#resultModal_@i">
                         View computed results
                     </button>
                 </td>
@@ -67,7 +67,7 @@
                             <p><b>Hybrid Value: </b>@Model[i].HybridGrade.HybridValue</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

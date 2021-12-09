@@ -7,6 +7,7 @@ using SentimentAnalysisTool.Web.Enums;
 using SentimentAnalysisTool.Web.Models.CommentViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace SentimentAnalysisTool.Web.Controllers
@@ -35,29 +36,35 @@ namespace SentimentAnalysisTool.Web.Controllers
             [FromForm] IFormFile file,
             [FromForm] AlgorithmnType algorithmnType)
         {
-            UploadCsvCommentViewModel uploadCsvCommentViewModel = new UploadCsvCommentViewModel();
-            if (algorithmnType == AlgorithmnType.Vader)
+            try
             {
-                var commentVaderObjects = await _recordsService.AddRecordAsync<VaderModel>(file, _configuration.GetValue<string>("BaseUrl"));
-                var commentVaderViewModels = commentVaderObjects.Select(m => new CommentVaderViewModel(m));
-                return PartialView("_CommentsPartialVader", commentVaderViewModels.ToList());
-            }
+                UploadCsvCommentViewModel uploadCsvCommentViewModel = new();
+                if (algorithmnType == AlgorithmnType.Vader)
+                {
+                    var commentVaderObjects = await _recordsService.AddRecordAsync<VaderModel>(file, _configuration.GetValue<string>("BaseUrl"));
+                    var commentVaderViewModels = commentVaderObjects.Select(m => new CommentVaderViewModel(m));
+                    return PartialView("_CommentsPartialVader", commentVaderViewModels.ToList());
+                }
 
-            if (algorithmnType == AlgorithmnType.SentiWordNet)
+                if (algorithmnType == AlgorithmnType.SentiWordNet)
+                {
+                    var commentSentiwordObjects = await _recordsService.AddRecordAsync<SentiWordNetModel>(file, _configuration.GetValue<string>("BaseUrl"));
+                    var commentSentiwordViewModels = commentSentiwordObjects.Select(m => new CommentSentiWordNetViewModel(m));
+                    return PartialView("_CommentsPartialSentiwordnet", commentSentiwordViewModels.ToList());
+                }
+
+                if (algorithmnType == AlgorithmnType.Hybrid)
+                {
+                    var commentHybridObjects = await _recordsService.AddRecordAsync<HybridModel>(file, _configuration.GetValue<string>("BaseUrl"));
+                    var commentHybridViewModels = commentHybridObjects.Select(m => new CommentHybridViewModel(m));
+                    return PartialView("_CommentsPartialHybrid", commentHybridViewModels.ToList());
+                }
+                return View(nameof(Index), uploadCsvCommentViewModel);
+            }
+            catch (HttpRequestException ex)
             {
-                var commentSentiwordObjects = await _recordsService.AddRecordAsync<SentiWordNetModel>(file, _configuration.GetValue<string>("BaseUrl"));
-                var commentSentiwordViewModels = commentSentiwordObjects.Select(m => new CommentSentiWordNetViewModel(m));
-                return PartialView("_CommentsPartialSentiwordnet", commentSentiwordViewModels.ToList());
-            }
-
-            if (algorithmnType == AlgorithmnType.Hybrid)
-            {
-                var commentHybridObjects = await _recordsService.AddRecordAsync<HybridModel>(file, _configuration.GetValue<string>("BaseUrl"));
-                var commentHybridViewModels = commentHybridObjects.Select(m => new CommentHybridViewModel(m));
-                return PartialView("_CommentsPartialHybrid", commentHybridViewModels.ToList());
-            }
-
-            return View(nameof(Index), uploadCsvCommentViewModel);
+                return BadRequest(ex.Message);
+            }           
         }
     }
 }

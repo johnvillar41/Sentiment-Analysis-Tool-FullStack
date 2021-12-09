@@ -10,7 +10,8 @@
                           data-ajax="true"
                           data-ajax-method="post"
                           data-ajax-update="#commentsPartial"
-                          data-ajax-loading="#spinner-upload">
+                          data-ajax-loading="#spinner-upload"
+                          data-ajax-failure="promptNoNetwork">
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="file" id="customfile" required />
@@ -36,9 +37,12 @@
                         <span class="sr-only">Loading...</span>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-1">
                     <div class="alert alert-danger" id="warningMessage" role="alert" style="display:none;">
                         Please upload csv files only
+                    </div>
+                    <div class="alert alert-warning" id="errorNetwork" role="alert" style="display:none;">
+                        No network connection! Please try again later.
                     </div>
                 </div>
             </div>
@@ -132,6 +136,9 @@
                 $('#warningMessage').hide();
             }
         });
-
+        promptNoNetwork = function (response) {
+            $('#errorNetwork').show();
+            console.log("Network error!" + response.val);
+        }
     </script>    
 }
