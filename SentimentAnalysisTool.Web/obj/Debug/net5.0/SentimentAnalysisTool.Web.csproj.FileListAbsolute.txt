@@ -368,3 +368,4 @@ C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\bin\Debug\net5.0\libman.json
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\Records\_RecordDisplayPartial.cshtml.g.cs
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\Records\_WordFrequencyPartial.cshtml.g.cs
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\Records\_ReviewClassificationPartial.cshtml.g.cs

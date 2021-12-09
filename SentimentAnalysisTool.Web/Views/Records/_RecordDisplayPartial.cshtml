@@ -35,8 +35,11 @@
 
         <div class="col-6">
             <div class="card mb-2 shadow-sm card-chart-height">
+                <div class="card-header">
+                    Review Classification
+                </div>
                 <div class="card-body">
-                    This is some text within a card body.
+                    @await Html.PartialAsync("_ReviewClassificationPartial", Model.ReviewClassification)
                 </div>
             </div>
         </div>

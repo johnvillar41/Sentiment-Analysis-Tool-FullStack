@@ -49,6 +49,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                         CommentVaderViewModels = recordViewModelVader,
                         CommentHybridViewModels = null,
                         CommentSentiwordModels = null,
+                        ReviewClassification = new ReviewClassficationViewModel(recordModelVaderObjects.PositivePercent, recordModelVaderObjects.NegativePercent),
                         WordFrequencyViewModels = recordModelVaderObjects.WordFrequencyModels
                             .Select(m => new WordFrequencyViewModel(m))
                             .OrderByDescending(m => m.WordFrequency)
@@ -66,6 +67,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                         CommentVaderViewModels = null,
                         CommentHybridViewModels = null,
                         CommentSentiwordModels = recordViewModelSentiwordViewModels,
+                        ReviewClassification = new ReviewClassficationViewModel(recordModelSentiwordObjects.PositivePercent, recordModelSentiwordObjects.NegativePercent),
                         WordFrequencyViewModels = recordModelSentiwordObjects.WordFrequencyModels
                             .Select(m => new WordFrequencyViewModel(m))
                             .OrderByDescending(m => m.WordFrequency)
@@ -83,6 +85,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                         CommentVaderViewModels = null,
                         CommentHybridViewModels = recordViewModelHybridViewModels,
                         CommentSentiwordModels = null,
+                        ReviewClassification = new ReviewClassficationViewModel(recordModelHybridObjects.PositivePercent, recordModelHybridObjects.NegativePercent),
                         WordFrequencyViewModels = recordModelHybridObjects.WordFrequencyModels
                             .Select(m => new WordFrequencyViewModel(m))
                             .OrderByDescending(m => m.WordFrequency)
