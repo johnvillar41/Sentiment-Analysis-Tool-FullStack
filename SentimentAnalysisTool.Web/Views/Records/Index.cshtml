@@ -11,7 +11,8 @@
                           data-ajax-method="post"
                           data-ajax-update="#commentsPartial"
                           data-ajax-loading="#spinner-upload"
-                          data-ajax-failure="promptNoNetwork">
+                          data-ajax-failure="promptNoNetwork"
+                          data-ajax-success="promptHasNetwork">
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="file" id="customfile" required />
@@ -117,28 +118,5 @@
 
 </div>
 @section scripts{
-    <script>
-        $('#customfile').on('change', function () {
-            console.log("I am inside upload event");
-            files = $(this)[0].files;
-            name = '';
-            for (var i = 0; i < files.length; i++) {
-                name += '\"' + files[i].name + '\"' + (i != files.length - 1 ? ", " : "");
-            }
-            $(".custom-file-label").html(name);
-        });
-        $('#customfile').change(function () {
-            var fileExtension = ['xlsx', 'csv'];
-            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-                $('#warningMessage').show();
-                $('#customfile').val("");
-            } else {
-                $('#warningMessage').hide();
-            }
-        });
-        promptNoNetwork = function (response) {
-            $('#errorNetwork').show();
-            console.log("Network error!" + response.val);
-        }
-    </script>    
+        <script src="~/js/records-index.js"></script>    
 }
