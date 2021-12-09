@@ -55,4 +55,18 @@
 </div>
 @section scripts{
     <script src="~/js/records-index.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Positive', 'Negative'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [@Model.ReviewClassification.PositivePercent, @Model.ReviewClassification.NegativePercent],
+                }]
+            },
+
+        });
+    </script>
 }
