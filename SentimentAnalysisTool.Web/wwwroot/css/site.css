@@ -58,8 +58,12 @@ p, h1 {
     height: 38vh;
 }
 
-.table-height {
+.table-height-comments {
     height: 80vh;
+}
+
+.table-height-word-frequency{
+    height: 27vh;
 }
 
 .card {

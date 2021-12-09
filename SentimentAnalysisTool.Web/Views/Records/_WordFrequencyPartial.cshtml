@@ -1,0 +1,18 @@
+﻿@model IEnumerable<SentimentAnalysisTool.Web.Models.WordFrequencyViewModel>
+<table class="table table-responsive table-height-word-frequency table-hover">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Word</th>
+            <th scope="col">Word Frequency </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Word</td>
+                <td>@item.WordFrequency</td>
+            </tr>
+        }
+    </tbody>
+</table>

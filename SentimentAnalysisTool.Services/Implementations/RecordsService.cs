@@ -17,14 +17,14 @@ namespace SentimentAnalysisTool.Services.Implementations
         {
             _httpClient = new HttpClient();
         }
-        public async Task<List<CommentModel<T>>> AddRecordAsync<T>(IFormFile file, string baseUrl)
+        public async Task<RecordModel<T>> AddRecordAsync<T>(IFormFile file, string baseUrl)
         {
             try
             {
                 var form = await ParseFile(file);
                 var genericType = typeof(T);
                 HttpResponseMessage response = null;
-                List<CommentModel<T>> jsonModel = null;
+                RecordModel<T> jsonModel = null;
                 if (genericType.Name.Equals("SentiWordNetModel"))
                 {
                     response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=SentiWordNet", form);
@@ -37,7 +37,7 @@ namespace SentimentAnalysisTool.Services.Implementations
                 {
                     response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=Hybrid", form);
                 }
-                jsonModel = await response.Content.ReadAsAsync<List<CommentModel<T>>>();
+                jsonModel = await response.Content.ReadAsAsync<RecordModel<T>>();
                 return jsonModel;
             }
             catch (HttpRequestException)
