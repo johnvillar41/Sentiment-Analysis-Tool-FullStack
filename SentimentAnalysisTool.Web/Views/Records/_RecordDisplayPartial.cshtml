@@ -24,6 +24,9 @@
     <div class="row">
         <div class="col-6">
             <div class="card mb-2 shadow-sm card-chart-height">
+                <div class="card-header">
+                    Word Frequencies
+                </div>
                 <div class="card-body">
                     @await Html.PartialAsync("_WordFrequencyPartial", Model.WordFrequencyViewModels)
                 </div>

@@ -49,7 +49,10 @@ namespace SentimentAnalysisTool.Web.Controllers
                         CommentVaderViewModels = recordViewModelVader,
                         CommentHybridViewModels = null,
                         CommentSentiwordModels = null,
-                        WordFrequencyViewModels = recordModelVaderObjects.WordFrequencyModels.Select(m=>new WordFrequencyViewModel(m)),
+                        WordFrequencyViewModels = recordModelVaderObjects.WordFrequencyModels
+                            .Select(m => new WordFrequencyViewModel(m))
+                            .OrderByDescending(m => m.WordFrequency)
+                            .ToList(),
                     };
                     return PartialView("_RecordDisplayPartial", recordDisplay);
                 }
@@ -63,7 +66,10 @@ namespace SentimentAnalysisTool.Web.Controllers
                         CommentVaderViewModels = null,
                         CommentHybridViewModels = null,
                         CommentSentiwordModels = recordViewModelSentiwordViewModels,
-                        WordFrequencyViewModels = recordModelSentiwordObjects.WordFrequencyModels.Select(m => new WordFrequencyViewModel(m)),
+                        WordFrequencyViewModels = recordModelSentiwordObjects.WordFrequencyModels
+                            .Select(m => new WordFrequencyViewModel(m))
+                            .OrderByDescending(m => m.WordFrequency)
+                            .ToList(),
                     };
                     return PartialView("_RecordDisplayPartial", recordDisplay);
                 }
@@ -77,7 +83,10 @@ namespace SentimentAnalysisTool.Web.Controllers
                         CommentVaderViewModels = null,
                         CommentHybridViewModels = recordViewModelHybridViewModels,
                         CommentSentiwordModels = null,
-                        WordFrequencyViewModels = recordModelHybridObjects.WordFrequencyModels.Select(m => new WordFrequencyViewModel(m)),
+                        WordFrequencyViewModels = recordModelHybridObjects.WordFrequencyModels
+                            .Select(m => new WordFrequencyViewModel(m))
+                            .OrderByDescending(m => m.WordFrequency)
+                            .ToList(),
                     };
                     return PartialView("_RecordDisplayPartial", recordDisplay);
                 }
