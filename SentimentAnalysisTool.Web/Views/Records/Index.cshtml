@@ -6,13 +6,7 @@
             <div class="card-body">
 
                 <div class="row">
-                    <form method="post" asp-controller="Records" asp-action="UploadCsvFile" enctype="multipart/form-data"
-                          data-ajax="true"
-                          data-ajax-method="post"
-                          data-ajax-update="#record-display"
-                          data-ajax-loading="#spinner-upload"
-                          data-ajax-failure="promptNoNetwork"
-                          data-ajax-success="promptHasNetwork">
+                    <form method="post" asp-controller="Records" asp-action="UploadCsvFile" enctype="multipart/form-data">
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="file" id="customfile" required />
@@ -56,17 +50,21 @@
 @section scripts{
     <script src="~/js/records-index.js"></script>
     <script>
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Positive', 'Negative'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [@Model.ReviewClassification.PositivePercent, @Model.ReviewClassification.NegativePercent],
-                }]
-            },
-
+        $(document).ready(function () {
+            console.log('@ViewData["PositivePercent"]');
+            $('#errorNetwork').hide();
+            const ctx = document.getElementById('myChart');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Positive', 'Negative'],
+                    datasets: [{
+                        label: 'Review Classification',
+                        data: ['@ViewData["PositivePercent"]', '@ViewData["NegativePercent"]'],
+                        borderWidth: 1
+                    }]
+                }
+            });
         });
     </script>
 }

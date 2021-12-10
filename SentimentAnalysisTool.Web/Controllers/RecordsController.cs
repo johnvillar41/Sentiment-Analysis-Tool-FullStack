@@ -28,6 +28,12 @@ namespace SentimentAnalysisTool.Web.Controllers
 
         public IActionResult Index(RecordDisplayViewModel model)
         {
+            if(model == null)
+            {
+                ViewData["PositivePercent"] = 0;
+                ViewData["NegativePercent"] = 0;
+            }
+            
             return View(model);
         }
 
@@ -55,7 +61,9 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
                     };
-                    return PartialView("_RecordDisplayPartial", recordDisplay);
+                    ViewData["PositivePercent"] = recordDisplay.ReviewClassification.PositivePercent;
+                    ViewData["NegativePercent"] = recordDisplay.ReviewClassification.NegativePercent;
+                    return View(nameof(Index), recordDisplay);
                 }
 
                 if (algorithmnType == AlgorithmnType.SentiWordNet)
@@ -73,7 +81,9 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
                     };
-                    return PartialView("_RecordDisplayPartial", recordDisplay);
+                    ViewData["PositivePercent"] = recordDisplay.ReviewClassification.PositivePercent;
+                    ViewData["NegativePercent"] = recordDisplay.ReviewClassification.NegativePercent;
+                    return View(nameof(Index), recordDisplay);
                 }
 
                 if (algorithmnType == AlgorithmnType.Hybrid)
@@ -91,7 +101,9 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
                     };
-                    return PartialView("_RecordDisplayPartial", recordDisplay);
+                    ViewData["PositivePercent"] = recordDisplay.ReviewClassification.PositivePercent;
+                    ViewData["NegativePercent"] = recordDisplay.ReviewClassification.NegativePercent;
+                    return View(nameof(Index), recordDisplay);
                 }
                 return View(nameof(Index), recordDisplay);
             }

@@ -21,6 +21,3 @@ promptNoNetwork = function (response) {
     $('#errorNetwork').show();
 }
 
-promptHasNetwork = function (response) {
-    $('#errorNetwork').hide();
-}
