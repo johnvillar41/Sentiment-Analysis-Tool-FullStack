@@ -8,7 +8,6 @@ else
     <table class="table table-responsive table-height-comments table-hover">
         <thead class="thead-light">
             <tr>
-                <th scope="col">Comment Id</th>
                 <th scope="col">Comment </th>
                 <th scope="col">Score </th>
                 <th scope="col">Sentiment </th>
@@ -21,7 +20,6 @@ else
             @for (int i = 0; i < Model.Count; i++)
             {
                 <tr>
-                    <th scope="row">@Model[i].CommentId</th>
                     <td>@Model[i].CommentDetail</td>
                     @if (Model[i].CommentScore >= 1 && Model[i].CommentScore <= 2)
                     {

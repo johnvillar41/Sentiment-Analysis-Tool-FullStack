@@ -68,8 +68,6 @@ namespace SentimentAnalysisTool.Web.Controllers
                         ReviewClassification = recordDisplay.ReviewClassification
                     };
                     return Json(obj);
-                        
-                    //return PartialView("_RecordDisplayPartial", recordDisplay);
                 }
 
                 if (algorithmnType == AlgorithmnType.SentiWordNet)
@@ -87,7 +85,12 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
                     };
-                    return View(nameof(Index), recordDisplay);
+                    var obj = new
+                    {
+                        Html = await RenderHelper.RenderViewAsync<RecordDisplayViewModel>(this, "_RecordDisplayPartial", recordDisplay),
+                        ReviewClassification = recordDisplay.ReviewClassification
+                    };
+                    return Json(obj);
                 }
 
                 if (algorithmnType == AlgorithmnType.Hybrid)
@@ -105,7 +108,12 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
                     };
-                    return View(nameof(Index), recordDisplay);
+                    var obj = new
+                    {
+                        Html = await RenderHelper.RenderViewAsync<RecordDisplayViewModel>(this, "_RecordDisplayPartial", recordDisplay),
+                        ReviewClassification = recordDisplay.ReviewClassification
+                    };
+                    return Json(obj);
                 }
                 return View(nameof(Index), recordDisplay);
             }
