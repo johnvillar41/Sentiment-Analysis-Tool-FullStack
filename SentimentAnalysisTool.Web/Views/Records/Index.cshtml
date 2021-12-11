@@ -6,7 +6,7 @@
             <div class="card-body">
 
                 <div class="row">
-                    <form method="post" asp-controller="Records" asp-action="UploadCsvFile" enctype="multipart/form-data">
+                    <form method="post" id="formUpload" enctype="multipart/form-data">
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="file" id="customfile" required />
@@ -51,19 +51,42 @@
     <script src="~/js/records-index.js"></script>
     <script>
         $(document).ready(function () {
-            console.log('@ViewData["PositivePercent"]');
-            $('#errorNetwork').hide();
-            const ctx = document.getElementById('myChart');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Positive', 'Negative'],
-                    datasets: [{
-                        label: 'Review Classification',
-                        data: ['@ViewData["PositivePercent"]', '@ViewData["NegativePercent"]'],
-                        borderWidth: 1
-                    }]
-                }
+            $('form#formUpload').submit(function (event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("UploadCsvFile","Records")',
+                    data: formData,
+                    beforeSend: function () {
+                        $('#spinner-upload').show();
+                    },
+                    complete: function () {
+                        $('#spinner-upload').hide();
+                    },
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        promptHasNetwork(response);                       
+                    },
+                    error: function (response) { promptNoNetwork(response) },
+                    failure: function (response) { promptNoNetwork(response) },
+                }).done(function (response) {
+                    $('#record-display').html(response.html);
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    const chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Positive', 'Negative'],
+                            datasets: [{
+                                label: 'Review Classification',
+                                data: [response.reviewClassification.positivePercent, response.reviewClassification.negativePercent],
+                                borderWidth: 1
+                            }]
+                        }
+                    });
+                    chart.render();
+                });
             });
         });
     </script>

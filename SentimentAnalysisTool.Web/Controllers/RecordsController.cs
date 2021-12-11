@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using SentimentAnalysisTool.Data.Models;
 using SentimentAnalysisTool.Services.Interfaces;
 using SentimentAnalysisTool.Web.Enums;
+using SentimentAnalysisTool.Web.Helpers;
 using SentimentAnalysisTool.Web.Models;
 using SentimentAnalysisTool.Web.Models.CommentViewModels;
 using System.Collections.Generic;
@@ -28,18 +29,18 @@ namespace SentimentAnalysisTool.Web.Controllers
 
         public IActionResult Index(RecordDisplayViewModel model)
         {
-            if(model == null)
+            if (model == null)
             {
                 ViewData["PositivePercent"] = 0;
                 ViewData["NegativePercent"] = 0;
             }
-            
+
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UploadCsvFile(
+        public async Task<ActionResult> UploadCsvFile(
             [FromForm] IFormFile file,
             [FromForm] AlgorithmnType algorithmnType)
         {
@@ -61,9 +62,14 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
                     };
-                    ViewData["PositivePercent"] = recordDisplay.ReviewClassification.PositivePercent;
-                    ViewData["NegativePercent"] = recordDisplay.ReviewClassification.NegativePercent;
-                    return View(nameof(Index), recordDisplay);
+                    var obj = new
+                    {
+                        Html = await RenderHelper.RenderViewAsync<RecordDisplayViewModel>(this, "_RecordDisplayPartial", recordDisplay),
+                        ReviewClassification = recordDisplay.ReviewClassification
+                    };
+                    return Json(obj);
+                        
+                    //return PartialView("_RecordDisplayPartial", recordDisplay);
                 }
 
                 if (algorithmnType == AlgorithmnType.SentiWordNet)
@@ -81,8 +87,6 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
                     };
-                    ViewData["PositivePercent"] = recordDisplay.ReviewClassification.PositivePercent;
-                    ViewData["NegativePercent"] = recordDisplay.ReviewClassification.NegativePercent;
                     return View(nameof(Index), recordDisplay);
                 }
 
@@ -101,8 +105,6 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
                     };
-                    ViewData["PositivePercent"] = recordDisplay.ReviewClassification.PositivePercent;
-                    ViewData["NegativePercent"] = recordDisplay.ReviewClassification.NegativePercent;
                     return View(nameof(Index), recordDisplay);
                 }
                 return View(nameof(Index), recordDisplay);
