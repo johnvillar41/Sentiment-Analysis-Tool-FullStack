@@ -29,12 +29,6 @@ namespace SentimentAnalysisTool.Web.Controllers
 
         public IActionResult Index(RecordDisplayViewModel model)
         {
-            if (model == null)
-            {
-                ViewData["PositivePercent"] = 0;
-                ViewData["NegativePercent"] = 0;
-            }
-
             return View(model);
         }
 
