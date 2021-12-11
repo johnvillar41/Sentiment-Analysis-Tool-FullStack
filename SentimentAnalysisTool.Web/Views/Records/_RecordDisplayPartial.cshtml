@@ -17,6 +17,10 @@
             {
                 @await Html.PartialAsync("_CommentsPartialHybrid", Model.CommentHybridViewModels.ToList());
             }
+            @if (Model.CommentSentiwordModels == null && Model.CommentHybridViewModels == null && Model.CommentVaderViewModels == null)
+            {
+                <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_oga1x3jk.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+            }
         </div>
     </div>
 </div>
@@ -28,7 +32,14 @@
                     Word Frequencies
                 </div>
                 <div class="card-body">
-                    @await Html.PartialAsync("_WordFrequencyPartial", Model.WordFrequencyViewModels)
+                    @if (Model.WordFrequencyViewModels == null)
+                    {
+                        <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_oga1x3jk.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+                    }
+                    else
+                    {
+                        @await Html.PartialAsync("_WordFrequencyPartial", Model.WordFrequencyViewModels)
+                    }
                 </div>
             </div>
         </div>
@@ -39,7 +50,14 @@
                     Review Classification
                 </div>
                 <div class="card-body">
-                    @await Html.PartialAsync("_ReviewClassificationPartial", Model.ReviewClassification)
+                    @if (Model.ReviewClassification == null)
+                    {
+                        <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_oga1x3jk.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+                    }
+                    else
+                    {
+                        @await Html.PartialAsync("_ReviewClassificationPartial", Model.ReviewClassification)
+                    }
                 </div>
             </div>
         </div>

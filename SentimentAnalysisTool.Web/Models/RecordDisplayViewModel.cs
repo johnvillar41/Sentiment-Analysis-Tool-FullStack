@@ -8,10 +8,10 @@ namespace SentimentAnalysisTool.Web.Models
 {
     public class RecordDisplayViewModel
     {
-        public IEnumerable<CommentVaderViewModel> CommentVaderViewModels { get; set; } = new List<CommentVaderViewModel>(); 
-        public IEnumerable<CommentHybridViewModel> CommentHybridViewModels { get; set; } = new List<CommentHybridViewModel>();
-        public IEnumerable<CommentSentiWordNetViewModel> CommentSentiwordModels { get; set; } = new List<CommentSentiWordNetViewModel>();
-        public IEnumerable<WordFrequencyViewModel> WordFrequencyViewModels { get; set; } = new List<WordFrequencyViewModel>();
-        public ReviewClassficationViewModel ReviewClassification { get; set; } = new ReviewClassficationViewModel();
+        public IEnumerable<CommentVaderViewModel> CommentVaderViewModels { get; set; } 
+        public IEnumerable<CommentHybridViewModel> CommentHybridViewModels { get; set; }
+        public IEnumerable<CommentSentiWordNetViewModel> CommentSentiwordModels { get; set; }
+        public IEnumerable<WordFrequencyViewModel> WordFrequencyViewModels { get; set; }
+        public ReviewClassficationViewModel ReviewClassification { get; set; }
     }
 }
