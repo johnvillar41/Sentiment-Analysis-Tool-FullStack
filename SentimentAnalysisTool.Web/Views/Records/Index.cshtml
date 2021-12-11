@@ -28,9 +28,6 @@
 
                         <input id="formSubmit" type="submit" class="btn btn-dark" value="Submit file" />
                     </form>
-                    <div class="spinner-border ml-1 mt-1" role="status" id="spinner-upload" style="display:none;">
-                        <span class="sr-only">Loading...</span>
-                    </div>
                 </div>
                 <div class="row mt-1">
                     <div class="alert alert-danger" id="warningMessage" role="alert" style="display:none;">
@@ -43,6 +40,9 @@
             </div>
         </div>
     </div>
+</div>
+<div id="spinner-upload" class="overlayDiv" style="display:none;">
+    <lottie-player src="https://assets6.lottiefiles.com/datafiles/bEYvzB8QfV3EM9a/data.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
 </div>
 <div class="row" id="record-display">
     @await Html.PartialAsync("_RecordDisplayPartial", Model)
@@ -67,25 +67,39 @@
                     contentType: false,
                     processData: false,
                     success: function (response) {
-                        promptHasNetwork(response);                       
+                        promptHasNetwork(response);
                     },
                     error: function (response) { promptNoNetwork(response) },
                     failure: function (response) { promptNoNetwork(response) },
                 }).done(function (response) {
                     $('#record-display').html(response.html);
                     const ctx = document.getElementById('myChart').getContext('2d');
-                    const chart = new Chart(ctx, {
+                    const myChart = new Chart(ctx, {
                         type: 'bar',
                         data: {
                             labels: ['Positive', 'Negative'],
                             datasets: [{
                                 label: 'Review Classification',
                                 data: [response.reviewClassification.positivePercent, response.reviewClassification.negativePercent],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',                                   
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',                                    
+                                ],
                                 borderWidth: 1
                             }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
                         }
                     });
-                    chart.render();
                 });
             });
         });
