@@ -376,3 +376,4 @@ C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\bin\Debug\net5.0\System.Web.WebPages.dll
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\Records\_UploadFileFormPartial.cshtml.g.cs
