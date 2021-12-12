@@ -1,21 +1,22 @@
 ﻿@model IList<SentimentAnalysisTool.Web.Models.WordFrequencyViewModel>
 @if (Model.Count == 0)
     return;
-
-<table class="table table-responsive table-height-word-frequency table-hover">
-    <thead class="thead-light">
-        <tr>
-            <th scope="col">Word</th>
-            <th scope="col">Frequency </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-responsive table-height-word-frequency">
+    <table class="table table-hover">
+        <thead class="thead-light">
             <tr>
-                <td>@item.Word</td>
-                <td>@item.WordFrequency</td>
+                <th scope="col">Word</th>
+                <th scope="col">Frequency </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Word</td>
+                    <td>@item.WordFrequency</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

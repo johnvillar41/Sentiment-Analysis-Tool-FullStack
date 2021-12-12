@@ -5,80 +5,82 @@
 }
 else
 {
-    <table class="table table-responsive table-height-comments table-hover">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">Comment </th>
-                <th scope="col">Score </th>
-                <th scope="col">Sentiment </th>
-                <th scope="col">Date </th>
-                <th scope="col">Action </th>
-                <th scope="col">Algorithmn </th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (int i = 0; i < Model.Count; i++)
-            {
+    <div class="table-responsive table-height-comments">
+        <table class="table table-hover">
+            <thead class="thead-light">
                 <tr>
-                    <td>@Model[i].CommentDetail</td>
-                    @if (Model[i].CommentScore >= 1 && Model[i].CommentScore <= 2)
-                    {
-                        <td><span class="badge badge-pill badge-dark">@Model[i].CommentScore / 5</span></td>
-                    }
-                    else if (Model[i].CommentScore >= 4 && Model[i].CommentScore <= 5)
-                    {
-                        <td><span class="badge badge-pill badge-light">@Model[i].CommentScore / 5</span></td>
-                    }
-                    else
-                    {
-                        <td><span class="badge badge-pill badge-secondary">@Model[i].CommentScore / 5</span></td>
-                    }
-
-                    @if (Model[i].CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Positive)
-                    {
-                        <td><span class="badge badge-light">@Model[i].CommentPolarity</span></td>
-                    }
-                    else if (Model[i].CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Negative)
-                    {
-                        <td><span class="badge badge-dark">@Model[i].CommentPolarity</span></td>
-                    }
-                    else
-                    {
-                        <td><span class="badge badge-secondary">@Model[i].CommentPolarity</span></td>
-                    }
-
-                    <td>@Model[i].Date</td>
-                    <td>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#resultModal_@i">
-                            View computed results
-                        </button>
-                    </td>
-                    <td>Hybrid Algorithmn</td>
+                    <th scope="col">Comment </th>
+                    <th scope="col">Score </th>
+                    <th scope="col">Sentiment </th>
+                    <th scope="col">Date </th>
+                    <th scope="col">Action </th>
+                    <th scope="col">Algorithmn </th>
                 </tr>
-                <!-- Modal -->
-                <div class="modal fade" id="resultModal_@i" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Hybrid Computed Results</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p><b>Hybrid Score: </b>@Model[i].HybridGrade.HybridScore</p>
-                                <p><b>Hybrid Value: </b>@Model[i].HybridGrade.HybridValue</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Model[i].CommentDetail</td>
+                        @if (Model[i].CommentScore >= 1 && Model[i].CommentScore <= 2)
+                        {
+                            <td><span class="badge badge-pill badge-dark">@Model[i].CommentScore / 5</span></td>
+                        }
+                        else if (Model[i].CommentScore >= 4 && Model[i].CommentScore <= 5)
+                        {
+                            <td><span class="badge badge-pill badge-light">@Model[i].CommentScore / 5</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge badge-pill badge-secondary">@Model[i].CommentScore / 5</span></td>
+                        }
+
+                        @if (Model[i].CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Positive)
+                        {
+                            <td><span class="badge badge-light">@Model[i].CommentPolarity</span></td>
+                        }
+                        else if (Model[i].CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Negative)
+                        {
+                            <td><span class="badge badge-dark">@Model[i].CommentPolarity</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge badge-secondary">@Model[i].CommentPolarity</span></td>
+                        }
+
+                        <td>@Model[i].Date</td>
+                        <td>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#resultModal_@i">
+                                View computed results
+                            </button>
+                        </td>
+                        <td>Hybrid Algorithmn</td>
+                    </tr>
+                    <!-- Modal -->
+                    <div class="modal fade" id="resultModal_@i" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Hybrid Computed Results</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><b>Hybrid Score: </b>@Model[i].HybridGrade.HybridScore</p>
+                                    <p><b>Hybrid Value: </b>@Model[i].HybridGrade.HybridValue</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
-        </tbody>
-    </table>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 
 
