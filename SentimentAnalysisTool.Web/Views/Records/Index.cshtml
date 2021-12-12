@@ -32,14 +32,6 @@
                         <input id="formSubmit" type="submit" class="btn btn-dark" value="Submit file" />
                     </form>
                 </div>
-                <div class="row mt-1">
-                    <div class="alert alert-danger" id="warningMessage" role="alert" style="display:none;">
-                        Please upload csv files only
-                    </div>
-                    <div class="alert alert-warning" id="errorNetwork" role="alert" style="display:none;">
-                        No network connection! Please try again later.
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -51,7 +43,6 @@
     @await Html.PartialAsync("_RecordDisplayPartial", Model)
 </div>
 @section scripts{
-    <script src="~/js/records-index.js"></script>
     <script>
         $(document).ready(function () {
             $('form#formUpload').submit(function (event) {
@@ -75,71 +66,11 @@
                     error: function (response) { promptNoNetwork(response) },
                     failure: function (response) { promptNoNetwork(response) },
                 }).done(function (response) {
-                    $('#record-display').html(response.html);                    
+                    $('#record-display').html(response.html);
                     renderReviewClassification(response);
                 });
             });
-
-            renderReviewClassification = function (response) {
-                const ctx = document.getElementById('myChart').getContext('2d');
-                const myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Positive', 'Negative'],
-                        datasets: [{
-                            label: 'Review Classification',
-                            data: [response.reviewClassification.positivePercent, response.reviewClassification.negativePercent],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            }
-
-            renderSentimentOverTime = function (response) {
-                const ctx = document.getElementById('myChart').getContext('2d');
-                const myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Positive', 'Negative'],
-                        datasets: [{
-                            label: 'Review Classification',
-                            data: [response.reviewClassification.positivePercent, response.reviewClassification.negativePercent],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            }
-
         });
     </script>
+    <script src="~/js/records-index.js"></script>
 }
