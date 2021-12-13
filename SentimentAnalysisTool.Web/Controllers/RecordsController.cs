@@ -55,15 +55,8 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .Select(m => new WordFrequencyViewModel(m))
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
-                    };
-                    var obj = new
-                    {
-                        Html = await RenderHelper.RenderViewAsync<RecordDisplayViewModel>(this, "_RecordDisplayPartial", recordDisplay),
-                        ReviewClassification = recordDisplay.ReviewClassification
-                    };
-                    return Json(obj);
+                    };                   
                 }
-
                 if (algorithmnType == AlgorithmnType.SentiWordNet)
                 {
                     var recordModelSentiwordObjects = await _recordsService.AddRecordAsync<SentiWordNetModel>(file, _configuration.GetValue<string>("BaseUrl"));
@@ -78,13 +71,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .Select(m => new WordFrequencyViewModel(m))
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
-                    };
-                    var obj = new
-                    {
-                        Html = await RenderHelper.RenderViewAsync<RecordDisplayViewModel>(this, "_RecordDisplayPartial", recordDisplay),
-                        ReviewClassification = recordDisplay.ReviewClassification
-                    };
-                    return Json(obj);
+                    };                   
                 }
 
                 if (algorithmnType == AlgorithmnType.Hybrid)
@@ -101,15 +88,14 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .Select(m => new WordFrequencyViewModel(m))
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
-                    };
-                    var obj = new
-                    {
-                        Html = await RenderHelper.RenderViewAsync<RecordDisplayViewModel>(this, "_RecordDisplayPartial", recordDisplay),
-                        ReviewClassification = recordDisplay.ReviewClassification
-                    };
-                    return Json(obj);
+                    };                 
                 }
-                return View(nameof(Index), recordDisplay);
+                var obj = new
+                {
+                    Html = await RenderHelper.RenderViewAsync<RecordDisplayViewModel>(this, "_RecordDisplayPartial", recordDisplay),
+                    recordDisplay.ReviewClassification
+                };
+                return Json(obj);
             }
             catch (HttpRequestException ex)
             {
