@@ -42,54 +42,12 @@ namespace SentimentAnalysisTool.Web.Controllers
             {
                 RecordDisplayViewModel recordDisplay = new();
                 if (algorithmnType == AlgorithmnType.Vader)
-                {
-                    var recordModelVaderObjects = await _recordsService.AddRecordAsync<VaderModel>(file, _configuration.GetValue<string>("BaseUrl"));
-                    var recordViewModelVader = recordModelVaderObjects.CommentModels.Select(m => new CommentVaderViewModel(m));
-                    recordDisplay = new RecordDisplayViewModel()
-                    {
-                        CommentVaderViewModels = recordViewModelVader,
-                        CommentHybridViewModels = null,
-                        CommentSentiwordModels = null,
-                        ReviewClassification = new ReviewClassficationViewModel(recordModelVaderObjects.PositivePercent, recordModelVaderObjects.NegativePercent),
-                        WordFrequencyViewModels = recordModelVaderObjects.WordFrequencyModels
-                            .Select(m => new WordFrequencyViewModel(m))
-                            .OrderByDescending(m => m.WordFrequency)
-                            .ToList(),
-                    };                   
-                }
+                    recordDisplay = await AddRecordUsingVaderAsync(file, recordDisplay);
                 if (algorithmnType == AlgorithmnType.SentiWordNet)
-                {
-                    var recordModelSentiwordObjects = await _recordsService.AddRecordAsync<SentiWordNetModel>(file, _configuration.GetValue<string>("BaseUrl"));
-                    var recordViewModelSentiwordViewModels = recordModelSentiwordObjects.CommentModels.Select(m => new CommentSentiWordNetViewModel(m));
-                    recordDisplay = new RecordDisplayViewModel()
-                    {
-                        CommentVaderViewModels = null,
-                        CommentHybridViewModels = null,
-                        CommentSentiwordModels = recordViewModelSentiwordViewModels,
-                        ReviewClassification = new ReviewClassficationViewModel(recordModelSentiwordObjects.PositivePercent, recordModelSentiwordObjects.NegativePercent),
-                        WordFrequencyViewModels = recordModelSentiwordObjects.WordFrequencyModels
-                            .Select(m => new WordFrequencyViewModel(m))
-                            .OrderByDescending(m => m.WordFrequency)
-                            .ToList(),
-                    };                   
-                }
-
+                    recordDisplay = await AddRecordUsingSentiWordNetAsync(file, recordDisplay);
                 if (algorithmnType == AlgorithmnType.Hybrid)
-                {
-                    var recordModelHybridObjects = await _recordsService.AddRecordAsync<HybridModel>(file, _configuration.GetValue<string>("BaseUrl"));
-                    var recordViewModelHybridViewModels = recordModelHybridObjects.CommentModels.Select(m => new CommentHybridViewModel(m));
-                    recordDisplay = new RecordDisplayViewModel()
-                    {
-                        CommentVaderViewModels = null,
-                        CommentHybridViewModels = recordViewModelHybridViewModels,
-                        CommentSentiwordModels = null,
-                        ReviewClassification = new ReviewClassficationViewModel(recordModelHybridObjects.PositivePercent, recordModelHybridObjects.NegativePercent),
-                        WordFrequencyViewModels = recordModelHybridObjects.WordFrequencyModels
-                            .Select(m => new WordFrequencyViewModel(m))
-                            .OrderByDescending(m => m.WordFrequency)
-                            .ToList(),
-                    };                 
-                }
+                    recordDisplay = await AddRecordUsingHybridAsync(file, recordDisplay);
+
                 var obj = new
                 {
                     Html = await RenderHelper.RenderViewAsync<RecordDisplayViewModel>(this, "_RecordDisplayPartial", recordDisplay),
@@ -101,6 +59,60 @@ namespace SentimentAnalysisTool.Web.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        private async Task<RecordDisplayViewModel> AddRecordUsingHybridAsync(IFormFile file, RecordDisplayViewModel recordDisplay)
+        {
+            var recordModelHybridObjects = await _recordsService.AddRecordAsync<HybridModel>(file, _configuration.GetValue<string>("BaseUrl"));
+            var recordViewModelHybridViewModels = recordModelHybridObjects.CommentModels.Select(m => new CommentHybridViewModel(m));
+            recordDisplay = new RecordDisplayViewModel()
+            {
+                CommentVaderViewModels = null,
+                CommentHybridViewModels = recordViewModelHybridViewModels,
+                CommentSentiwordModels = null,
+                ReviewClassification = new ReviewClassficationViewModel(recordModelHybridObjects.PositivePercent, recordModelHybridObjects.NegativePercent),
+                WordFrequencyViewModels = recordModelHybridObjects.WordFrequencyModels
+                    .Select(m => new WordFrequencyViewModel(m))
+                    .OrderByDescending(m => m.WordFrequency)
+                    .ToList(),
+            };
+            return recordDisplay;
+        }
+
+        private async Task<RecordDisplayViewModel> AddRecordUsingSentiWordNetAsync(IFormFile file, RecordDisplayViewModel recordDisplay)
+        {
+            var recordModelSentiwordObjects = await _recordsService.AddRecordAsync<SentiWordNetModel>(file, _configuration.GetValue<string>("BaseUrl"));
+            var recordViewModelSentiwordViewModels = recordModelSentiwordObjects.CommentModels.Select(m => new CommentSentiWordNetViewModel(m));
+            recordDisplay = new RecordDisplayViewModel()
+            {
+                CommentVaderViewModels = null,
+                CommentHybridViewModels = null,
+                CommentSentiwordModels = recordViewModelSentiwordViewModels,
+                ReviewClassification = new ReviewClassficationViewModel(recordModelSentiwordObjects.PositivePercent, recordModelSentiwordObjects.NegativePercent),
+                WordFrequencyViewModels = recordModelSentiwordObjects.WordFrequencyModels
+                    .Select(m => new WordFrequencyViewModel(m))
+                    .OrderByDescending(m => m.WordFrequency)
+                    .ToList(),
+            };
+            return recordDisplay;
+        }
+
+        private async Task<RecordDisplayViewModel> AddRecordUsingVaderAsync(IFormFile file, RecordDisplayViewModel recordDisplay)
+        {
+            var recordModelVaderObjects = await _recordsService.AddRecordAsync<VaderModel>(file, _configuration.GetValue<string>("BaseUrl"));
+            var recordViewModelVader = recordModelVaderObjects.CommentModels.Select(m => new CommentVaderViewModel(m));
+            recordDisplay = new RecordDisplayViewModel()
+            {
+                CommentVaderViewModels = recordViewModelVader,
+                CommentHybridViewModels = null,
+                CommentSentiwordModels = null,
+                ReviewClassification = new ReviewClassficationViewModel(recordModelVaderObjects.PositivePercent, recordModelVaderObjects.NegativePercent),
+                WordFrequencyViewModels = recordModelVaderObjects.WordFrequencyModels
+                    .Select(m => new WordFrequencyViewModel(m))
+                    .OrderByDescending(m => m.WordFrequency)
+                    .ToList(),
+            };
+            return recordDisplay;
         }
     }
 }
