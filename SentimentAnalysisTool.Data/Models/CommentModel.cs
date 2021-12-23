@@ -29,7 +29,10 @@ namespace SentimentAnalysisTool.Data.Models
         public DateTime Date { get; set; }
         
         [JsonProperty("algorithmnModel")]
-        public T AlgorithmnModel { get; set; }        
+        public T AlgorithmnModel { get; set; }     
+        
+        [JsonProperty("transformedComment")]
+        public string TransformedCommentDetail { get; set; }
     }
 
 }

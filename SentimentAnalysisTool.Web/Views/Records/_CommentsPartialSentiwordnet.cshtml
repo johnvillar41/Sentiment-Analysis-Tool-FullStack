@@ -10,6 +10,7 @@ else
         <thead class="thead-light">
             <tr>
                 <th scope="col">Comment </th>
+                <th scope="col">Transformed Comment </th>
                 <th scope="col">Score </th>
                 <th scope="col">Sentiment </th>
                 <th scope="col">Date </th>
@@ -22,6 +23,7 @@ else
             {
                 <tr>
                     <td>@Model[i].CommentDetail</td>
+                    <td>@Model[i].TransformedCommentDetail</td>
                     @if (Model[i].CommentScore >= 1 && Model[i].CommentScore <= 2)
                     {
                         <td><span class="badge badge-pill badge-dark">@Model[i].CommentScore / 5</span></td>

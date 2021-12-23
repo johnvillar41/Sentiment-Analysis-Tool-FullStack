@@ -19,6 +19,7 @@ namespace SentimentAnalysisTool.Web.Models.CommentViewModels
             Date = comment.Date;
             CommentPolarity = (SentimentType)Enum.Parse(typeof(SentimentType), comment.CommentPolarity);
             SentiWordNetGrade = comment.AlgorithmnModel;
+            TransformedCommentDetail = comment.TransformedCommentDetail;
         }
     }
 }

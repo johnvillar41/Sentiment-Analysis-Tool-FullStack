@@ -20,6 +20,7 @@ namespace SentimentAnalysisTool.Web.Models.CommentViewModels
             Date = comment.Date;
             CommentPolarity = (SentimentType)Enum.Parse(typeof(SentimentType), comment.CommentPolarity);
             HybridGrade = comment.AlgorithmnModel;
+            TransformedCommentDetail = comment.TransformedCommentDetail;
         }
     }
 }
