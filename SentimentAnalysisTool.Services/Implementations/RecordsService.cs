@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using SentimentAnalysisTool.Data.Models;
 using SentimentAnalysisTool.Services.Interfaces;
+using SentimentAnalysisTool.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -17,7 +20,7 @@ namespace SentimentAnalysisTool.Services.Implementations
         {
             _httpClient = new HttpClient();
         }
-        public async Task<RecordModel<T>> AddRecordAsync<T>(IFormFile file, string baseUrl)
+        public async Task<RecordModel<T>> AddRecordAsync<T>(UploadCsvFileModel file, string baseUrl)
         {
             try
             {
@@ -25,26 +28,16 @@ namespace SentimentAnalysisTool.Services.Implementations
                 var genericType = typeof(T);
                 HttpResponseMessage response = null;
                 RecordModel<T> jsonModel = null;
-                if (genericType.Name.Equals("SentiWordNetModel"))
-                {
-                    response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=SentiWordNet", form);
-                }
-                if (genericType.Name.Equals("VaderModel"))
-                {
-                    response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=Vader", form);
-                }
-                if (genericType.Name.Equals("HybridModel"))
-                {
-                    response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload?algorithmnType=Hybrid", form);
-                }
+                response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload", form);
+                response.EnsureSuccessStatusCode();
                 jsonModel = await response.Content.ReadAsAsync<RecordModel<T>>();
                 return jsonModel;
             }
             catch (HttpRequestException)
             {
                 throw new HttpRequestException("Not connected from server!");
-            }            
-        }       
+            }
+        }
 
         public async Task<bool> DeleteRecordAsync(int recordId, string baseUrl)
         {
@@ -67,17 +60,21 @@ namespace SentimentAnalysisTool.Services.Implementations
 
             return null;
         }
-        private async Task<MultipartFormDataContent> ParseFile(IFormFile file)
+        private async Task<MultipartFormDataContent> ParseFile(UploadCsvFileModel file)
         {
             var task = await Task.Run(() =>
             {
                 _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
                 var form = new MultipartFormDataContent();
                 var ms = new MemoryStream();
-                file.CopyTo(ms);
+                file.File.CopyTo(ms);
                 var fileBytes = ms.ToArray();
-                //var s = Convert.ToBase64String(fileBytes);
-                form.Add(new ByteArrayContent(fileBytes, 0, fileBytes.Length), "file", file.FileName);
+                form.Add(new ByteArrayContent(fileBytes, 0, fileBytes.Length), "file", file.File.FileName);
+                form.Add(new StringContent(file.ShouldDeleteSlangs.ToString()), "\"shouldDeleteSlangs\"");
+                form.Add(new StringContent(file.Algorithmn), "\"algorithmn\"");
+                form.Add(new StringContent(file.ShouldConvertAbbreviations.ToString()), "\"shouldConvertAbbreviations\"");
+                form.Add(new StringContent(file.CorpusType.ToString()), "\"corpusType\"");
+                form.Add(new StringContent(file.MaxNumberOfChars.ToString()), "\"maxNumberOfChars\"");
                 return form;
             });
 

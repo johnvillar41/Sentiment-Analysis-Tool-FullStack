@@ -36,17 +36,30 @@ namespace SentimentAnalysisTool.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> UploadCsvFile(
             [FromForm] IFormFile file,
-            [FromForm] AlgorithmnType algorithmnType)
+            [FromForm] AlgorithmnType algorithmnType,
+            [FromForm] bool shouldDeleteSlangs,
+            [FromForm] bool shouldConvertAbbreviations,
+            [FromForm] string corpusType,
+            [FromForm] int maxNumberOfChars)
         {
             try
             {
+                var uploadCsvModel = new UploadCsvFileModel()
+                {
+                    File = file,
+                    ShouldDeleteSlangs = shouldDeleteSlangs,
+                    ShouldConvertAbbreviations = shouldConvertAbbreviations,
+                    CorpusType = corpusType,
+                    MaxNumberOfChars = maxNumberOfChars,
+                    Algorithmn = algorithmnType.ToString()
+                };
                 RecordDisplayViewModel recordDisplay = new();
                 if (algorithmnType == AlgorithmnType.Vader)
-                    recordDisplay = await AddRecordUsingVaderAsync(file, recordDisplay);
+                    recordDisplay = await AddRecordUsingVaderAsync(uploadCsvModel, recordDisplay);
                 if (algorithmnType == AlgorithmnType.SentiWordNet)
-                    recordDisplay = await AddRecordUsingSentiWordNetAsync(file, recordDisplay);
+                    recordDisplay = await AddRecordUsingSentiWordNetAsync(uploadCsvModel, recordDisplay);
                 if (algorithmnType == AlgorithmnType.Hybrid)
-                    recordDisplay = await AddRecordUsingHybridAsync(file, recordDisplay);
+                    recordDisplay = await AddRecordUsingHybridAsync(uploadCsvModel, recordDisplay);
 
                 var obj = new
                 {
@@ -61,9 +74,9 @@ namespace SentimentAnalysisTool.Web.Controllers
             }
         }
 
-        private async Task<RecordDisplayViewModel> AddRecordUsingHybridAsync(IFormFile file, RecordDisplayViewModel recordDisplay)
+        private async Task<RecordDisplayViewModel> AddRecordUsingHybridAsync(UploadCsvFileModel record, RecordDisplayViewModel recordDisplay)
         {
-            var recordModelHybridObjects = await _recordsService.AddRecordAsync<HybridModel>(file, _configuration.GetValue<string>("BaseUrl"));
+            var recordModelHybridObjects = await _recordsService.AddRecordAsync<HybridModel>(record, _configuration.GetValue<string>("BaseUrl"));
             var recordViewModelHybridViewModels = recordModelHybridObjects.CommentModels.Select(m => new CommentHybridViewModel(m));
             recordDisplay = new RecordDisplayViewModel()
             {
@@ -79,9 +92,9 @@ namespace SentimentAnalysisTool.Web.Controllers
             return recordDisplay;
         }
 
-        private async Task<RecordDisplayViewModel> AddRecordUsingSentiWordNetAsync(IFormFile file, RecordDisplayViewModel recordDisplay)
+        private async Task<RecordDisplayViewModel> AddRecordUsingSentiWordNetAsync(UploadCsvFileModel record, RecordDisplayViewModel recordDisplay)
         {
-            var recordModelSentiwordObjects = await _recordsService.AddRecordAsync<SentiWordNetModel>(file, _configuration.GetValue<string>("BaseUrl"));
+            var recordModelSentiwordObjects = await _recordsService.AddRecordAsync<SentiWordNetModel>(record, _configuration.GetValue<string>("BaseUrl"));
             var recordViewModelSentiwordViewModels = recordModelSentiwordObjects.CommentModels.Select(m => new CommentSentiWordNetViewModel(m));
             recordDisplay = new RecordDisplayViewModel()
             {
@@ -97,9 +110,9 @@ namespace SentimentAnalysisTool.Web.Controllers
             return recordDisplay;
         }
 
-        private async Task<RecordDisplayViewModel> AddRecordUsingVaderAsync(IFormFile file, RecordDisplayViewModel recordDisplay)
+        private async Task<RecordDisplayViewModel> AddRecordUsingVaderAsync(UploadCsvFileModel record, RecordDisplayViewModel recordDisplay)
         {
-            var recordModelVaderObjects = await _recordsService.AddRecordAsync<VaderModel>(file, _configuration.GetValue<string>("BaseUrl"));
+            var recordModelVaderObjects = await _recordsService.AddRecordAsync<VaderModel>(record, _configuration.GetValue<string>("BaseUrl"));
             var recordViewModelVader = recordModelVaderObjects.CommentModels.Select(m => new CommentVaderViewModel(m));
             recordDisplay = new RecordDisplayViewModel()
             {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using SentimentAnalysisTool.Data.Models;
+using SentimentAnalysisTool.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace SentimentAnalysisTool.Services.Interfaces
 {
     public interface IRecordsService
     {
-        Task<RecordModel<T>> AddRecordAsync<T>(IFormFile file, string baseUrl);
+        Task<RecordModel<T>> AddRecordAsync<T>(UploadCsvFileModel file, string baseUrl);
         Task<bool> DeleteRecordAsync(int recordId, string baseUrl);
         Task<RecordModel<T>> FetchRecordsAsync<T>(int recordId, string baseUrl);
     }

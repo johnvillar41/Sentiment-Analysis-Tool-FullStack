@@ -95,4 +95,13 @@
     }
 });
 
+$("#drop-down-env").on("click", function () {
+    document.getElementById("corpus-type").value = "EnvironmentReview";
+});
+$("#drop-down-film").on("click", function () {
+    document.getElementById("corpus-type").value = "FilmReview";
+});
+$("#drop-down-prod").on("click", function () {
+    document.getElementById("corpus-type").value = "ProductReview";
+});
 

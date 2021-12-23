@@ -28,7 +28,7 @@ namespace SentimentAnalysisTool.Data.Models
         [JsonProperty("date")]
         public DateTime Date { get; set; }
         
-        [JsonProperty("algorithmnObject")]
+        [JsonProperty("algorithmnModel")]
         public T AlgorithmnModel { get; set; }        
     }
 

@@ -33,7 +33,7 @@
                     <h6><b>Select CorpusType</b></h6>
                     <div class="row">
                         <div class="col-6">
-                            <input type="text" class="form-control" readonly placeholder="Pick corpus"/>
+                            <input type="text" class="form-control" id="corpus-type" name="corpusType" readonly required />
                         </div>
                         <div class="col-6">
                             <div class="dropdown mb-1">
@@ -41,15 +41,35 @@
                                     CorpusType
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">@nameof(SentimentAnalysisTool.Web.Enums.DataCorpusType.EnvironmentReview)</a>
-                                    <a class="dropdown-item" href="#">@nameof(SentimentAnalysisTool.Web.Enums.DataCorpusType.FilmReview)</a>
-                                    <a class="dropdown-item" href="#">@nameof(SentimentAnalysisTool.Web.Enums.DataCorpusType.ProductReview)</a>
+                                    <a class="dropdown-item" id="drop-down-env">@nameof(SentimentAnalysisTool.Web.Enums.DataCorpusType.EnvironmentReview)</a>
+                                    <a class="dropdown-item" id="drop-down-film">@nameof(SentimentAnalysisTool.Web.Enums.DataCorpusType.FilmReview)</a>
+                                    <a class="dropdown-item" id="drop-down-prod">@nameof(SentimentAnalysisTool.Web.Enums.DataCorpusType.ProductReview)</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <hr />
                     <h6><b>Select Preprocessing techniques</b></h6>
+                    <p>Delete Slang Words? </p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="shouldDeleteSlangs" value="true">
+                        <label class="form-check-label">True</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="shouldDeleteSlangs" value="false">
+                        <label class="form-check-label">False</label>
+                    </div>
+                    <p class="mt-3">Convert Abbreviations? </p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="shouldConvertAbbreviations" value="true">
+                        <label class="form-check-label">True</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="shouldConvertAbbreviations" value="false">
+                        <label class="form-check-label">False</label>
+                    </div>
+                    <p class="mt-3">Maximum number of characters</p>
+                    <input type="number" class="form-control" name="maxNumberOfChars" min="1" max="250" value="90"/>
                 </form>
             </div>
             <div class="modal-footer">
