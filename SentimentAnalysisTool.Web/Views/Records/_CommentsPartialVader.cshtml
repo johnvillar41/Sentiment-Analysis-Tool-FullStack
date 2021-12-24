@@ -39,11 +39,11 @@ else
 
                     @if (Model[i].CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Positive)
                     {
-                        <td><span class="badge badge-light">@Model[i].CommentPolarity</span></td>
+                        <td><span class="badge badge-light">@Model[i].CommentPolarity <i class="fas fa-smile"></i></span></td>
                     }
                     else if (Model[i].CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Negative)
                     {
-                        <td><span class="badge badge-dark">@Model[i].CommentPolarity</span></td>
+                        <td><span class="badge badge-dark">@Model[i].CommentPolarity <i class="fas fa-sad-tear"></i></span></td>
                     }
                     else
                     {
