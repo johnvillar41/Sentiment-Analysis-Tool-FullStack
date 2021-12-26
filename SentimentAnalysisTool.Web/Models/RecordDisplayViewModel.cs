@@ -1,4 +1,5 @@
-﻿using SentimentAnalysisTool.Web.Models.CommentViewModels;
+﻿using SentimentAnalysisTool.Web.Enums;
+using SentimentAnalysisTool.Web.Models.CommentViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace SentimentAnalysisTool.Web.Models
         public IEnumerable<CommentSentiWordNetViewModel> CommentSentiwordModels { get; set; }
         public IEnumerable<WordFrequencyViewModel> WordFrequencyViewModels { get; set; }
         public ReviewClassficationViewModel ReviewClassification { get; set; }
+        public AlgorithmnType? Algorithmn { get; set; }
     }
 }

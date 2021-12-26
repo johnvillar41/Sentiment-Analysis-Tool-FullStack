@@ -1,23 +1,24 @@
-﻿@model SentimentAnalysisTool.Web.Models.RecordDisplayViewModel
+﻿@using SentimentAnalysisTool.Web.Enums
+@model SentimentAnalysisTool.Web.Models.RecordDisplayViewModel
 <div class="col-6">
     <div class="card shadow-sm card-height d-flex">        
         <div class="card-header">
             Comments <br />
         </div>
         <div class="card-body align-items-center d-flex justify-content-center">
-            @if (Model.CommentSentiwordModels == null && Model.CommentHybridViewModels == null && Model.CommentVaderViewModels != null)
+            @if (Model.Algorithmn == AlgorithmnType.Vader)
             {
                 @await Html.PartialAsync("_CommentsPartialVader", Model.CommentVaderViewModels.ToList())
             }
-            @if (Model.CommentSentiwordModels != null && Model.CommentHybridViewModels == null && Model.CommentVaderViewModels == null)
+            @if (Model.Algorithmn == AlgorithmnType.SentiWordNet)
             {
                 @await Html.PartialAsync("_CommentsPartialSentiwordnet", Model.CommentSentiwordModels.ToList())
             }
-            @if (Model.CommentSentiwordModels == null && Model.CommentHybridViewModels != null && Model.CommentVaderViewModels == null)
+            @if (Model.Algorithmn == AlgorithmnType.Hybrid)
             {
                 @await Html.PartialAsync("_CommentsPartialHybrid", Model.CommentHybridViewModels.ToList());
             }
-            @if (Model.CommentSentiwordModels == null && Model.CommentHybridViewModels == null && Model.CommentVaderViewModels == null)
+            @if (Model.Algorithmn == null)
             {
                 <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_oga1x3jk.json" background="transparent" speed="1" style="width: 600px; height: 600px;" loop autoplay></lottie-player>
             }
