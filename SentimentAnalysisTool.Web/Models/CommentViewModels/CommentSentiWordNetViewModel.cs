@@ -10,7 +10,7 @@ namespace SentimentAnalysisTool.Web.Models.CommentViewModels
 {
     public class CommentSentiWordNetViewModel : BaseCommentViewModel
     {
-        public SentiWordNetModel SentiWordNetGrade { get; set; }
+        public SentiWordNetModel AlgorithmnGrade { get; set; }
         public CommentSentiWordNetViewModel(CommentModel<SentiWordNetModel> comment)
         {
             CommentId = comment.CommentId;
@@ -18,8 +18,9 @@ namespace SentimentAnalysisTool.Web.Models.CommentViewModels
             CommentDetail = comment.CommentDetail;
             Date = comment.Date;
             CommentPolarity = (SentimentType)Enum.Parse(typeof(SentimentType), comment.CommentPolarity);
-            SentiWordNetGrade = comment.AlgorithmnModel;
+            AlgorithmnGrade = comment.AlgorithmnModel;
             TransformedCommentDetail = comment.TransformedCommentDetail;
+            Algorithmn = AlgorithmnType.SentiWordNet;
         }
     }
 }

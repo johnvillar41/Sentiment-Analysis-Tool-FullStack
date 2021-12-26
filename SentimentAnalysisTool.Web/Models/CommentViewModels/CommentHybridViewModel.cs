@@ -11,7 +11,7 @@ namespace SentimentAnalysisTool.Web.Models.CommentViewModels
 {
     public class CommentHybridViewModel : BaseCommentViewModel
     {
-        public HybridModel HybridGrade { get; set; }
+        public HybridModel AlgorithmnGrade { get; set; }
         public CommentHybridViewModel(CommentModel<HybridModel> comment)
         {
             CommentId = comment.CommentId;
@@ -19,8 +19,9 @@ namespace SentimentAnalysisTool.Web.Models.CommentViewModels
             CommentDetail = comment.CommentDetail;
             Date = comment.Date;
             CommentPolarity = (SentimentType)Enum.Parse(typeof(SentimentType), comment.CommentPolarity);
-            HybridGrade = comment.AlgorithmnModel;
+            AlgorithmnGrade = comment.AlgorithmnModel;
             TransformedCommentDetail = comment.TransformedCommentDetail;
+            Algorithmn = AlgorithmnType.Hybrid;
         }
     }
 }

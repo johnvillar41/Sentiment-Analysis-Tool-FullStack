@@ -1,22 +1,23 @@
 ﻿@using SentimentAnalysisTool.Web.Enums
+@using SentimentAnalysisTool.Web.Models.CommentViewModels
 @model SentimentAnalysisTool.Web.Models.RecordDisplayViewModel
 <div class="col-6">
-    <div class="card shadow-sm card-height d-flex">        
+    <div class="card shadow-sm card-height d-flex">
         <div class="card-header">
             Comments <br />
         </div>
         <div class="card-body align-items-center d-flex justify-content-center">
             @if (Model.Algorithmn == AlgorithmnType.Vader)
             {
-                @await Html.PartialAsync("_CommentsPartialVader", Model.CommentVaderViewModels.ToList())
+                @await Html.PartialAsync("_CommentsPartial", (List<CommentVaderViewModel>)Model.CommentVaderViewModels.ToList())
             }
             @if (Model.Algorithmn == AlgorithmnType.SentiWordNet)
             {
-                @await Html.PartialAsync("_CommentsPartialSentiwordnet", Model.CommentSentiwordModels.ToList())
+                @await Html.PartialAsync("_CommentsPartial", (List<CommentSentiWordNetViewModel>)Model.CommentSentiwordModels.ToList())
             }
             @if (Model.Algorithmn == AlgorithmnType.Hybrid)
             {
-                @await Html.PartialAsync("_CommentsPartialHybrid", Model.CommentHybridViewModels.ToList());
+                @await Html.PartialAsync("_CommentsPartial", (List<CommentHybridViewModel>)Model.CommentHybridViewModels.ToList());
             }
             @if (Model.Algorithmn == null)
             {

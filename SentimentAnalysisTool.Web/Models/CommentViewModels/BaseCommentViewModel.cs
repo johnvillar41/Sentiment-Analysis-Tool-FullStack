@@ -14,5 +14,6 @@ namespace SentimentAnalysisTool.Web.Models.CommentViewModels
         public string TransformedCommentDetail { get; set; }
         public DateTime Date { get; set; }
         public SentimentType CommentPolarity { get; set; }
+        public AlgorithmnType Algorithmn { get; set; }
     }
 }
