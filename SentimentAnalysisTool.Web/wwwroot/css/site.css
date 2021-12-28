@@ -66,6 +66,10 @@ p, h1 {
     height: 20vh;
 }
 
+.table-height-comments-transform {
+    height: 25vh;
+}
+
 .card {
     background-color: #D3D3D3;
 }

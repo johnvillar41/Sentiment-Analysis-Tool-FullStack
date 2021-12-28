@@ -1,0 +1,24 @@
+﻿@model List<SentimentAnalysisTool.Web.Models.CommentTransformViewModel>
+<div class="table-responsive table-height-comments-transform">
+    <table class="table table-hover">
+        <thead class="thead-light table-sticky">
+            <tr>
+                <th scope="col">Original Comment </th>
+                <th scope="col">Manually Transformed Comment </th>
+                <th scope="col">Automatically Transformed Comment </th>
+                <th scope="col">Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.OriginalComment</td>
+                    <td>@item.ManualTransformedComment</td>
+                    <td>@item.AutomaticTransformedComment</td>
+                    <td>@item.IsCommentEqual</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
