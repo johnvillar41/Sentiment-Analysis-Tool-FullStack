@@ -79,4 +79,7 @@ p, h1 {
     z-index: 99;
 }
 
-​
+.table-sticky {
+    position: sticky;
+    top: 0;
+}
