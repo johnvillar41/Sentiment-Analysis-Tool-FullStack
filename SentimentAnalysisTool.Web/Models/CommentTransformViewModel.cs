@@ -17,7 +17,7 @@ namespace SentimentAnalysisTool.Web.Models
             OriginalComment = comment.CommentDetail;
             ManualTransformedComment = comment.ManualTransformedCommentDetail;
             AutomaticTransformedComment = comment.TransformedCommentDetail;
-            IsCommentEqual = ManualTransformedComment.Equals(AutomaticTransformedComment);
+            IsCommentEqual = ManualTransformedComment.Equals(AutomaticTransformedComment, StringComparison.OrdinalIgnoreCase);
         }
         public CommentTransformViewModel()
         {
