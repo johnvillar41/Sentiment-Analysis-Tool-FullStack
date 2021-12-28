@@ -33,6 +33,9 @@ namespace SentimentAnalysisTool.Data.Models
         
         [JsonProperty("transformedComment")]
         public string TransformedCommentDetail { get; set; }
+
+        [JsonProperty("manualTransformedComment")]
+        public string ManualTransformedCommentDetail { get; set; }
     }
 
 }

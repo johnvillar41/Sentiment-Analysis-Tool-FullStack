@@ -15,7 +15,7 @@ namespace SentimentAnalysisTool.Web.Models
         public CommentTransformViewModel(BaseCommentViewModel comment)
         {
             OriginalComment = comment.CommentDetail;
-            ManualTransformedComment = comment.TransformedCommentDetail; // TODO
+            ManualTransformedComment = comment.ManualTransformedCommentDetail;
             AutomaticTransformedComment = comment.TransformedCommentDetail;
             IsCommentEqual = ManualTransformedComment.Equals(AutomaticTransformedComment);
         }

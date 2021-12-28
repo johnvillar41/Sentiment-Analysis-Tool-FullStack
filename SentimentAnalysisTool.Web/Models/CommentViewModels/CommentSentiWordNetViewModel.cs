@@ -21,6 +21,7 @@ namespace SentimentAnalysisTool.Web.Models.CommentViewModels
             AlgorithmnGrade = comment.AlgorithmnModel;
             TransformedCommentDetail = comment.TransformedCommentDetail;
             Algorithmn = AlgorithmnType.SentiWordNet;
+            ManualTransformedCommentDetail = comment.ManualTransformedCommentDetail;
         }
     }
 }
