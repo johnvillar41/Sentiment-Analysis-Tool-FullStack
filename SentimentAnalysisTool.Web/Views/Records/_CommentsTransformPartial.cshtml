@@ -16,7 +16,14 @@
                     <td>@item.OriginalComment</td>
                     <td>@item.ManualTransformedComment</td>
                     <td>@item.AutomaticTransformedComment</td>
-                    <td>@item.IsCommentEqual</td>
+                    @if (item.IsCommentEqual)
+                    {
+                        <td><span class="badge badge-pill badge-light">@item.IsCommentEqual <i class="fas fa-plus-circle"></i></span></td>
+                    }
+                    else
+                    {
+                        <td> <span class="badge badge-pill badge-dark">@item.IsCommentEqual <i class="fas fa-minus-circle"></i></span></td>
+                    }
                 </tr>
             }
         </tbody>
