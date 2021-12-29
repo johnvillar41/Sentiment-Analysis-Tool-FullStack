@@ -8,9 +8,20 @@ namespace SentimentAnalysisTool.Web.Models
 {
     public class CommentTransformViewModel
     {
+        private string _manualTransformedComment;
+        private string _automaticTransformedComment;
+
         public string OriginalComment { get; set; }
-        public string ManualTransformedComment { get; set; }
-        public string AutomaticTransformedComment { get; set; }
+        public string ManualTransformedComment 
+        { 
+            get => _manualTransformedComment.Trim(); 
+            set => _manualTransformedComment = value; 
+        }
+        public string AutomaticTransformedComment 
+        {
+            get => _automaticTransformedComment.Trim();
+            set => _automaticTransformedComment = value;
+        }
         public bool IsCommentEqual { get; }
         public CommentTransformViewModel(BaseCommentViewModel comment)
         {
