@@ -14,10 +14,10 @@
                         </button>
                     </div>
                     <div class="ml-auto">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#upload-slang-modal">
+                        <button type="button" id="btnConfusionMatrixProcess" class="btn btn-dark" style="display:none;" data-toggle="modal">
                             Confusion Matrix TextProcessing <i class="fas fa-robot"></i>
                         </button>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#upload-slang-modal">
+                        <button type="button" id="btnConfusionMatrixAlgo" class="btn btn-dark" style="display:none;" data-toggle="modal">
                             Confusion Matrix Algorithmn <i class="fas fa-robot"></i>
                         </button>
                     </div>
@@ -55,7 +55,84 @@
                     contentType: false,
                     processData: false,
                     success: function (response) {
+                        $("#btnConfusionMatrixProcess").show();
+                        $("#btnConfusionMatrixAlgo").show();
+
                         promptHasNetwork(response);
+                        $("#btnConfusionMatrixProcess").on("click", function () {
+                            Swal.fire({
+                                title: '<strong>Confusion Matrix</strong>',
+                                icon: 'info',
+                                html: `<table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Salary</th>
+                                                <th>Country</th>
+                                                <th>City</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Dakota Rice</td>
+                                                <td>$36,738</td>
+                                                <td>Niger</td>
+                                                <td>Oud-Turnhout</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Minerva Hooper</td>
+                                                <td>$23,789</td>
+                                                <td>Curaçao</td>
+                                                <td>Sinaai-Waas</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Sage Rodriguez</td>
+                                                <td>$56,142</td>
+                                                <td>Netherlands</td>
+                                                <td>Baileux</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Philip Chaney</td>
+                                                <td>$38,735</td>
+                                                <td>Korea, South</td>
+                                                <td>Overland Park</td>
+                                            </tr>
+                                </tbody>
+                                </table>`,
+                                showCloseButton: true,
+                                showCancelButton: true,
+                                focusConfirm: false,
+                                confirmButtonText:
+                                    '<i class="fa fa-thumbs-up"></i> Great!',
+                                confirmButtonAriaLabel: 'Thumbs up, great!',
+                                cancelButtonText:
+                                    '<i class="fa fa-thumbs-down"></i>',
+                                cancelButtonAriaLabel: 'Thumbs down'
+                            });
+                        });
+                        $("#btnConfusionMatrixAlgo").on("click", function () {
+                            Swal.fire({
+                                title: '<strong>Confusion Matrix</strong>',
+                                icon: 'info',
+                                html:
+                                    '<b>Confusion Matrix results for TODO </b> <br/>' +
+                                    '<p>' + response.algorithmnConfusionMatrix + '</p>',
+                                showCloseButton: true,
+                                showCancelButton: true,
+                                focusConfirm: false,
+                                confirmButtonText:
+                                    '<i class="fa fa-thumbs-up"></i> Great!',
+                                confirmButtonAriaLabel: 'Thumbs up, great!',
+                                cancelButtonText:
+                                    '<i class="fa fa-thumbs-down"></i>',
+                                cancelButtonAriaLabel: 'Thumbs down'
+                            });
+                        });
                     },
                     error: function (response) { promptNoNetwork(response) },
                     failure: function (response) { promptNoNetwork(response) },
@@ -65,6 +142,9 @@
                 });
             });
         });
+
+
+
     </script>
     <script src="~/js/records-index.js"></script>
 }

@@ -60,7 +60,9 @@ namespace SentimentAnalysisTool.Web.Controllers
                 var obj = new
                 {
                     Html = await RenderHelper.RenderViewAsync<RecordDisplayViewModel>(this, "_RecordDisplayPartial", recordDisplay),
-                    recordDisplay.ReviewClassification
+                    recordDisplay.ReviewClassification,
+                    TextProcessingConfusionMatrix = 69,
+                    AlgorithmnConfusionMatrix = 70,
                 };
                 return Json(obj);
             }
@@ -69,7 +71,13 @@ namespace SentimentAnalysisTool.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        private dynamic CalculateTextProcessingMatrix(RecordDisplayViewModel record)
+        {
+            return new
+            {
 
+            };
+        }
         private async Task<RecordDisplayViewModel> BuildRecordDisplayViewModelAsync(UploadCsvFileModel record, RecordDisplayViewModel recordDisplay, AlgorithmnType algorithmn)
         {
             switch (algorithmn)
@@ -99,7 +107,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .Select(m => new WordFrequencyViewModel(m))
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
-                        CommentTransformViewModels = recordViewModelSentiwordViewModels.Select(m=> new CommentTransformViewModel(m)).ToList()
+                        CommentTransformViewModels = recordViewModelSentiwordViewModels.Select(m => new CommentTransformViewModel(m)).ToList()
                     };
                     break;
                 case AlgorithmnType.Vader:
