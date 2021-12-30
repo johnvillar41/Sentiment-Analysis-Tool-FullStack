@@ -7,9 +7,24 @@ namespace SentimentAnalysisTool.Web.Enums
 {
     public enum ConfusionMatrixType
     {
-        TruePositive,
-        TrueNegative,
-        FalsePositive,
-        FalseNegative
+        /// <summary>
+        /// True Positive
+        /// </summary>
+        TP,
+
+        /// <summary>
+        /// True Negative
+        /// </summary>
+        TN,
+
+        /// <summary>
+        /// False Positive
+        /// </summary>
+        FP,
+
+        /// <summary>
+        /// False Negative
+        /// </summary>
+        FN
     }
 }

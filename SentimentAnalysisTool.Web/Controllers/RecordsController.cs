@@ -61,8 +61,8 @@ namespace SentimentAnalysisTool.Web.Controllers
                 {
                     Html = await RenderHelper.RenderViewAsync<RecordDisplayViewModel>(this, "_RecordDisplayPartial", recordDisplay),
                     recordDisplay.ReviewClassification,
-                    TextProcessingConfusionMatrix = 69,
-                    AlgorithmnConfusionMatrix = 70,
+                    TextProcessingAccuracy = CalculateAccuracyTextProcessing(recordDisplay),
+                    AlgorithmnConfusionMatrix = CalculateAccuracyTextProcessing(recordDisplay),
                 };
                 return Json(obj);
             }
@@ -71,12 +71,54 @@ namespace SentimentAnalysisTool.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        private dynamic CalculateTextProcessingMatrix(RecordDisplayViewModel record)
+        private double CalculateAccuracyTextProcessing(RecordDisplayViewModel record)
         {
-            return new
+            var totalComments = (double)0;
+            var totalPositiveEquals = (double)0;
+            switch (record.Algorithmn)
             {
-
-            };
+                case AlgorithmnType.SentiWordNet:
+                    totalComments = (double)record.CommentSentiwordModels.Count();
+                    totalPositiveEquals = (double)0;
+                    foreach (var item in record.CommentSentiwordModels)
+                    {
+                        if (item.AlgorithmnGrade.SentimentScore
+                            .Trim()
+                            .Equals(item.CommentPolarity.ToString()))
+                        {
+                            totalPositiveEquals++;
+                        }
+                    }
+                    break;
+                case AlgorithmnType.Vader:
+                    totalComments = (double)record.CommentVaderViewModels.Count();
+                    totalPositiveEquals = (double)0;
+                    foreach (var item in record.CommentVaderViewModels)
+                    {
+                        if (item.AlgorithmnGrade.CompoundScore
+                            .Trim()
+                            .Equals(item.CommentPolarity.ToString()))
+                        {
+                            totalPositiveEquals++;
+                        }
+                    }
+                    break;
+                case AlgorithmnType.Hybrid:
+                    totalComments = (double)record.CommentHybridViewModels.Count();
+                    totalPositiveEquals = (double)0;
+                    foreach (var item in record.CommentHybridViewModels)
+                    {
+                        if (item.AlgorithmnGrade.HybridScore
+                            .Trim()
+                            .Equals(item.CommentPolarity.ToString()))
+                        {
+                            totalPositiveEquals++;
+                        }
+                    }
+                    break;
+                    
+            }
+            return (totalPositiveEquals / totalComments) * 100;
         }
         private async Task<RecordDisplayViewModel> BuildRecordDisplayViewModelAsync(UploadCsvFileModel record, RecordDisplayViewModel recordDisplay, AlgorithmnType algorithmn)
         {

@@ -57,50 +57,21 @@
                     success: function (response) {
                         $("#btnConfusionMatrixProcess").show();
                         $("#btnConfusionMatrixAlgo").show();
-
                         promptHasNetwork(response);
+                        console.log(response.textProcessingConfusionMatrix);
                         $("#btnConfusionMatrixProcess").on("click", function () {
                             Swal.fire({
-                                title: '<strong>Confusion Matrix</strong>',
+                                title: '<strong>Textprocessing Accuracy</strong>',
                                 icon: 'info',
                                 html: `<table class="table">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Salary</th>
-                                                <th>Country</th>
-                                                <th>City</th>
+                                                <th>Accuracy</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>1</td>
-                                                <td>Dakota Rice</td>
-                                                <td>$36,738</td>
-                                                <td>Niger</td>
-                                                <td>Oud-Turnhout</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Minerva Hooper</td>
-                                                <td>$23,789</td>
-                                                <td>Curaçao</td>
-                                                <td>Sinaai-Waas</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sage Rodriguez</td>
-                                                <td>$56,142</td>
-                                                <td>Netherlands</td>
-                                                <td>Baileux</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Philip Chaney</td>
-                                                <td>$38,735</td>
-                                                <td>Korea, South</td>
-                                                <td>Overland Park</td>
+                                                <td>${response.textProcessingAccuracy}</td>
                                             </tr>
                                 </tbody>
                                 </table>`,
@@ -120,8 +91,24 @@
                                 title: '<strong>Confusion Matrix</strong>',
                                 icon: 'info',
                                 html:
-                                    '<b>Confusion Matrix results for TODO </b> <br/>' +
-                                    '<p>' + response.algorithmnConfusionMatrix + '</p>',
+                                    `<table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Accuracy</th>
+                                                <th>Precision</th>
+                                                <th>Recall</th>
+                                                <th>F1 Score</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>${response.textProcessingAccuracy}</td>
+                                                <td>${response.textProcessingAccuracy}</td>
+                                                <td>${response.textProcessingAccuracy}</td>
+                                                <td>${response.textProcessingAccuracy}</td>
+                                            </tr>
+                                </tbody>
+                                </table>`,
                                 showCloseButton: true,
                                 showCancelButton: true,
                                 focusConfirm: false,
