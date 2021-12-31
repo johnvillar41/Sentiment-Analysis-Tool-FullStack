@@ -5,10 +5,9 @@ using SentimentAnalysisTool.Data.Models;
 using SentimentAnalysisTool.Services.Interfaces;
 using SentimentAnalysisTool.Web.Enums;
 using SentimentAnalysisTool.Web.Helpers;
+using SentimentAnalysisTool.Web.Helpers.Interfaces;
 using SentimentAnalysisTool.Web.Models;
 using SentimentAnalysisTool.Web.Models.CommentViewModels;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -18,14 +17,17 @@ namespace SentimentAnalysisTool.Web.Controllers
     public class RecordsController : Controller
     {
         private readonly IRecordsService _recordsService;
+        private readonly IComputingHelper _computingHelper;
         private readonly IConfiguration _configuration;
 
         public RecordsController(
             IRecordsService recordsService,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IComputingHelper computingHelper)
         {
             _recordsService = recordsService;
             _configuration = configuration;
+            _computingHelper = computingHelper;
         }
 
         public IActionResult Index(RecordDisplayViewModel model)
@@ -61,8 +63,8 @@ namespace SentimentAnalysisTool.Web.Controllers
                 {
                     Html = await RenderHelper.RenderViewAsync<RecordDisplayViewModel>(this, "_RecordDisplayPartial", recordDisplay),
                     recordDisplay.ReviewClassification,
-                    TextProcessingAccuracy = CalculateAccuracyTextProcessing(recordDisplay),
-                    AlgorithmnConfusionMatrix = CalculateAccuracyTextProcessing(recordDisplay),
+                    TextProcessingAccuracy = _computingHelper.ComputeAlgorithmnAccuracy(recordDisplay),
+                    AlgorithmnConfusionMatrix = _computingHelper.ComputeTextProcessingAccuracy(recordDisplay),
                 };
                 return Json(obj);
             }
@@ -71,55 +73,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        private double CalculateAccuracyTextProcessing(RecordDisplayViewModel record)
-        {
-            var totalComments = (double)0;
-            var totalPositiveEquals = (double)0;
-            switch (record.Algorithmn)
-            {
-                case AlgorithmnType.SentiWordNet:
-                    totalComments = (double)record.CommentSentiwordModels.Count();
-                    totalPositiveEquals = (double)0;
-                    foreach (var item in record.CommentSentiwordModels)
-                    {
-                        if (item.AlgorithmnGrade.SentimentScore
-                            .Trim()
-                            .Equals(item.CommentPolarity.ToString()))
-                        {
-                            totalPositiveEquals++;
-                        }
-                    }
-                    break;
-                case AlgorithmnType.Vader:
-                    totalComments = (double)record.CommentVaderViewModels.Count();
-                    totalPositiveEquals = (double)0;
-                    foreach (var item in record.CommentVaderViewModels)
-                    {
-                        if (item.AlgorithmnGrade.CompoundScore
-                            .Trim()
-                            .Equals(item.CommentPolarity.ToString()))
-                        {
-                            totalPositiveEquals++;
-                        }
-                    }
-                    break;
-                case AlgorithmnType.Hybrid:
-                    totalComments = (double)record.CommentHybridViewModels.Count();
-                    totalPositiveEquals = (double)0;
-                    foreach (var item in record.CommentHybridViewModels)
-                    {
-                        if (item.AlgorithmnGrade.HybridScore
-                            .Trim()
-                            .Equals(item.CommentPolarity.ToString()))
-                        {
-                            totalPositiveEquals++;
-                        }
-                    }
-                    break;
 
-            }
-            return (totalPositiveEquals / totalComments) * 100;
-        }
         private async Task<RecordDisplayViewModel> BuildRecordDisplayViewModelAsync(UploadCsvFileModel record, RecordDisplayViewModel recordDisplay, AlgorithmnType algorithmn)
         {
             switch (algorithmn)
@@ -158,7 +112,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                     recordDisplay.CommentSentiwordModels
                         .Where(m => m.AlgorithmnGrade.SentimentScore.Trim() == SentimentType.Neutral.ToString())
                         .ToList()
-                        .ForEach(x => x.AlgorithmnGrade.SentimentScore = SentimentType.Positive.ToString());    
+                        .ForEach(x => x.AlgorithmnGrade.SentimentScore = SentimentType.Positive.ToString());
                     break;
                 case AlgorithmnType.Vader:
                     var recordModelVaderObjects = await _recordsService.AddRecordAsync<VaderModel>(record, _configuration.GetValue<string>("BaseUrl"));

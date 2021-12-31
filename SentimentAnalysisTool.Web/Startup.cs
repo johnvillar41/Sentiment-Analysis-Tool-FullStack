@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SentimentAnalysisTool.Services.Implementations;
 using SentimentAnalysisTool.Services.Interfaces;
+using SentimentAnalysisTool.Web.Helpers.Implementations;
+using SentimentAnalysisTool.Web.Helpers.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +32,7 @@ namespace SentimentAnalysisTool.Web
            
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IRecordsService, RecordsService>();            
+            services.AddTransient<IComputingHelper, ComputingHelper>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

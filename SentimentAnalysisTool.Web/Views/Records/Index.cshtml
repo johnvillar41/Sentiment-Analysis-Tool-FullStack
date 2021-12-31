@@ -55,8 +55,7 @@
                     },
                     contentType: false,
                     processData: false,
-                    success: function (response) {
-                        promptSuccess(response);
+                    success: function (response) {                        
                         promptHasNetwork(response);
                     },
                     error: function (response) { promptNoNetwork(response) },
@@ -64,6 +63,7 @@
                 }).done(function (response) {
                     $('#record-display').html(response.html);
                     renderReviewClassification(response);
+                    promptSuccess(response);
                 });
             });
         });

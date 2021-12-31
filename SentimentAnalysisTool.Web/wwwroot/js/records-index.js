@@ -142,10 +142,10 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>${response.textProcessingAccuracy}</td>
-                                <td>${response.textProcessingAccuracy}</td>
-                                <td>${response.textProcessingAccuracy}</td>
-                                <td>${response.textProcessingAccuracy}</td>
+                                <td>${response.algorithmnConfusionMatrix}</td>
+                                <td>${response.algorithmnConfusionMatrix}</td>
+                                <td>${response.algorithmnConfusionMatrix}</td>
+                                <td>${response.algorithmnConfusionMatrix}</td>
                             </tr>
                         </tbody>
                 </table>`,
