@@ -116,7 +116,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                         }
                     }
                     break;
-                    
+
             }
             return (totalPositiveEquals / totalComments) * 100;
         }
@@ -137,6 +137,10 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .ToList(),
                         CommentTransformViewModels = recordViewModelHybridViewModels.Select(m => new CommentTransformViewModel(m)).ToList()
                     };
+                    recordDisplay.CommentHybridViewModels
+                        .Where(m => m.AlgorithmnGrade.HybridScore.Trim() == nameof(SentimentType.Neutral))
+                        .ToList()
+                        .ForEach(x => x.AlgorithmnGrade.HybridScore = nameof(SentimentType.Positive));
                     break;
                 case AlgorithmnType.SentiWordNet:
                     var recordModelSentiwordObjects = await _recordsService.AddRecordAsync<SentiWordNetModel>(record, _configuration.GetValue<string>("BaseUrl"));
@@ -151,6 +155,10 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .ToList(),
                         CommentTransformViewModels = recordViewModelSentiwordViewModels.Select(m => new CommentTransformViewModel(m)).ToList()
                     };
+                    recordDisplay.CommentSentiwordModels
+                        .Where(m => m.AlgorithmnGrade.SentimentScore.Trim() == SentimentType.Neutral.ToString())
+                        .ToList()
+                        .ForEach(x => x.AlgorithmnGrade.SentimentScore = SentimentType.Positive.ToString());    
                     break;
                 case AlgorithmnType.Vader:
                     var recordModelVaderObjects = await _recordsService.AddRecordAsync<VaderModel>(record, _configuration.GetValue<string>("BaseUrl"));
@@ -165,6 +173,10 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .ToList(),
                         CommentTransformViewModels = recordViewModelVader.Select(m => new CommentTransformViewModel(m)).ToList()
                     };
+                    recordDisplay.CommentVaderViewModels
+                        .Where(m => m.AlgorithmnGrade.CompoundScore.Trim() == SentimentType.Neutral.ToString())
+                        .ToList()
+                        .ForEach(x => x.AlgorithmnGrade.CompoundScore = SentimentType.Positive.ToString());
                     break;
             }
             recordDisplay.Algorithmn = algorithmn;
