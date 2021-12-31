@@ -14,10 +14,10 @@
                         </button>
                     </div>
                     <div class="ml-auto">
-                        <button type="button" id="btnConfusionMatrixProcess" class="btn btn-dark" style="display:none;" data-toggle="modal">
+                        <button disabled type="button" id="btnAccuracyProcess" class="btn btn-dark" data-toggle="modal">
                             Confusion Matrix TextProcessing <i class="fas fa-robot"></i>
                         </button>
-                        <button type="button" id="btnConfusionMatrixAlgo" class="btn btn-dark" style="display:none;" data-toggle="modal">
+                        <button disabled type="button" id="btnConfusionMatrixAlgo" class="btn btn-dark" data-toggle="modal">
                             Confusion Matrix Algorithmn <i class="fas fa-robot"></i>
                         </button>
                     </div>
@@ -48,6 +48,7 @@
                     beforeSend: function () {
                         $("#upload-modal").modal('hide');
                         $('#spinner-upload').show();
+                        $('#formFileSubmit').prop("disabled", true);
                     },
                     complete: function () {
                         $('#spinner-upload').hide();
@@ -55,71 +56,8 @@
                     contentType: false,
                     processData: false,
                     success: function (response) {
-                        $("#btnConfusionMatrixProcess").show();
-                        $("#btnConfusionMatrixAlgo").show();
+                        promptSuccess(response);
                         promptHasNetwork(response);
-                        console.log(response.textProcessingConfusionMatrix);
-                        $("#btnConfusionMatrixProcess").on("click", function () {
-                            Swal.fire({
-                                title: '<strong>Textprocessing Accuracy</strong>',
-                                icon: 'info',
-                                html: `<table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Accuracy</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>${response.textProcessingAccuracy}</td>
-                                            </tr>
-                                </tbody>
-                                </table>`,
-                                showCloseButton: true,
-                                showCancelButton: true,
-                                focusConfirm: false,
-                                confirmButtonText:
-                                    '<i class="fa fa-thumbs-up"></i> Great!',
-                                confirmButtonAriaLabel: 'Thumbs up, great!',
-                                cancelButtonText:
-                                    '<i class="fa fa-thumbs-down"></i>',
-                                cancelButtonAriaLabel: 'Thumbs down'
-                            });
-                        });
-                        $("#btnConfusionMatrixAlgo").on("click", function () {
-                            Swal.fire({
-                                title: '<strong>Confusion Matrix</strong>',
-                                icon: 'info',
-                                html:
-                                    `<table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Accuracy</th>
-                                                <th>Precision</th>
-                                                <th>Recall</th>
-                                                <th>F1 Score</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>${response.textProcessingAccuracy}</td>
-                                                <td>${response.textProcessingAccuracy}</td>
-                                                <td>${response.textProcessingAccuracy}</td>
-                                                <td>${response.textProcessingAccuracy}</td>
-                                            </tr>
-                                </tbody>
-                                </table>`,
-                                showCloseButton: true,
-                                showCancelButton: true,
-                                focusConfirm: false,
-                                confirmButtonText:
-                                    '<i class="fa fa-thumbs-up"></i> Great!',
-                                confirmButtonAriaLabel: 'Thumbs up, great!',
-                                cancelButtonText:
-                                    '<i class="fa fa-thumbs-down"></i>',
-                                cancelButtonAriaLabel: 'Thumbs down'
-                            });
-                        });
                     },
                     error: function (response) { promptNoNetwork(response) },
                     failure: function (response) { promptNoNetwork(response) },

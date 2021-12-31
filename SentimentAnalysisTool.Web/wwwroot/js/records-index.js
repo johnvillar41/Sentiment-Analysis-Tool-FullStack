@@ -93,16 +93,85 @@
             }
         });
     }
-});
 
-$("#drop-down-env").on("click", function () {
-    document.getElementById("corpus-type").value = "EnvironmentReview";
-});
-$("#drop-down-film").on("click", function () {
-    document.getElementById("corpus-type").value = "FilmReview";
-});
-$("#drop-down-prod").on("click", function () {
-    document.getElementById("corpus-type").value = "ProductReview";
+    promptSuccess = function(response) {
+        $("#btnAccuracyProcess").prop("disabled", false);
+        $("#btnConfusionMatrixAlgo").prop("disabled", false);
+        $("#formFileSubmit").prop("disabled", false);
+        console.log(response.textProcessingConfusionMatrix);
+        $("#btnAccuracyProcess").on("click", function () {
+            Swal.fire({
+                title: '<strong>Textprocessing Accuracy</strong>',
+                icon: 'info',
+                html: `<table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Accuracy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>${response.textProcessingAccuracy}</td>
+                                </tr>
+                            </tbody>
+                        </table>`,
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Great!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+                cancelButtonText:
+                    '<i class="fa fa-thumbs-down"></i>',
+                cancelButtonAriaLabel: 'Thumbs down'
+            });
+        });
+        $("#btnConfusionMatrixAlgo").on("click", function () {
+            Swal.fire({
+                title: '<strong>Confusion Matrix</strong>',
+                icon: 'info',
+                html:
+                    `<table class="table">
+                        <thead>
+                            <tr>
+                                <th>Accuracy</th>
+                                <th>Precision</th>
+                                <th>Recall</th>
+                                <th>F1 Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${response.textProcessingAccuracy}</td>
+                                <td>${response.textProcessingAccuracy}</td>
+                                <td>${response.textProcessingAccuracy}</td>
+                                <td>${response.textProcessingAccuracy}</td>
+                            </tr>
+                        </tbody>
+                </table>`,
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Great!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+                cancelButtonText:
+                    '<i class="fa fa-thumbs-down"></i>',
+                cancelButtonAriaLabel: 'Thumbs down'
+            });
+        });
+    }
+
+    $("#drop-down-env").on("click", function () {
+        document.getElementById("corpus-type").value = "EnvironmentReview";
+    });
+    $("#drop-down-film").on("click", function () {
+        document.getElementById("corpus-type").value = "FilmReview";
+    });
+    $("#drop-down-prod").on("click", function () {
+        document.getElementById("corpus-type").value = "ProductReview";
+    });
+
 });
 
 
