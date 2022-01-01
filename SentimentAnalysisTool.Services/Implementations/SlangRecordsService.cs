@@ -11,9 +11,14 @@ namespace SentimentAnalysisTool.Services.Implementations
 {
     public class SlangRecordsService : ISlangRecordsService
     {
-        public async Task<bool> AddSlangRecordAsync(SlangRecordModel slangRecord, string baseUrl, HttpClient httpClient)
+        private readonly HttpClient _httpClient;
+        public SlangRecordsService()
         {
-            var response = await httpClient.PostAsJsonAsync<SlangRecordModel>($"{baseUrl}/api/SlangRecords", slangRecord);
+            _httpClient = new HttpClient();
+        }
+        public async Task<bool> AddSlangRecordAsync(SlangRecordModel slangRecord, string baseUrl)
+        {
+            var response = await _httpClient.PostAsJsonAsync<SlangRecordModel>($"{baseUrl}/api/SlangRecords", slangRecord);
             var responseCode = response.IsSuccessStatusCode;
 
             if (responseCode)
@@ -22,9 +27,9 @@ namespace SentimentAnalysisTool.Services.Implementations
             return false;
         }
 
-        public async Task<bool> AddSlangRecordsAsync(IEnumerable<SlangRecordModel> slangRecords, string baseUrl, HttpClient httpClient)
+        public async Task<bool> AddSlangRecordsAsync(IEnumerable<SlangRecordModel> slangRecords, string baseUrl)
         {
-            var response = await httpClient.PostAsJsonAsync<IEnumerable<SlangRecordModel>>($"{baseUrl}/api/SlangRecords", slangRecords);
+            var response = await _httpClient.PostAsJsonAsync<IEnumerable<SlangRecordModel>>($"{baseUrl}/api/SlangRecords", slangRecords);
             var responseCode = response.IsSuccessStatusCode;
 
             if (responseCode)
@@ -33,15 +38,25 @@ namespace SentimentAnalysisTool.Services.Implementations
             return false;
         }
 
-        public async Task<bool> DeleteSlangRecordAsync(int slangRecordId, string baseUrl, HttpClient httpClient)
+        public async Task<bool> DeleteSlangRecordAsync(int slangRecordId, string baseUrl)
         {
-            var response = await httpClient.DeleteAsync($"{baseUrl}/api/SlangRecords/{slangRecordId}");
+            var response = await _httpClient.DeleteAsync($"{baseUrl}/api/SlangRecords/{slangRecordId}");
             var responseCode = response.IsSuccessStatusCode;
 
             if (responseCode)
                 return true;
 
             return false;
+        }
+
+        public async Task<IEnumerable<SlangRecordModel>> FetchAllSlangRecordAsync(int? corpusTypeId, string baseUrl)
+        {
+            var response = await _httpClient.GetAsync($"{baseUrl}/api/SlangRecords/{corpusTypeId}");
+            var responseCode = response.IsSuccessStatusCode;
+            if (responseCode)
+                return await response.Content.ReadAsAsync<IEnumerable<SlangRecordModel>>();
+
+            return new List<SlangRecordModel>();
         }
     }
 }

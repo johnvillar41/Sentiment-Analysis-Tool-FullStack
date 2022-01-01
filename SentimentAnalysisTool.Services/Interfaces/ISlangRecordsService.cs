@@ -10,8 +10,9 @@ namespace SentimentAnalysisTool.Services.Interfaces
 {
     public interface ISlangRecordsService
     {
-        Task<bool> AddSlangRecordAsync(SlangRecordModel slangRecord, string baseUrl, HttpClient httpClient);
-        Task<bool> AddSlangRecordsAsync(IEnumerable<SlangRecordModel> slangRecords, string baseUrl, HttpClient httpClient);
-        Task<bool> DeleteSlangRecordAsync(int slangRecordId, string baseUrl, HttpClient httpClient);
+        Task<bool> AddSlangRecordAsync(SlangRecordModel slangRecord, string baseUrl);
+        Task<bool> AddSlangRecordsAsync(IEnumerable<SlangRecordModel> slangRecords, string baseUrl);
+        Task<bool> DeleteSlangRecordAsync(int slangRecordId, string baseUrl);
+        Task<IEnumerable<SlangRecordModel>> FetchAllSlangRecordAsync(int? corpusTypeId,string baseUrl);
     }
 }
