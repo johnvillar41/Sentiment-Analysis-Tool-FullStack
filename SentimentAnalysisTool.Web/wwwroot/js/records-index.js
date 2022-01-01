@@ -98,7 +98,6 @@
         $("#btnAccuracyProcess").prop("disabled", false);
         $("#btnConfusionMatrixAlgo").prop("disabled", false);
         $("#formFileSubmit").prop("disabled", false);
-        console.log(response.textProcessingConfusionMatrix);
         $("#btnAccuracyProcess").on("click", function () {
             Swal.fire({
                 title: '<strong>Textprocessing Accuracy</strong>',
@@ -111,7 +110,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>${response.textProcessingAccuracy}</td>
+                                    <td>${response.textProcessingAccuracy.toFixed(2)}</td>
                                 </tr>
                             </tbody>
                         </table>`,
@@ -142,10 +141,10 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>${response.algorithmnConfusionMatrix}</td>
-                                <td>${response.algorithmnConfusionMatrix}</td>
-                                <td>${response.algorithmnConfusionMatrix}</td>
-                                <td>${response.algorithmnConfusionMatrix}</td>
+                                <td>${response.confusionMatrixViewModel.accuracy.toFixed(2)}</td>
+                                <td>${response.confusionMatrixViewModel.precision.toFixed(2)}</td>
+                                <td>${response.confusionMatrixViewModel.recall.toFixed(2)}</td>
+                                <td>${response.confusionMatrixViewModel.f1_Score.toFixed(2)}</td>
                             </tr>
                         </tbody>
                 </table>`,

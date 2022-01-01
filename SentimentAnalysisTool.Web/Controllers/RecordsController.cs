@@ -63,8 +63,8 @@ namespace SentimentAnalysisTool.Web.Controllers
                 {
                     Html = await RenderHelper.RenderViewAsync<RecordDisplayViewModel>(this, "_RecordDisplayPartial", recordDisplay),
                     recordDisplay.ReviewClassification,
-                    TextProcessingAccuracy = _computingHelper.ComputeAlgorithmnAccuracy(recordDisplay),
-                    AlgorithmnConfusionMatrix = _computingHelper.ComputeTextProcessingAccuracy(recordDisplay),
+                    TextProcessingAccuracy = _computingHelper.ComputeTextProcessingAccuracy(recordDisplay),
+                    ConfusionMatrixViewModel = _computingHelper.ComputeAlgorithmnConfusionMatrix(recordDisplay),
                 };
                 return Json(obj);
             }

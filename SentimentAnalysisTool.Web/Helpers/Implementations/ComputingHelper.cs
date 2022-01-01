@@ -10,54 +10,47 @@ namespace SentimentAnalysisTool.Web.Helpers.Implementations
 {
     public class ComputingHelper : IComputingHelper
     {
-        public double ComputeAlgorithmnAccuracy(RecordDisplayViewModel record)
+        public ConfusionMatrixViewModel ComputeAlgorithmnConfusionMatrix(RecordDisplayViewModel record)
         {
-            var totalComments = (double)0;
-            var totalPositiveEquals = (double)0;
+            var truePositives = (double)0;
+            var trueNegatives = (double)0;
+            var falsePositives = (double)0;
+            var falseNegatives = (double)0;
             switch (record.Algorithmn)
             {
                 case AlgorithmnType.SentiWordNet:
-                    totalComments = (double)record.CommentSentiwordModels.Count();
-                    totalPositiveEquals = (double)0;
                     foreach (var item in record.CommentSentiwordModels)
                     {
-                        if (item.AlgorithmnGrade.SentimentScore
-                            .Trim()
-                            .Equals(item.CommentPolarity.ToString()))
+                        if (item.CommentPolarity.Equals(SentimentType.Positive)
+                            && item.AlgorithmnGrade.SentimentScore.Equals(SentimentType.Positive.ToString()))
                         {
-                            totalPositiveEquals++;
+                            truePositives++;
+                        }
+                        if (item.CommentPolarity.Equals(SentimentType.Negative)
+                            && item.AlgorithmnGrade.SentimentScore.Equals(SentimentType.Negative.ToString()))
+                        {
+                            trueNegatives++;
+                        }
+                        if (item.CommentPolarity.Equals(SentimentType.Negative)
+                            && item.AlgorithmnGrade.SentimentScore.Equals(SentimentType.Positive.ToString()))
+                        {
+                            falsePositives++;
+                        }
+                        if (item.CommentPolarity.Equals(SentimentType.Negative)
+                            && item.AlgorithmnGrade.SentimentScore.Equals(SentimentType.Negative.ToString()))
+                        {
+                            falseNegatives++;
                         }
                     }
                     break;
-                case AlgorithmnType.Vader:
-                    totalComments = (double)record.CommentVaderViewModels.Count();
-                    totalPositiveEquals = (double)0;
-                    foreach (var item in record.CommentVaderViewModels)
-                    {
-                        if (item.AlgorithmnGrade.CompoundScore
-                            .Trim()
-                            .Equals(item.CommentPolarity.ToString()))
-                        {
-                            totalPositiveEquals++;
-                        }
-                    }
-                    break;
-                case AlgorithmnType.Hybrid:
-                    totalComments = (double)record.CommentHybridViewModels.Count();
-                    totalPositiveEquals = (double)0;
-                    foreach (var item in record.CommentHybridViewModels)
-                    {
-                        if (item.AlgorithmnGrade.HybridScore
-                            .Trim()
-                            .Equals(item.CommentPolarity.ToString()))
-                        {
-                            totalPositiveEquals++;
-                        }
-                    }
-                    break;
-
             }
-            return (totalPositiveEquals / totalComments) * 100;
+            return new ConfusionMatrixViewModel()
+            {
+                Accuracy = ((truePositives + trueNegatives) / (truePositives + trueNegatives + falsePositives + falseNegatives)) * 100,
+                Precision = ((truePositives)/(truePositives + falsePositives)) * 100,
+                Recall = ((truePositives) / (truePositives + falseNegatives)) * 100,
+                F1_Score = ((2*truePositives)/(2*truePositives + falsePositives + falseNegatives)) * 100
+            };
         }
 
         public double ComputeTextProcessingAccuracy(RecordDisplayViewModel record)

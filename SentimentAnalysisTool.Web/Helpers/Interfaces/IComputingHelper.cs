@@ -9,6 +9,6 @@ namespace SentimentAnalysisTool.Web.Helpers.Interfaces
     public interface IComputingHelper
     {
         double ComputeTextProcessingAccuracy(RecordDisplayViewModel record);
-        double ComputeAlgorithmnAccuracy(RecordDisplayViewModel record);
+        ConfusionMatrixViewModel ComputeAlgorithmnConfusionMatrix(RecordDisplayViewModel record);
     }
 }

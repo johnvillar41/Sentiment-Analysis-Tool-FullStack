@@ -7,9 +7,9 @@ namespace SentimentAnalysisTool.Web.Models
 {
     public class ConfusionMatrixViewModel
     {
-        public int Accuracy { get; set; }
-        public int Precision { get; set; }
-        public int Recall { get; set; }
-        public int F1_Score { get; set; }
+        public double Accuracy { get; set; }
+        public double Precision { get; set; }
+        public double Recall { get; set; }
+        public double F1_Score { get; set; }
     }
 }
