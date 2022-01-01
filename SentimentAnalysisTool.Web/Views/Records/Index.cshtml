@@ -15,7 +15,7 @@
                     </div>
                     <div class="ml-auto">
                         <button disabled type="button" id="btnAccuracyProcess" class="btn btn-dark" data-toggle="modal">
-                            Confusion Matrix TextProcessing <i class="fas fa-robot"></i>
+                            Accuracy TextProcessing <i class="fas fa-robot"></i>
                         </button>
                         <button disabled type="button" id="btnConfusionMatrixAlgo" class="btn btn-dark" data-toggle="modal">
                             Confusion Matrix Algorithmn <i class="fas fa-robot"></i>
@@ -58,7 +58,10 @@
                     success: function (response) {                        
                         promptHasNetwork(response);
                     },
-                    error: function (response) { promptNoNetwork(response) },
+                    error: function (response) {
+                        promptNoNetwork(response);
+                        $("#formFileSubmit").prop("disabled", false);
+                    },
                     failure: function (response) { promptNoNetwork(response) },
                 }).done(function (response) {
                     $('#record-display').html(response.html);
