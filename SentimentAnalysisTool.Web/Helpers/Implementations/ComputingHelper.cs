@@ -43,6 +43,56 @@ namespace SentimentAnalysisTool.Web.Helpers.Implementations
                         }
                     }
                     break;
+                case AlgorithmnType.Hybrid:
+                    foreach (var item in record.CommentHybridViewModels)
+                    {
+                        if (item.CommentPolarity.Equals(SentimentType.Positive)
+                            && item.AlgorithmnGrade.HybridScore.Equals(SentimentType.Positive.ToString()))
+                        {
+                            truePositives++;
+                        }
+                        if (item.CommentPolarity.Equals(SentimentType.Negative)
+                            && item.AlgorithmnGrade.HybridScore.Equals(SentimentType.Negative.ToString()))
+                        {
+                            trueNegatives++;
+                        }
+                        if (item.CommentPolarity.Equals(SentimentType.Negative)
+                            && item.AlgorithmnGrade.HybridScore.Equals(SentimentType.Positive.ToString()))
+                        {
+                            falsePositives++;
+                        }
+                        if (item.CommentPolarity.Equals(SentimentType.Negative)
+                            && item.AlgorithmnGrade.HybridScore.Equals(SentimentType.Negative.ToString()))
+                        {
+                            falseNegatives++;
+                        }
+                    }
+                    break;
+                case AlgorithmnType.Vader:
+                    foreach (var item in record.CommentVaderViewModels)
+                    {
+                        if (item.CommentPolarity.Equals(SentimentType.Positive)
+                            && item.AlgorithmnGrade.CompoundScore.Equals(SentimentType.Positive.ToString()))
+                        {
+                            truePositives++;
+                        }
+                        if (item.CommentPolarity.Equals(SentimentType.Negative)
+                            && item.AlgorithmnGrade.CompoundScore.Equals(SentimentType.Negative.ToString()))
+                        {
+                            trueNegatives++;
+                        }
+                        if (item.CommentPolarity.Equals(SentimentType.Negative)
+                            && item.AlgorithmnGrade.CompoundScore.Equals(SentimentType.Positive.ToString()))
+                        {
+                            falsePositives++;
+                        }
+                        if (item.CommentPolarity.Equals(SentimentType.Negative)
+                            && item.AlgorithmnGrade.CompoundScore.Equals(SentimentType.Negative.ToString()))
+                        {
+                            falseNegatives++;
+                        }
+                    }
+                    break;
             }
             return new ConfusionMatrixViewModel()
             {
