@@ -33,6 +33,7 @@ namespace SentimentAnalysisTool.Web
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IRecordsService, RecordsService>();            
             services.AddTransient<IComputingHelper, ComputingHelper>();            
+            services.AddTransient<ISlangRecordsService, SlangRecordsService>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

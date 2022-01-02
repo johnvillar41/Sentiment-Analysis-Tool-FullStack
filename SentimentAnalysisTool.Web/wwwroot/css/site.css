@@ -1,6 +1,5 @@
 ﻿body {
     margin-bottom: 60px;
-    background-color: #D3D3D3;
 }
 
 .footer {
@@ -11,25 +10,8 @@
     line-height: 60px;
 }
 
-.nav-item {
-    color: black;
-}
-
-.navbar-brand {
-    color: black;
-}
-
-.nav-link {
-    color: black;
-}
-
-p, h1 {
-    color: black;
-}
-
 .jumbotron {
     height: 100vh;
-    background-color: #D3D3D3;
 }
 
 .img-wrapper {
@@ -68,10 +50,6 @@ p, h1 {
 
 .table-height-comments-transform {
     height: 25vh;
-}
-
-.card {
-    background-color: #D3D3D3;
 }
 
 .overlayDiv {
