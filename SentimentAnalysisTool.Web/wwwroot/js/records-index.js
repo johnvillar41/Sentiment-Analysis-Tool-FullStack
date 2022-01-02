@@ -105,12 +105,12 @@
                 html: `<table class="table">
                             <thead>
                                 <tr>
-                                    <th>Accuracy</th>
+                                    <th style="color:black;">Accuracy</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>${response.textProcessingAccuracy.toFixed(2)}</td>
+                                    <td style="color:black;">${response.textProcessingAccuracy.toFixed(2)}</td>
                                 </tr>
                             </tbody>
                         </table>`,
@@ -133,18 +133,18 @@
                     `<table class="table">
                         <thead>
                             <tr>
-                                <th>Accuracy</th>
-                                <th>Precision</th>
-                                <th>Recall</th>
-                                <th>F1 Score</th>
+                                <th style="color:black;">Accuracy</th>
+                                <th style="color:black;">Precision</th>
+                                <th style="color:black;">Recall</th>
+                                <th style="color:black;">F1 Score</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>${response.confusionMatrixViewModel.accuracy.toFixed(2)}</td>
-                                <td>${response.confusionMatrixViewModel.precision.toFixed(2)}</td>
-                                <td>${response.confusionMatrixViewModel.recall.toFixed(2)}</td>
-                                <td>${response.confusionMatrixViewModel.f1_Score.toFixed(2)}</td>
+                                <td style="color:black;">${response.confusionMatrixViewModel.accuracy.toFixed(2)}</td>
+                                <td style="color:black;">${response.confusionMatrixViewModel.precision.toFixed(2)}</td>
+                                <td style="color:black;">${response.confusionMatrixViewModel.recall.toFixed(2)}</td>
+                                <td style="color:black;">${response.confusionMatrixViewModel.f1_Score.toFixed(2)}</td>
                             </tr>
                         </tbody>
                 </table>`,

@@ -13,14 +13,11 @@ namespace SentimentAnalysisTool.Web.Controllers
     {
         private readonly ISlangRecordsService _slangRecordsService;
         private readonly IConfiguration _configuration;
-        private readonly HttpClient _httpClient;
         public TextProcessing(
             ISlangRecordsService slangRecordsService, 
-            HttpClient httpClient, 
             IConfiguration configuration)
         {
             _slangRecordsService = slangRecordsService;
-            _httpClient = httpClient;
             _configuration = configuration;
         }
         public async Task<IActionResult> Index(int? corpusTypeId)

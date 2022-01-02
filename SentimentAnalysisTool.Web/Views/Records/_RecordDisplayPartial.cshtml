@@ -4,7 +4,7 @@
 <div class="col-6">
     <div class="card shadow-sm card-height d-flex">
         <div class="card-header">
-            Comments <br />
+            Comments <i class="fas fa-comments"></i><br />
         </div>
         <div class="card-body align-items-center d-flex justify-content-center">
             @if (Model.Algorithmn == AlgorithmnType.Vader)
@@ -31,7 +31,7 @@
         <div class="col-6">
             <div class="card mb-2 shadow-sm card-chart-height d-flex">
                 <div class="card-header">
-                    Word Frequencies
+                    Word Frequencies <i class="fas fa-wave-square"></i>
                 </div>
                 <div class="card-body align-items-center d-flex justify-content-center">
                     @if (Model.WordFrequencyViewModels == null)
@@ -49,7 +49,7 @@
         <div class="col-6">
             <div class="card mb-2 shadow-sm card-chart-height d-flex">
                 <div class="card-header">
-                    Review Classification
+                    Review Classification <i class="fas fa-percentage"></i>
                 </div>
                 <div class="card-body align-items-center d-flex justify-content-center">
                     @if (Model.ReviewClassification == null)
@@ -91,7 +91,7 @@
         <div class="col-12">
             <div class="card mb-2 shadow-sm card-chart-height-2">
                 <div class="card-header">
-                    TextProcessing
+                    TextProcessing <i class="fas fa-keyboard"></i>
                 </div>
                 <div class="card-body align-items-center d-flex justify-content-center">
                     @if (Model.CommentTransformViewModels == null)
