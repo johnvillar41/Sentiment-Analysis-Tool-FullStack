@@ -89,7 +89,9 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .Select(m => new WordFrequencyViewModel(m))
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
-                        CommentTransformViewModels = recordViewModelHybridViewModels.Select(m => new CommentTransformViewModel(m)).ToList()
+                        CommentTransformViewModels = recordViewModelHybridViewModels.Select(m => new CommentTransformViewModel(m)).ToList(),
+                        TotalNumberOfCommentRows = recordViewModelHybridViewModels.Count(),
+                        TotalNumberOfAcceptedCommentRows = recordModelHybridObjects.CommentModels.Count()
                     };
                     recordDisplay.CommentHybridViewModels
                         .Where(m => m.AlgorithmnGrade.HybridScore.Trim() == nameof(SentimentType.Neutral))
@@ -107,7 +109,9 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .Select(m => new WordFrequencyViewModel(m))
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
-                        CommentTransformViewModels = recordViewModelSentiwordViewModels.Select(m => new CommentTransformViewModel(m)).ToList()
+                        CommentTransformViewModels = recordViewModelSentiwordViewModels.Select(m => new CommentTransformViewModel(m)).ToList(),
+                        TotalNumberOfCommentRows = recordViewModelSentiwordViewModels.Count(),
+                        TotalNumberOfAcceptedCommentRows = recordModelSentiwordObjects.CommentModels.Count()
                     };
                     recordDisplay.CommentSentiwordModels
                         .Where(m => m.AlgorithmnGrade.SentimentScore.Trim() == SentimentType.Neutral.ToString())
@@ -125,7 +129,9 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .Select(m => new WordFrequencyViewModel(m))
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
-                        CommentTransformViewModels = recordViewModelVader.Select(m => new CommentTransformViewModel(m)).ToList()
+                        CommentTransformViewModels = recordViewModelVader.Select(m => new CommentTransformViewModel(m)).ToList(),
+                        TotalNumberOfCommentRows = recordViewModelVader.Count(),
+                        TotalNumberOfAcceptedCommentRows = recordModelVaderObjects.CommentModels.Count()
                     };
                     recordDisplay.CommentVaderViewModels
                         .Where(m => m.AlgorithmnGrade.CompoundScore.Trim() == SentimentType.Neutral.ToString())

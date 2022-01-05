@@ -5,6 +5,8 @@
     <div class="card shadow-sm card-height d-flex">
         <div class="card-header">
             Comments <i class="fas fa-comments"></i><br />
+            Total number of rows: @Model.TotalNumberOfCommentRows <br/>
+            Total number of accepted rows: @Model.TotalNumberOfAcceptedCommentRows
         </div>
         <div class="card-body align-items-center d-flex justify-content-center">
             @if (Model.Algorithmn == AlgorithmnType.Vader)

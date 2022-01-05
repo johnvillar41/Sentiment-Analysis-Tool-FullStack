@@ -14,6 +14,8 @@ namespace SentimentAnalysisTool.Web.Models
         public IEnumerable<CommentSentiWordNetViewModel> CommentSentiwordModels { get; set; }
         public IEnumerable<WordFrequencyViewModel> WordFrequencyViewModels { get; set; }
         public IEnumerable<CommentTransformViewModel> CommentTransformViewModels { get; set; }
+        public int TotalNumberOfCommentRows { get; set; }
+        public int TotalNumberOfAcceptedCommentRows { get; set; }
         public ReviewClassficationViewModel ReviewClassification { get; set; }
         public AlgorithmnType? Algorithmn { get; set; }
     }
