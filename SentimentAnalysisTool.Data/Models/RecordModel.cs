@@ -13,6 +13,7 @@ namespace SentimentAnalysisTool.Data.Models
         public string RecordName { get; set; }
         public int PositivePercent { get; set; }
         public int NegativePercent { get; set; }
+        public int TotalNumberOfExcelRows { get; set; }
         public IEnumerable<CommentModel<T>> CommentModels { get; set; }
         public IEnumerable<CorpusRecordModel> CorpusRecordModels { get; set; }
         public IEnumerable<WordFrequencyModel> WordFrequencyModels { get; set; }

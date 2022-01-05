@@ -90,7 +90,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
                         CommentTransformViewModels = recordViewModelHybridViewModels.Select(m => new CommentTransformViewModel(m)).ToList(),
-                        TotalNumberOfCommentRows = recordViewModelHybridViewModels.Count(),
+                        TotalNumberOfCommentRows = recordModelHybridObjects.TotalNumberOfExcelRows,
                         TotalNumberOfAcceptedCommentRows = recordModelHybridObjects.CommentModels.Count()
                     };
                     recordDisplay.CommentHybridViewModels
@@ -110,7 +110,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
                         CommentTransformViewModels = recordViewModelSentiwordViewModels.Select(m => new CommentTransformViewModel(m)).ToList(),
-                        TotalNumberOfCommentRows = recordViewModelSentiwordViewModels.Count(),
+                        TotalNumberOfCommentRows = recordModelSentiwordObjects.TotalNumberOfExcelRows,
                         TotalNumberOfAcceptedCommentRows = recordModelSentiwordObjects.CommentModels.Count()
                     };
                     recordDisplay.CommentSentiwordModels
@@ -130,7 +130,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                             .OrderByDescending(m => m.WordFrequency)
                             .ToList(),
                         CommentTransformViewModels = recordViewModelVader.Select(m => new CommentTransformViewModel(m)).ToList(),
-                        TotalNumberOfCommentRows = recordViewModelVader.Count(),
+                        TotalNumberOfCommentRows = recordModelVaderObjects.TotalNumberOfExcelRows,
                         TotalNumberOfAcceptedCommentRows = recordModelVaderObjects.CommentModels.Count()
                     };
                     recordDisplay.CommentVaderViewModels
