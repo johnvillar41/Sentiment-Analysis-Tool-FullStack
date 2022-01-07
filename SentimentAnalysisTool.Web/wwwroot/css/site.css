@@ -65,3 +65,9 @@
     position: sticky;
     top: 0;
 }
+
+#word-cloud {
+    height: 10vh;
+    width: 10vw;
+    margin: 0 auto;
+}
