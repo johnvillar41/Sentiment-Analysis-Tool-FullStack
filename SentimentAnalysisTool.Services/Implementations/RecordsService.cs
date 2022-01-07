@@ -31,11 +31,17 @@ namespace SentimentAnalysisTool.Services.Implementations
                 response = await _httpClient.PostAsync($"{baseUrl}/api/Records/Upload", form);
                 response.EnsureSuccessStatusCode();
                 jsonModel = await response.Content.ReadAsAsync<RecordModel<T>>();
+
+                if(((List<CommentModel<T>>)jsonModel.CommentModels).Count == 0)
+                {
+                    throw new HttpRequestException("Empty results computed from file!");
+                }
+
                 return jsonModel;
             }
-            catch (HttpRequestException)
+            catch (Exception e)
             {
-                throw new HttpRequestException("Not connected from server!");
+                throw new Exception(e.Message);
             }
         }
 

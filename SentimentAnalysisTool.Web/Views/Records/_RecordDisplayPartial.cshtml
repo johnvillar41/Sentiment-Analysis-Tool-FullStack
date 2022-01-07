@@ -4,7 +4,7 @@
 <div class="col-6">
     <div class="card shadow-sm card-height d-flex">
         <div class="card-header">
-            Comments <i class="fas fa-comments"></i><br />
+            <b>Comments</b> <i class="fas fa-comments"></i><br />
             Total number of rows: @Model.TotalNumberOfCommentRows <br/>
             Total number of accepted rows: @Model.TotalNumberOfAcceptedCommentRows
         </div>
@@ -33,7 +33,7 @@
         <div class="col-6">
             <div class="card mb-2 shadow-sm card-chart-height d-flex">
                 <div class="card-header">
-                    Word Frequencies <i class="fas fa-wave-square"></i>
+                    <b>Word Frequencies</b> <i class="fas fa-wave-square"></i>
                 </div>
                 <div class="card-body align-items-center d-flex justify-content-center">
                     @if (Model.WordFrequencyViewModels == null)
@@ -51,7 +51,7 @@
         <div class="col-6">
             <div class="card mb-2 shadow-sm card-chart-height d-flex">
                 <div class="card-header">
-                    Review Classification <i class="fas fa-percentage"></i>
+                    <b>Review Classification</b> <i class="fas fa-percentage"></i>
                 </div>
                 <div class="card-body align-items-center d-flex justify-content-center">
                     @if (Model.ReviewClassification == null)
@@ -70,7 +70,7 @@
         <div class="col-6">
             <div class="card mb-2 shadow-sm card-chart-height">
                 <div class="card-header">
-                    Sentiment over time
+                    <b>Sentiment over time</b>
                 </div>
                 <div class="card-body align-items-center d-flex justify-content-center">
                     This is some text within a card body.
@@ -81,7 +81,7 @@
         <div class="col-6">
             <div class="card mb-2 shadow-sm card-chart-height">
                 <div class="card-header">
-                    Keyword cloud
+                    <b>Keyword cloud</b>
                 </div>
                 <div class="card-body align-items-center d-flex justify-content-center">
                     <div id="keyword-container"></div>
@@ -93,7 +93,7 @@
         <div class="col-12">
             <div class="card mb-2 shadow-sm card-chart-height-2">
                 <div class="card-header">
-                    TextProcessing <i class="fas fa-keyboard"></i>
+                    <b>TextProcessing</b> <i class="fas fa-keyboard"></i>
                 </div>
                 <div class="card-body align-items-center d-flex justify-content-center">
                     @if (Model.CommentTransformViewModels == null)

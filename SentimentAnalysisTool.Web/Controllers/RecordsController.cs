@@ -8,6 +8,7 @@ using SentimentAnalysisTool.Web.Helpers;
 using SentimentAnalysisTool.Web.Helpers.Interfaces;
 using SentimentAnalysisTool.Web.Models;
 using SentimentAnalysisTool.Web.Models.CommentViewModels;
+using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -68,7 +69,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                 };
                 return Json(obj);
             }
-            catch (HttpRequestException ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
