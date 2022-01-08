@@ -12,5 +12,6 @@ namespace SentimentAnalysisTool.Data.Models
         public int RecordId { get; set; }
         public string Word { get; set; }
         public int WordFrequency { get; set; }
+        public string WordType { get; set; }
     }
 }

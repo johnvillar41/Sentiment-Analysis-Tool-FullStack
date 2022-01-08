@@ -1,4 +1,12 @@
 ﻿/*  ======================= SETUP ======================= */
+
+var words = ["hello", "hahazoned"].map(function (word) {
+    return {
+        word: word,
+        freq: Math.floor(Math.random() * 50) + 10
+    }
+});
+
 var config = {
     trace: true,
     spiralResolution: 1, //Lower = better resolution
@@ -9,12 +17,7 @@ var config = {
     font: "sans-serif"
 }
 
-var words = ["words", "are", "cool", "and", "so", "are", "you", "inconstituent", "funhouse!", "apart", "from", "Steve", "fish"].map(function (word) {
-    return {
-        word: word,
-        freq: Math.floor(Math.random() * 50) + 10
-    }
-})
+
 
 words.sort(function (a, b) {
     return -1 * (a.freq - b.freq);
