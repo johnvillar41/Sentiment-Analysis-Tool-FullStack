@@ -55,7 +55,7 @@
                     },
                     contentType: false,
                     processData: false,
-                    success: function (response) {                        
+                    success: function (response) {
                         promptHasNetwork(response);
                     },
                     error: function (response) {
@@ -67,6 +67,13 @@
                     $('#record-display').html(response.html);
                     renderReviewClassification(response);
                     promptSuccess(response);
+                    var words = ["hello", "hahazoned"].map(function (word) {
+                        return {
+                            word: word,
+                            freq: Math.floor(Math.random() * 50) + 10
+                        }
+                    });
+                    displayKeywordCloud(words);
                 });
             });
         });
@@ -75,4 +82,5 @@
 
     </script>
     <script src="~/js/records-index.js"></script>
+    <script src="~/js/keyword-cloud.js"></script>
 }
