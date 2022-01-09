@@ -66,6 +66,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                     recordDisplay.ReviewClassification,
                     TextProcessingAccuracy = _computingHelper.ComputeTextProcessingAccuracy(recordDisplay),
                     ConfusionMatrixViewModel = _computingHelper.ComputeAlgorithmnConfusionMatrix(recordDisplay),
+                    WordFrequencies = recordDisplay.WordFrequencyViewModels.Select(x => x.Word),
                 };
                 return Json(obj);
             }
