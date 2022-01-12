@@ -19,6 +19,7 @@ namespace SentimentAnalysisTool.Services.Implementations
         public RecordsService()
         {
             _httpClient = new HttpClient();
+            _httpClient.Timeout = TimeSpan.FromMinutes(15);
         }
         public async Task<RecordModel<T>> AddRecordAsync<T>(UploadCsvFileModel file, string baseUrl)
         {
@@ -79,6 +80,7 @@ namespace SentimentAnalysisTool.Services.Implementations
                 form.Add(new StringContent(file.ShouldDeleteSlangs.ToString()), "\"shouldDeleteSlangs\"");
                 form.Add(new StringContent(file.Algorithmn), "\"algorithmn\"");
                 form.Add(new StringContent(file.ShouldConvertAbbreviations.ToString()), "\"shouldConvertAbbreviations\"");
+                form.Add(new StringContent(file.ShouldConvertSynonyms.ToString()), "\"shouldConvertSynonyms\"");
                 form.Add(new StringContent(file.CorpusType.ToString()), "\"corpusType\"");
                 form.Add(new StringContent(file.MaxNumberOfChars.ToString()), "\"maxNumberOfChars\"");
                 return form;

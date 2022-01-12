@@ -20,6 +20,9 @@ namespace SentimentAnalysisTool.Web.Models
         [JsonProperty("shouldConvertAbbreviations")]
         public bool ShouldConvertAbbreviations { get; set; }
 
+        [JsonProperty("shouldConvertSynonyms")]
+        public bool ShouldConvertSynonyms { get; set; }
+
         [JsonProperty("corpusType")]
         public string CorpusType { get; set; }
 

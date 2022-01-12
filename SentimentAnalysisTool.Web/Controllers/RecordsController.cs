@@ -43,6 +43,7 @@ namespace SentimentAnalysisTool.Web.Controllers
             [FromForm] AlgorithmnType algorithmnType,
             [FromForm] bool shouldDeleteSlangs,
             [FromForm] bool shouldConvertAbbreviations,
+            [FromForm] bool shouldConvertSynonymns,
             [FromForm] string corpusType,
             [FromForm] int maxNumberOfChars)
         {
@@ -53,6 +54,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                     File = file,
                     ShouldDeleteSlangs = shouldDeleteSlangs,
                     ShouldConvertAbbreviations = shouldConvertAbbreviations,
+                    ShouldConvertSynonyms = shouldConvertSynonymns,
                     CorpusType = corpusType,
                     MaxNumberOfChars = maxNumberOfChars,
                     Algorithmn = algorithmnType.ToString()

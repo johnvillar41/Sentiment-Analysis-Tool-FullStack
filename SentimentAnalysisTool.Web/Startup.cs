@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,7 +34,7 @@ namespace SentimentAnalysisTool.Web
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IRecordsService, RecordsService>();            
             services.AddTransient<IComputingHelper, ComputingHelper>();            
-            services.AddTransient<ISlangRecordsService, SlangRecordsService>();            
+            services.AddTransient<ISlangRecordsService, SlangRecordsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
