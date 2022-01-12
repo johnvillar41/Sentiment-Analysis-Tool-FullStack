@@ -28,5 +28,8 @@ namespace SentimentAnalysisTool.Web.Models
 
         [JsonProperty("maxNumberOfChars")]
         public int MaxNumberOfChars { get; set; }
+
+        [JsonProperty("subjectMatter")]
+        public string SubjectMatter { get; set; }
     }
 }

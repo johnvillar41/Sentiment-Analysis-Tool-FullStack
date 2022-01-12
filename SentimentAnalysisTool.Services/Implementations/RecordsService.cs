@@ -83,6 +83,7 @@ namespace SentimentAnalysisTool.Services.Implementations
                 form.Add(new StringContent(file.ShouldConvertSynonyms.ToString()), "\"shouldConvertSynonyms\"");
                 form.Add(new StringContent(file.CorpusType.ToString()), "\"corpusType\"");
                 form.Add(new StringContent(file.MaxNumberOfChars.ToString()), "\"maxNumberOfChars\"");
+                form.Add(new StringContent(file.SubjectMatter), "\"subjectMatter\"");
                 return form;
             });
 

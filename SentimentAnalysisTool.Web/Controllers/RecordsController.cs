@@ -44,6 +44,7 @@ namespace SentimentAnalysisTool.Web.Controllers
             [FromForm] bool shouldDeleteSlangs,
             [FromForm] bool shouldConvertAbbreviations,
             [FromForm] bool shouldConvertSynonymns,
+            [FromForm] string subjectMatter,
             [FromForm] string corpusType,
             [FromForm] int maxNumberOfChars)
         {
@@ -57,7 +58,8 @@ namespace SentimentAnalysisTool.Web.Controllers
                     ShouldConvertSynonyms = shouldConvertSynonymns,
                     CorpusType = corpusType,
                     MaxNumberOfChars = maxNumberOfChars,
-                    Algorithmn = algorithmnType.ToString()
+                    Algorithmn = algorithmnType.ToString(),
+                    SubjectMatter = subjectMatter
                 };
                 RecordDisplayViewModel recordDisplay = new();
                 recordDisplay = await BuildRecordDisplayViewModelAsync(uploadCsvModel, recordDisplay, algorithmnType);
