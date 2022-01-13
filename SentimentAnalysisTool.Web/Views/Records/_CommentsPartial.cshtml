@@ -1,4 +1,4 @@
-﻿@using SentimentAnalysisTool.Web.Enums
+﻿@using SentimentAnalysisTool.Data.Enums
 @using SentimentAnalysisTool.Data.Models
 @model dynamic
 @if (Model.Count == 0)
@@ -38,11 +38,11 @@ else
                             <td><span class="badge badge-pill badge-secondary">@Model[i].CommentScore / 5</span></td>
                         }
 
-                        @if (Model[i].CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Positive)
+                        @if (Model[i].CommentPolarity == SentimentAnalysisTool.Data.Enums.SentimentType.Positive)
                         {
                             <td><span class="badge badge-light">@Model[i].CommentPolarity <i class="fas fa-smile"></i></span></td>
                         }
-                        else if (Model[i].CommentPolarity == SentimentAnalysisTool.Web.Enums.SentimentType.Negative)
+                        else if (Model[i].CommentPolarity == SentimentAnalysisTool.Data.Enums.SentimentType.Negative)
                         {
                             <td><span class="badge badge-secondary">@Model[i].CommentPolarity <i class="fas fa-sad-tear"></i></span></td>
                         }

@@ -1,11 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using SentimentAnalysisTool.Data.Models;
-using SentimentAnalysisTool.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
+﻿using SentimentAnalysisTool.Data.Models;
 using System.Threading.Tasks;
 
 namespace SentimentAnalysisTool.Services.Interfaces

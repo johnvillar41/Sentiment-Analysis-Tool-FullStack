@@ -1,7 +1,6 @@
-﻿using SentimentAnalysisTool.Data.Models;
-using SentimentAnalysisTool.Web.Enums;
+﻿using SentimentAnalysisTool.Data.Enums;
+using SentimentAnalysisTool.Data.Models;
 using System;
-using System.Text.Json.Serialization;
 
 namespace SentimentAnalysisTool.Web.Models.CommentViewModels
 {

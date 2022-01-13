@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using SentimentAnalysisTool.Data.Models;
+﻿using SentimentAnalysisTool.Data.Models;
 using SentimentAnalysisTool.Services.Interfaces;
-using SentimentAnalysisTool.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace SentimentAnalysisTool.Services.Implementations
@@ -78,7 +73,7 @@ namespace SentimentAnalysisTool.Services.Implementations
                 var fileBytes = ms.ToArray();
                 form.Add(new ByteArrayContent(fileBytes, 0, fileBytes.Length), "file", file.File.FileName);
                 form.Add(new StringContent(file.ShouldDeleteSlangs.ToString()), "\"shouldDeleteSlangs\"");
-                form.Add(new StringContent(file.Algorithmn), "\"algorithmn\"");
+                form.Add(new StringContent(file.Algorithmn.ToString()), "\"algorithmn\"");
                 form.Add(new StringContent(file.ShouldConvertAbbreviations.ToString()), "\"shouldConvertAbbreviations\"");
                 form.Add(new StringContent(file.ShouldConvertSynonyms.ToString()), "\"shouldConvertSynonyms\"");
                 form.Add(new StringContent(file.CorpusType.ToString()), "\"corpusType\"");

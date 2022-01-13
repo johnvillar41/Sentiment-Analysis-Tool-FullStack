@@ -33,7 +33,7 @@
     @await Html.PartialAsync("_RecordDisplayPartial", Model)
 </div>
 
-@await Html.PartialAsync("_UploadFileFormPartial")
+@await Html.PartialAsync("_UploadFileFormPartial", new SentimentAnalysisTool.Data.Models.UploadCsvFileModel())
 
 @section scripts{
     <script>

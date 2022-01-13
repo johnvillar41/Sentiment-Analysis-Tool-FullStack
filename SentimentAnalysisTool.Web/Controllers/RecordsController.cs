@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SentimentAnalysisTool.Data.Enums;
 using SentimentAnalysisTool.Data.Models;
 using SentimentAnalysisTool.Services.Interfaces;
-using SentimentAnalysisTool.Web.Enums;
 using SentimentAnalysisTool.Web.Helpers;
 using SentimentAnalysisTool.Web.Helpers.Interfaces;
 using SentimentAnalysisTool.Web.Models;
 using SentimentAnalysisTool.Web.Models.CommentViewModels;
 using System;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace SentimentAnalysisTool.Web.Controllers
@@ -38,30 +37,11 @@ namespace SentimentAnalysisTool.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UploadCsvFile(
-            [FromForm] IFormFile file,
-            [FromForm] AlgorithmnType algorithmnType,
-            [FromForm] bool shouldDeleteSlangs,
-            [FromForm] bool shouldConvertAbbreviations,
-            [FromForm] bool shouldConvertSynonymns,
-            [FromForm] string subjectMatter,
-            [FromForm] string corpusType,
-            [FromForm] int maxNumberOfChars)
+        public async Task<ActionResult> UploadCsvFile([FromForm] UploadCsvFileModel uploadCsvFile)
         {
             try
             {
-                var uploadCsvModel = new UploadCsvFileModel()
-                {
-                    File = file,
-                    ShouldDeleteSlangs = shouldDeleteSlangs,
-                    ShouldConvertAbbreviations = shouldConvertAbbreviations,
-                    ShouldConvertSynonyms = shouldConvertSynonymns,
-                    CorpusType = corpusType,
-                    MaxNumberOfChars = maxNumberOfChars,
-                    Algorithmn = algorithmnType.ToString(),
-                    SubjectMatter = subjectMatter
-                };
-                RecordDisplayViewModel recordDisplay = await BuildRecordDisplayViewModelAsync(uploadCsvModel, algorithmnType);
+                RecordDisplayViewModel recordDisplay = await BuildRecordDisplayViewModelAsync(uploadCsvFile);
 
                 var obj = new
                 {
@@ -79,10 +59,10 @@ namespace SentimentAnalysisTool.Web.Controllers
             }
         }
 
-        private async Task<RecordDisplayViewModel> BuildRecordDisplayViewModelAsync(UploadCsvFileModel record, AlgorithmnType algorithmn)
+        private async Task<RecordDisplayViewModel> BuildRecordDisplayViewModelAsync(UploadCsvFileModel record)
         {
             RecordDisplayViewModel recordDisplay = new();
-            switch (algorithmn)
+            switch (record.Algorithmn)
             {
                 case AlgorithmnType.Hybrid:
                     var recordModelHybridObjects = await _recordsService.AddRecordAsync<HybridModel>(record, _configuration.GetValue<string>("BaseUrl"));
@@ -145,7 +125,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                         .ForEach(x => x.AlgorithmnGrade.CompoundScore = SentimentType.Positive.ToString());
                     break;
             }
-            recordDisplay.Algorithmn = algorithmn;
+            recordDisplay.Algorithmn = record.Algorithmn;
             return recordDisplay;
         }
     }

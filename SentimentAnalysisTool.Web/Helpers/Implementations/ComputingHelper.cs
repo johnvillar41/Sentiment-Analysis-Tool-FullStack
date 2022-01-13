@@ -1,10 +1,8 @@
-﻿using SentimentAnalysisTool.Web.Enums;
+﻿using SentimentAnalysisTool.Data.Enums;
 using SentimentAnalysisTool.Web.Helpers.Interfaces;
 using SentimentAnalysisTool.Web.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SentimentAnalysisTool.Web.Helpers.Implementations
 {

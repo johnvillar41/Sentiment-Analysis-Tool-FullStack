@@ -1,4 +1,6 @@
-﻿<div class="modal fade" id="upload-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+﻿@model SentimentAnalysisTool.Data.Models.UploadCsvFileModel
+
+<div class="modal fade" id="upload-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -18,22 +20,22 @@
                     <hr />
                     <h6><b>Select Algorithmn</b></h6>
                     <div class="form-check form-check-inline mt-2">
-                        <input class="form-check-input" type="radio" name="algorithmnType" value="@SentimentAnalysisTool.Web.Enums.AlgorithmnType.Hybrid" required>
-                        <label class="form-check-label">@nameof(SentimentAnalysisTool.Web.Enums.AlgorithmnType.Hybrid)</label>
+                        <input class="form-check-input" type="radio" asp-for="@Model.Algorithmn" value="@SentimentAnalysisTool.Data.Enums.AlgorithmnType.Hybrid" required>
+                        <label class="form-check-label">@nameof(SentimentAnalysisTool.Data.Enums.AlgorithmnType.Hybrid)</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="algorithmnType" value="@SentimentAnalysisTool.Web.Enums.AlgorithmnType.SentiWordNet" required>
-                        <label class="form-check-label">@nameof(SentimentAnalysisTool.Web.Enums.AlgorithmnType.SentiWordNet)</label>
+                        <input class="form-check-input" type="radio" asp-for="@Model.Algorithmn" value="@SentimentAnalysisTool.Data.Enums.AlgorithmnType.SentiWordNet" required>
+                        <label class="form-check-label">@nameof(SentimentAnalysisTool.Data.Enums.AlgorithmnType.SentiWordNet)</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="algorithmnType" value="@SentimentAnalysisTool.Web.Enums.AlgorithmnType.Vader" required>
-                        <label class="form-check-label">@nameof(SentimentAnalysisTool.Web.Enums.AlgorithmnType.Vader)</label>
+                        <input class="form-check-input" type="radio" asp-for="@Model.Algorithmn" value="@SentimentAnalysisTool.Data.Enums.AlgorithmnType.Vader" required>
+                        <label class="form-check-label">@nameof(SentimentAnalysisTool.Data.Enums.AlgorithmnType.Vader)</label>
                     </div>
                     <hr />
                     <h6><b>Select CorpusType</b></h6>
                     <div class="row">
                         <div class="col-6">
-                            <input type="text" class="form-control" id="corpus-type" name="corpusType" readonly value="FilmReview" required />
+                            <input type="text" class="form-control" id="corpus-type" asp-for="@Model.CorpusType" readonly value="FilmReview" required />
                         </div>
                         <div class="col-6">
                             <div class="dropdown mb-1">
@@ -41,9 +43,9 @@
                                     CorpusType
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" id="drop-down-env">@nameof(SentimentAnalysisTool.Web.Enums.DataCorpusType.EnvironmentReview)</a>
-                                    <a class="dropdown-item" id="drop-down-film">@nameof(SentimentAnalysisTool.Web.Enums.DataCorpusType.FilmReview)</a>
-                                    <a class="dropdown-item" id="drop-down-prod">@nameof(SentimentAnalysisTool.Web.Enums.DataCorpusType.ProductReview)</a>
+                                    <a class="dropdown-item" id="drop-down-env">@nameof(SentimentAnalysisTool.Data.Enums.DataCorpusType.EnvironmentReview)</a>
+                                    <a class="dropdown-item" id="drop-down-film">@nameof(SentimentAnalysisTool.Data.Enums.DataCorpusType.FilmReview)</a>
+                                    <a class="dropdown-item" id="drop-down-prod">@nameof(SentimentAnalysisTool.Data.Enums.DataCorpusType.ProductReview)</a>
                                 </div>
                             </div>
                         </div>
@@ -52,35 +54,35 @@
                     <h6><b>Select Preprocessing techniques</b></h6>
                     <p>Delete Slang Words? </p>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="shouldDeleteSlangs" value="true" required>
+                        <input class="form-check-input" type="radio" asp-for="@Model.ShouldDeleteSlangs" value="true" required>
                         <label class="form-check-label">True</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="shouldDeleteSlangs" value="false" required>
+                        <input class="form-check-input" type="radio" asp-for="@Model.ShouldDeleteSlangs" value="false" required>
                         <label class="form-check-label">False</label>
                     </div>
                     <p class="mt-3">Convert Abbreviations? </p>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="shouldConvertAbbreviations" value="true" required>
+                        <input class="form-check-input" type="radio" asp-for="@Model.ShouldConvertAbbreviations" value="true" required>
                         <label class="form-check-label">True</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="shouldConvertAbbreviations" value="false" required>
+                        <input class="form-check-input" type="radio" asp-for="@Model.ShouldConvertAbbreviations" value="false" required>
                         <label class="form-check-label">False</label>
                     </div>
                     <p class="mt-3">Convert words that are not in wordnet? </p>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="shouldConvertSynonymns" value="true" required>
+                        <input class="form-check-input" type="radio" asp-for="@Model.ShouldConvertSynonyms" value="true" required>
                         <label class="form-check-label">True</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="shouldConvertSynonymns" value="false" required>
+                        <input class="form-check-input" type="radio" asp-for="@Model.ShouldConvertSynonyms" value="false" required>
                         <label class="form-check-label">False</label>
                     </div>
                     <p class="mt-3">Subject Matter</p>
-                    <input type="text" class="form-control" name="subjectMatter"/>
+                    <input type="text" class="form-control" name="subjectMatter" />
                     <p class="mt-3">Maximum number of characters</p>
-                    <input type="number" class="form-control" name="maxNumberOfChars" min="1" max="250" value="250" required />
+                    <input type="number" class="form-control" asp-for="@Model.MaxNumberOfChars" min="1" max="250" value="250" required />
                 </form>
             </div>
             <div class="modal-footer">
