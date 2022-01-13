@@ -61,8 +61,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                     Algorithmn = algorithmnType.ToString(),
                     SubjectMatter = subjectMatter
                 };
-                RecordDisplayViewModel recordDisplay = new();
-                recordDisplay = await BuildRecordDisplayViewModelAsync(uploadCsvModel, recordDisplay, algorithmnType);
+                RecordDisplayViewModel recordDisplay = await BuildRecordDisplayViewModelAsync(uploadCsvModel, algorithmnType);
 
                 var obj = new
                 {
@@ -80,8 +79,9 @@ namespace SentimentAnalysisTool.Web.Controllers
             }
         }
 
-        private async Task<RecordDisplayViewModel> BuildRecordDisplayViewModelAsync(UploadCsvFileModel record, RecordDisplayViewModel recordDisplay, AlgorithmnType algorithmn)
+        private async Task<RecordDisplayViewModel> BuildRecordDisplayViewModelAsync(UploadCsvFileModel record, AlgorithmnType algorithmn)
         {
+            RecordDisplayViewModel recordDisplay = new();
             switch (algorithmn)
             {
                 case AlgorithmnType.Hybrid:

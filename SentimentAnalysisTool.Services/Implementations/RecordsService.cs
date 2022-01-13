@@ -33,7 +33,7 @@ namespace SentimentAnalysisTool.Services.Implementations
                 response.EnsureSuccessStatusCode();
                 jsonModel = await response.Content.ReadAsAsync<RecordModel<T>>();
 
-                if(((List<CommentModel<T>>)jsonModel.CommentModels).Count == 0)
+                if (((List<CommentModel<T>>)jsonModel.CommentModels).Count == 0)
                 {
                     throw new HttpRequestException("Empty results computed from file!");
                 }
@@ -83,6 +83,8 @@ namespace SentimentAnalysisTool.Services.Implementations
                 form.Add(new StringContent(file.ShouldConvertSynonyms.ToString()), "\"shouldConvertSynonyms\"");
                 form.Add(new StringContent(file.CorpusType.ToString()), "\"corpusType\"");
                 form.Add(new StringContent(file.MaxNumberOfChars.ToString()), "\"maxNumberOfChars\"");
+                if (file.SubjectMatter == null)
+                    file.SubjectMatter = string.Empty;
                 form.Add(new StringContent(file.SubjectMatter), "\"subjectMatter\"");
                 return form;
             });

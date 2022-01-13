@@ -30,6 +30,6 @@ namespace SentimentAnalysisTool.Web.Models
         public int MaxNumberOfChars { get; set; }
 
         [JsonProperty("subjectMatter")]
-        public string SubjectMatter { get; set; }
+        public string SubjectMatter { get; set; } = string.Empty;
     }
 }
