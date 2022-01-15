@@ -11,6 +11,7 @@ namespace SentimentAnalysisTool.Services.Interfaces
     public interface ICorpusWordsService
     {
         Task<CorpusWordModel> FetchCorpusWordAsync(int corpusId, string baseUrl, HttpClient httpClient);
+        Task<IEnumerable<CorpusWordModel>> FetchCorpusWordsAsync(int? corpusTypeId, string baseUrl);
         Task<bool> AddCorpusWordsAsync(IEnumerable<CorpusWordModel> corpusWords, string baseUrl, HttpClient httpClient);
         Task<bool> AddCorpusWordAsync(CorpusWordModel corpusWord, string baseUrl, HttpClient httpClient);
         Task<bool> DeleteCorpusWordAsync(int corpusWordId, string baseUrl, HttpClient httpClient);
