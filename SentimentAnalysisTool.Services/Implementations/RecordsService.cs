@@ -11,9 +11,9 @@ namespace SentimentAnalysisTool.Services.Implementations
     public class RecordsService : IRecordsService
     {
         private readonly HttpClient _httpClient;
-        public RecordsService()
-        {
-            _httpClient = new HttpClient();
+        public RecordsService(HttpClient httpClient)
+        {            
+            _httpClient = httpClient;
             _httpClient.Timeout = TimeSpan.FromMinutes(15);
         }
         public async Task<RecordModel<T>> AddRecordAsync<T>(UploadCsvFileModel file, string baseUrl)

@@ -12,9 +12,9 @@ namespace SentimentAnalysisTool.Services.Implementations
     public class SlangRecordsService : ISlangRecordsService
     {
         private readonly HttpClient _httpClient;
-        public SlangRecordsService()
+        public SlangRecordsService(HttpClient httpClient)
         {
-            _httpClient = new HttpClient();
+            _httpClient = httpClient;
         }
         public async Task<bool> AddSlangRecordAsync(SlangRecordModel slangRecord, string baseUrl)
         {

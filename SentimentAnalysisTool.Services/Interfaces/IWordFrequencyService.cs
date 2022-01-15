@@ -10,7 +10,7 @@ namespace SentimentAnalysisTool.Services.Interfaces
 {
     public interface IWordFrequencyService
     {
-        Task<bool> AddWordFrequencyAsync(IEnumerable<WordFrequencyModel> wordFrequencies, string baseUrl, HttpClient httpClient);
-        Task<bool> AddWordFrequencyAsync(WordFrequencyModel wordFrequency, string baseUrl, HttpClient httpClient);
+        Task<bool> AddWordFrequencyAsync(IEnumerable<WordFrequencyModel> wordFrequencies, string baseUrl);
+        Task<bool> AddWordFrequencyAsync(WordFrequencyModel wordFrequency, string baseUrl);
     }
 }

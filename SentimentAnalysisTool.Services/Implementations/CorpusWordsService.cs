@@ -11,9 +11,14 @@ namespace SentimentAnalysisTool.Services.Implementations
 {
     public class CorpusWordsService : ICorpusWordsService
     {
-        public async Task<bool> AddCorpusWordAsync(CorpusWordModel corpusWord, string baseUrl, HttpClient httpClient)
+        private readonly HttpClient _httpClient;
+        public CorpusWordsService(HttpClient httpClient)
         {
-            var response = await httpClient.PostAsJsonAsync<CorpusWordModel>($"{baseUrl}/api/CorpusWords", corpusWord);
+            _httpClient = httpClient;
+        }
+        public async Task<bool> AddCorpusWordAsync(CorpusWordModel corpusWord, string baseUrl)
+        {
+            var response = await _httpClient.PostAsJsonAsync<CorpusWordModel>($"{baseUrl}/api/CorpusWords", corpusWord);
             var responseCode = response.IsSuccessStatusCode;
 
             if (responseCode)
@@ -22,9 +27,9 @@ namespace SentimentAnalysisTool.Services.Implementations
             return false;
         }
 
-        public async Task<bool> AddCorpusWordsAsync(IEnumerable<CorpusWordModel> corpusWords, string baseUrl, HttpClient httpClient)
+        public async Task<bool> AddCorpusWordsAsync(IEnumerable<CorpusWordModel> corpusWords, string baseUrl)
         {
-            var response = await httpClient.PostAsJsonAsync<IEnumerable<CorpusWordModel>>($"{baseUrl}/api/CorpusWords", corpusWords);
+            var response = await _httpClient.PostAsJsonAsync<IEnumerable<CorpusWordModel>>($"{baseUrl}/api/CorpusWords", corpusWords);
             var responseCode = response.IsSuccessStatusCode;
 
             if (responseCode)
@@ -33,9 +38,9 @@ namespace SentimentAnalysisTool.Services.Implementations
             return false;
         }
 
-        public async Task<bool> DeleteCorpusWordAsync(int corpusWordId, string baseUrl, HttpClient httpClient)
+        public async Task<bool> DeleteCorpusWordAsync(int corpusWordId, string baseUrl)
         {
-            var response = await httpClient.DeleteAsync($"{baseUrl}/api/CorpusWords/{corpusWordId}");
+            var response = await _httpClient.DeleteAsync($"{baseUrl}/api/CorpusWords/{corpusWordId}");
             var responseCode = response.IsSuccessStatusCode;
 
             if (responseCode)
@@ -44,9 +49,9 @@ namespace SentimentAnalysisTool.Services.Implementations
             return false;
         }
 
-        public async Task<CorpusWordModel> FetchCorpusWordAsync(int corpusId, string baseUrl, HttpClient httpClient)
+        public async Task<CorpusWordModel> FetchCorpusWordAsync(int corpusId, string baseUrl)
         {
-            var response = await httpClient.GetAsync($"{baseUrl}/api/CorpusWords/{corpusId}");
+            var response = await _httpClient.GetAsync($"{baseUrl}/api/CorpusWords/{corpusId}");
             var responseCode = response.IsSuccessStatusCode;
 
             if (responseCode)

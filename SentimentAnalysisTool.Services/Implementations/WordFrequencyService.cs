@@ -11,9 +11,14 @@ namespace SentimentAnalysisTool.Services.Implementations
 {
     public class WordFrequencyService : IWordFrequencyService
     {
-        public async Task<bool> AddWordFrequencyAsync(IEnumerable<WordFrequencyModel> wordFrequencies, string baseUrl, HttpClient httpClient)
+        private readonly HttpClient _httpClient;
+        public WordFrequencyService(HttpClient httpClient)
         {
-            var response = await httpClient.PostAsJsonAsync<IEnumerable<WordFrequencyModel>>($"{baseUrl}/api/WordFrequency", wordFrequencies);
+            _httpClient = httpClient;
+        }
+        public async Task<bool> AddWordFrequencyAsync(IEnumerable<WordFrequencyModel> wordFrequencies, string baseUrl)
+        {
+            var response = await _httpClient.PostAsJsonAsync<IEnumerable<WordFrequencyModel>>($"{baseUrl}/api/WordFrequency", wordFrequencies);
             var responseCode = response.IsSuccessStatusCode;
 
             if (responseCode)
@@ -22,9 +27,9 @@ namespace SentimentAnalysisTool.Services.Implementations
             return false;
         }
 
-        public async Task<bool> AddWordFrequencyAsync(WordFrequencyModel wordFrequency, string baseUrl, HttpClient httpClient)
+        public async Task<bool> AddWordFrequencyAsync(WordFrequencyModel wordFrequency, string baseUrl)
         {
-            var response = await httpClient.PostAsJsonAsync<WordFrequencyModel>($"{baseUrl}/api/WordFrequency", wordFrequency);
+            var response = await _httpClient.PostAsJsonAsync<WordFrequencyModel>($"{baseUrl}/api/WordFrequency", wordFrequency);
             var responseCode = response.IsSuccessStatusCode;
 
             if (responseCode)

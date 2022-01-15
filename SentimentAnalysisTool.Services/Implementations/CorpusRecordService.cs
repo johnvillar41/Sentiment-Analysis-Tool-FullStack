@@ -11,9 +11,14 @@ namespace SentimentAnalysisTool.Services.Implementations
 {
     public class CorpusRecordService : ICorpusRecordService
     {
-        public async Task<bool> AddCorpusRecordAsync(CorpusRecordModel corpus, string baseUrl, HttpClient httpClient)
+        private readonly HttpClient _httpClient;
+        public CorpusRecordService(HttpClient httpClient)
         {
-            var response = await httpClient.PostAsJsonAsync<CorpusRecordModel>($"{baseUrl}/api/CorpusRecords", corpus);
+            _httpClient = httpClient;
+        }
+        public async Task<bool> AddCorpusRecordAsync(CorpusRecordModel corpus, string baseUrl)
+        {
+            var response = await _httpClient.PostAsJsonAsync<CorpusRecordModel>($"{baseUrl}/api/CorpusRecords", corpus);
             var responseCode = response.IsSuccessStatusCode;
 
             if (responseCode)

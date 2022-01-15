@@ -11,7 +11,7 @@ namespace SentimentAnalysisTool.Services.Interfaces
 {
     public interface ICommentService
     {
-        Task<ICollection<CommentModel<T>>> FetchCommentsAsync<T>(int pageSize, int pageNumber, string baseUrl, HttpClient httpClient);
+        Task<ICollection<CommentModel<T>>> FetchCommentsAsync<T>(int pageSize, int pageNumber, string baseUrl);
         Task<bool> UploadCsvFileAsync(IFormFile csv, string baseUrl, HttpClient httpClient);
     }
 }

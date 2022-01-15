@@ -10,6 +10,6 @@ namespace SentimentAnalysisTool.Services.Interfaces
 {
     public interface ICorpusRecordService
     {
-        Task<bool> AddCorpusRecordAsync(CorpusRecordModel corpus, string baseUrl, HttpClient httpClient);
+        Task<bool> AddCorpusRecordAsync(CorpusRecordModel corpus, string baseUrl);
     }
 }

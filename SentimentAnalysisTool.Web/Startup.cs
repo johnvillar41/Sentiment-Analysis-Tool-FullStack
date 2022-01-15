@@ -30,13 +30,20 @@ namespace SentimentAnalysisTool.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();          
-           
+            
+            //Service DI
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IRecordsService, RecordsService>();            
             services.AddTransient<IComputingHelper, ComputingHelper>();            
             services.AddTransient<ISlangRecordsService, SlangRecordsService>();
             services.AddTransient<ICorpusWordsService, CorpusWordsService>();
             services.AddTransient<IAbbreviationsService, AbbreviationsService>();
+
+            //HttpClient DI
+            services.AddHttpClient<AbbreviationsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
+            services.AddHttpClient<CommentService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
+            services.AddHttpClient<SlangRecordsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
+            services.AddHttpClient<CorpusWordsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
