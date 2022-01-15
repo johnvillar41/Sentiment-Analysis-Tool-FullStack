@@ -31,6 +31,9 @@ namespace SentimentAnalysisTool.Web.Controllers
         }
         public async Task<IActionResult> Index(int? corpusTypeId)
         {
+            if (corpusTypeId == null)
+                return View(new TextProcessingViewModel());
+
             var slangs = await _slangRecordsService.FetchAllSlangRecordAsync(corpusTypeId, BaseUrl);
             var corpuses = await _corpusWordsService.FetchCorpusWordsAsync(corpusTypeId, BaseUrl);
             var abbreviations = await _abbreviationsService.FetchAbbreviationsAsync(corpusTypeId, BaseUrl);
