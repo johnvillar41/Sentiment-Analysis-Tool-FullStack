@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace SentimentAnalysisTool.Web.Controllers
 {
-    public class TextProcessing : Controller
+    public class TextProcessingController : Controller
     {
         private readonly ISlangRecordsService _slangRecordsService;
         private readonly ICorpusWordsService _corpusWordsService;
         private readonly IAbbreviationsService _abbreviationsService;
         private readonly IConfiguration _configuration;
         public string BaseUrl { get; }
-        public TextProcessing(
+        public TextProcessingController(
             ISlangRecordsService slangRecordsService,
             IConfiguration configuration,
             ICorpusWordsService corpusWordsService,
@@ -29,7 +29,7 @@ namespace SentimentAnalysisTool.Web.Controllers
             _corpusWordsService = corpusWordsService;
             _abbreviationsService = abbreviationsService;
         }
-        public async Task<IActionResult> Index(int? corpusTypeId)
+        public async Task<IActionResult> Index([FromQuery] int? corpusTypeId)
         {
             if (corpusTypeId == null)
                 return View(new TextProcessingViewModel());

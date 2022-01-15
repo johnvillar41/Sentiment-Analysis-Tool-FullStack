@@ -60,9 +60,15 @@ namespace SentimentAnalysisTool.Services.Implementations
             return new CorpusWordModel();
         }
 
-        public Task<IEnumerable<CorpusWordModel>> FetchCorpusWordsAsync(int? corpusTypeId, string baseUrl)
-        {
-            throw new NotImplementedException();
+        public async Task<IEnumerable<CorpusWordModel>> FetchCorpusWordsAsync(int? corpusTypeId, string baseUrl)
+        {            
+            var response = await _httpClient.GetAsync($"{baseUrl}/api/CorpusWords/{corpusTypeId}");
+            var responseCode = response.IsSuccessStatusCode;
+
+            if (responseCode)
+                return await response.Content.ReadAsAsync<IEnumerable<CorpusWordModel>>();
+
+            return new List<CorpusWordModel>();
         }
     }
 }
