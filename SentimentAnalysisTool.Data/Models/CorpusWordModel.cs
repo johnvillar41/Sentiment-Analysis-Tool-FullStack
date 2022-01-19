@@ -11,5 +11,6 @@ namespace SentimentAnalysisTool.Data.Models
         public int CorpusWordId { get; set; }
         public int CorpusTypeId { get; set; }
         public string CorpusWord { get; set; }
+        public string SynonymWord { get; set; }
     }
 }

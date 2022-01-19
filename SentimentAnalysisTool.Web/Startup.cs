@@ -41,7 +41,7 @@ namespace SentimentAnalysisTool.Web
             services.AddTransient<IAbbreviationsService, AbbreviationsService>();
 
             //HttpClient DI
-            services.AddHttpClient<AbbreviationsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl"));                
+            services.AddHttpClient<AbbreviationsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));                
             services.AddHttpClient<CommentService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
             services.AddHttpClient<SlangRecordsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
             services.AddHttpClient<CorpusWordsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
