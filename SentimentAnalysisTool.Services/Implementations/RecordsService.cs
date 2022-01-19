@@ -14,8 +14,8 @@ namespace SentimentAnalysisTool.Services.Implementations
         public RecordsService(HttpClient httpClient)
         {            
             _httpClient = httpClient;
-            _httpClient.Timeout = TimeSpan.FromMinutes(15);
             _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
+            _httpClient.Timeout = TimeSpan.FromMinutes(15);
         }
         public async Task<RecordModel<T>> AddRecordAsync<T>(UploadCsvFileModel file, string baseUrl)
         {
@@ -67,7 +67,6 @@ namespace SentimentAnalysisTool.Services.Implementations
         {
             var task = await Task.Run(() =>
             {
-                _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
                 var form = new MultipartFormDataContent();
                 var ms = new MemoryStream();
                 file.File.CopyTo(ms);

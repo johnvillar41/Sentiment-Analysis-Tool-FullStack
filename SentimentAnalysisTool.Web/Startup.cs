@@ -45,6 +45,7 @@ namespace SentimentAnalysisTool.Web
             services.AddHttpClient<CommentService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
             services.AddHttpClient<SlangRecordsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
             services.AddHttpClient<CorpusWordsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
+            services.AddHttpClient<RecordsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
