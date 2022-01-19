@@ -15,6 +15,7 @@ namespace SentimentAnalysisTool.Services.Implementations
         {            
             _httpClient = httpClient;
             _httpClient.Timeout = TimeSpan.FromMinutes(15);
+            _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
         }
         public async Task<RecordModel<T>> AddRecordAsync<T>(UploadCsvFileModel file, string baseUrl)
         {

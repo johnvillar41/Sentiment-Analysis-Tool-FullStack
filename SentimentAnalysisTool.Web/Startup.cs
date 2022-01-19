@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace SentimentAnalysisTool.Web
@@ -29,18 +30,18 @@ namespace SentimentAnalysisTool.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();          
-            
+            services.AddControllersWithViews();
+
             //Service DI
             services.AddTransient<ICommentService, CommentService>();
-            services.AddTransient<IRecordsService, RecordsService>();            
-            services.AddTransient<IComputingHelper, ComputingHelper>();            
+            services.AddTransient<IRecordsService, RecordsService>();
+            services.AddTransient<IComputingHelper, ComputingHelper>();
             services.AddTransient<ISlangRecordsService, SlangRecordsService>();
             services.AddTransient<ICorpusWordsService, CorpusWordsService>();
             services.AddTransient<IAbbreviationsService, AbbreviationsService>();
 
             //HttpClient DI
-            services.AddHttpClient<AbbreviationsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
+            services.AddHttpClient<AbbreviationsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl"));                
             services.AddHttpClient<CommentService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
             services.AddHttpClient<SlangRecordsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
             services.AddHttpClient<CorpusWordsService>(m => m.BaseAddress = new Uri(Configuration.GetValue<string>("BaseUrl")));
@@ -70,7 +71,7 @@ namespace SentimentAnalysisTool.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");                
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

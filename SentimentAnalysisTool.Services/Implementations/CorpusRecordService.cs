@@ -15,6 +15,7 @@ namespace SentimentAnalysisTool.Services.Implementations
         public CorpusRecordService(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
         }
         public async Task<bool> AddCorpusRecordAsync(CorpusRecordModel corpus, string baseUrl)
         {

@@ -14,6 +14,33 @@
 <div class="tab-content mt-1" id="myTabContent">
     <div class="tab-pane fade show active" id="slang" role="tabpanel" aria-labelledby="home-tab">
         <button type="button" class="btn btn-dark mb-1">Add Slang words <i class="fas fa-plus-circle"></i></button>
+        @if (Model.SlangRecords == null)
+        {
+            <p>No content</p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">CorpusType Id</th>
+                        <th scope="col">SlangWord</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.SlangRecords)
+                    {
+                        <tr>
+                            <td>@item.CorpusTypeId</td>
+                            <td>@item.SlangName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+    <div class="tab-pane fade" id="abbrevs" role="tabpanel" aria-labelledby="profile-tab">
+        <button type="button" class="btn btn-dark mb-1">Add Abbreviations <i class="fas fa-plus-circle"></i></button>
         @if (Model.Abbreviations == null)
         {
             <p>No content</p>
@@ -40,35 +67,33 @@
                 </tbody>
             </table>
         }
-
     </div>
-    <div class="tab-pane fade" id="abbrevs" role="tabpanel" aria-labelledby="profile-tab">
-        <button type="button" class="btn btn-dark mb-1">Add Abbreviations <i class="fas fa-plus-circle"></i></button>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="tab-pane fade" id="corpus-words" role="tabpanel" aria-labelledby="home-tab">
+        <button type="button" class="btn btn-dark mb-1">Add Corpus words <i class="fas fa-plus-circle"></i></button>
+        @if (Model.Corpuses == null)
+        {
+            <p>No content</p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">CorpusType Id</th>
+                        <th scope="col">Abbreviation</th>
+                        <th scope="col">Abbreviation word</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Corpuses)
+                    {
+                        <tr>
+                            <td>@item.CorpusTypeId</td>
+                            <td>@item.CorpusWord</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     </div>
 </div>

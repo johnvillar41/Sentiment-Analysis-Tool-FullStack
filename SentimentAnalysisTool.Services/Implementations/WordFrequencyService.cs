@@ -15,6 +15,7 @@ namespace SentimentAnalysisTool.Services.Implementations
         public WordFrequencyService(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
         }
         public async Task<bool> AddWordFrequencyAsync(IEnumerable<WordFrequencyModel> wordFrequencies, string baseUrl)
         {

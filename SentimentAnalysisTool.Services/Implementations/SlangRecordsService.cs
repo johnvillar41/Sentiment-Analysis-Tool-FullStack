@@ -15,6 +15,7 @@ namespace SentimentAnalysisTool.Services.Implementations
         public SlangRecordsService(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
         }
         public async Task<bool> AddSlangRecordAsync(SlangRecordModel slangRecord, string baseUrl)
         {
