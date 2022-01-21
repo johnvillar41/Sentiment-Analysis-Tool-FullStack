@@ -86,7 +86,7 @@
                                 @foreach (var item in Model.Abbreviations)
                                 {
                                     <tr>
-                                        <td>@item.CorpusTypeId</td>
+                                        <td>@item.CorpusType.CorpusTypeId</td>
                                         <td>@item.Abbreviation</td>
                                         <td>@item.AbbreviationWord</td>
                                     </tr>
@@ -115,7 +115,7 @@
                                 @foreach (var item in Model.Corpuses)
                                 {
                                     <tr>
-                                        <td>@item.CorpusTypeId</td>
+                                        <td>@item.CorpusType.CorpusTypeId</td>
                                         <td>@item.CorpusWord</td>
                                         <td>@item.SynonymWord</td>
                                     </tr>
