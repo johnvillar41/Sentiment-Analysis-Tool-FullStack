@@ -10,5 +10,6 @@ namespace SentimentAnalysisTool.Data.Models
     {
         public CorpusTypeModel CorpusType { get; set; }
         public string SlangName { get; set; }
+        public int SlangRecordsId { get; set; }
     }
 }

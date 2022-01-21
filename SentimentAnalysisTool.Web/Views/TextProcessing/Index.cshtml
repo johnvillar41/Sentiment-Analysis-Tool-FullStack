@@ -41,95 +41,18 @@
             <div class="tab-content mt-1" id="myTabContent">
                 <div class="tab-pane fade show active" id="slang" role="tabpanel" aria-labelledby="home-tab">
                     <button type="button" class="btn btn-secondary mb-1">Add Slang words <i class="fas fa-plus-circle"></i></button>
-                    @if (Model.SlangRecords == null)
-                    {
-                        <p>No content</p>
-                    }
-                    else
-                    {
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">CorpusType Id</th>
-                                    <th scope="col">SlangWord</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.SlangRecords)
-                                {
-                                    <tr>
-                                        @if (item.CorpusType != null)
-                                        {
-                                            <td>@item.CorpusType.CorpusTypeId</td>
-                                        }
-                                        else
-                                        {
-                                            <td>Not loaded</td>
-                                        }
-                                        <td>@item.SlangName</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
-                </div>
-                <div class="tab-pane fade" id="abbrevs" role="tabpanel" aria-labelledby="profile-tab">
-                    <button type="button" class="btn btn-secondary mb-1">Add Abbreviations <i class="fas fa-plus-circle"></i></button>
-                    @if (Model.Abbreviations == null)
-                    {
-                        <p>No content</p>
-                    }
-                    else
-                    {
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">CorpusType Id</th>
-                                    <th scope="col">Abbreviation</th>
-                                    <th scope="col">Abbreviation word</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Abbreviations)
-                                {
-
-
-                                    <tr>
-                                        @if (item.CorpusType != null)
-                                        {
-                                            <td>@item.CorpusType.CorpusTypeId</td>
-                                        }
-                                        else
-                                        {
-                                            <td>Not loaded</td>
-                                        }
-                                        <td>@item.Abbreviation</td>
-                                        <td>@item.AbbreviationWord</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
-                </div>
-                <div class="tab-pane fade" id="corpus-words" role="tabpanel" aria-labelledby="home-tab">
-                    <button type="button" class="btn btn-secondary mb-1">Add Corpus words <i class="fas fa-plus-circle"></i></button>
-                    @if (Model.Corpuses == null)
-                    {
-                        <p>No content</p>
-                    }
-                    else
-                    {
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">CorpusType Id</th>
-                                    <th scope="col">Corpus Word</th>
-                                    <th scope="col">Synonym Word</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Corpuses)
-                                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">CorpusType Id</th>
+                                <th scope="col">SlangRecord Id</th>
+                                <th scope="col">SlangWord</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.SlangRecords)
+                            {
                                 <tr>
                                     @if (item.CorpusType != null)
                                     {
@@ -139,13 +62,78 @@
                                     {
                                         <td>Not loaded</td>
                                     }
+                                    <td>@item.SlangRecordsId</td>
+                                    <td>@item.SlangName</td>
+                                    <td>
+                                        <button class="btn btn-secondary">Update</button>
+                                        <button class="btn btn-secondary">Delete</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="abbrevs" role="tabpanel" aria-labelledby="profile-tab">
+                    <button type="button" class="btn btn-secondary mb-1">Add Abbreviations <i class="fas fa-plus-circle"></i></button>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">CorpusType Id</th>
+                                <th scope="col">Abbreviation Id</th>
+                                <th scope="col">Abbreviation</th>
+                                <th scope="col">Abbreviation word</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Abbreviations)
+                            {
+                                <tr>
+                                    @if (item.CorpusType != null)
+                                    {
+                                        <td>@item.CorpusType.CorpusTypeId</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Not loaded</td>
+                                    }
+                                    <td>@item.AbbreviationsId</td>
+                                    <td>@item.Abbreviation</td>
+                                    <td>@item.AbbreviationWord</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="corpus-words" role="tabpanel" aria-labelledby="home-tab">
+                    <button type="button" class="btn btn-secondary mb-1">Add Corpus words <i class="fas fa-plus-circle"></i></button>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">CorpusType Id</th>
+                                <th scope="col">Corpus Word Id</th>
+                                <th scope="col">Corpus Word</th>
+                                <th scope="col">Synonym Word</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Corpuses)
+                            {
+                                <tr>
+                                    @if (item.CorpusType != null)
+                                    {
+                                        <td>@item.CorpusType.CorpusTypeId</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Not loaded</td>
+                                    }
+                                    <td>@item.CorpusWordId</td>
                                     <td>@item.CorpusWord</td>
                                     <td>@item.SynonymWord</td>
                                 </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

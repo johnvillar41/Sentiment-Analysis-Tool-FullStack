@@ -8,8 +8,8 @@ namespace SentimentAnalysisTool.Web.Models
 {
     public class TextProcessingViewModel
     {
-        public IEnumerable<SlangRecordModel> SlangRecords { get; set; }
-        public IEnumerable<AbbreviationModel> Abbreviations { get; set; }
-        public IEnumerable<CorpusWordModel> Corpuses { get; set; }
+        public IEnumerable<SlangRecordModel> SlangRecords { get; set; } = new List<SlangRecordModel>();
+        public IEnumerable<AbbreviationModel> Abbreviations { get; set; } = new List<AbbreviationModel>();
+        public IEnumerable<CorpusWordModel> Corpuses { get; set; } = new List<CorpusWordModel>();
     }
 }
