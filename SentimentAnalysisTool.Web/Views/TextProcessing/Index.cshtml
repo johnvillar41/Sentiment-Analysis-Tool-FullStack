@@ -58,7 +58,14 @@
                                 @foreach (var item in Model.SlangRecords)
                                 {
                                     <tr>
-                                        <td>@item.CorpusType.CorpusTypeId</td>
+                                        @if (item.CorpusType != null)
+                                        {
+                                            <td>@item.CorpusType.CorpusTypeId</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Not loaded</td>
+                                        }
                                         <td>@item.SlangName</td>
                                     </tr>
                                 }
@@ -85,8 +92,17 @@
                             <tbody>
                                 @foreach (var item in Model.Abbreviations)
                                 {
+
+
                                     <tr>
-                                        <td>@item.CorpusType.CorpusTypeId</td>
+                                        @if (item.CorpusType != null)
+                                        {
+                                            <td>@item.CorpusType.CorpusTypeId</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Not loaded</td>
+                                        }
                                         <td>@item.Abbreviation</td>
                                         <td>@item.AbbreviationWord</td>
                                     </tr>
@@ -114,11 +130,18 @@
                             <tbody>
                                 @foreach (var item in Model.Corpuses)
                                 {
-                                    <tr>
+                                <tr>
+                                    @if (item.CorpusType != null)
+                                    {
                                         <td>@item.CorpusType.CorpusTypeId</td>
-                                        <td>@item.CorpusWord</td>
-                                        <td>@item.SynonymWord</td>
-                                    </tr>
+                                    }
+                                    else
+                                    {
+                                        <td>Not loaded</td>
+                                    }
+                                    <td>@item.CorpusWord</td>
+                                    <td>@item.SynonymWord</td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
