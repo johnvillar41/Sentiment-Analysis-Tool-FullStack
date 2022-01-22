@@ -53,8 +53,21 @@ namespace SentimentAnalysisTool.Web.Controllers
                 Corpuses = corpuses,
                 CorpusTypes = corpusTypes
             };
-
+            ViewBag.CorpusTypeId = corpusTypeId;
             return PartialView("_CorpusDataPartial", textProcessingModel);
+        }
+
+        public async Task<IActionResult> DeleteSlangRecord([FromQuery] int corpusTypeId, [FromQuery] int slangRecordId)
+        {
+            ViewBag.CorpusTypeId = corpusTypeId;
+            var result = await _slangRecordsService.DeleteSlangRecordAsync(slangRecordId, BaseUrl);
+            if (result)
+            {
+                var slangs = await _slangRecordsService.FetchAllSlangRecordAsync(corpusTypeId, BaseUrl);
+                return PartialView("_SlangRecordPartial", slangs);
+            }
+
+            return BadRequest("An error has occured!");
         }
     }
 }

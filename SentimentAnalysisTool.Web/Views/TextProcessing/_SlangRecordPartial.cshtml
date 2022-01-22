@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SentimentAnalysisTool.Data.Models.SlangRecordModel>
+<button type="button" class="btn btn-secondary mb-1">Add Slang words <i class="fas fa-plus-circle"></i></button>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">CorpusType Id</th>
+            <th scope="col">SlangRecord Id</th>
+            <th scope="col">SlangWord</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.CorpusType != null)
+                {
+                    <td>@item.CorpusType.CorpusTypeId</td>
+                }
+                else
+                {
+                    <td>Not loaded</td>
+                }
+                <td>@item.SlangRecordsId</td>
+                <td>@item.SlangName</td>
+                <td>
+                    <button class="btn btn-secondary">Update <i class="fas fa-edit"></i></button>
+                    <a class="btn btn-secondary"
+                       data-ajax="true"
+                       data-ajax-update="#slang"
+                       asp-controller="TextProcessing"
+                       asp-action="DeleteSlangRecord"
+                       asp-route-corpusTypeId="@ViewBag.CorpusTypeId"
+                       asp-route-slangRecordId="@item.SlangRecordsId">
+                        Delete <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
