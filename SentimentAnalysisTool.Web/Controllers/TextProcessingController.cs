@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SentimentAnalysisTool.Services.Interfaces;
+using SentimentAnalysisTool.Web.Helpers;
 using SentimentAnalysisTool.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -32,11 +33,13 @@ namespace SentimentAnalysisTool.Web.Controllers
             _abbreviationsService = abbreviationsService;
             _corpusTypeService = corpusTypeService;
         }
+
         public async Task<IActionResult> Index()
         {
             var corpusTypes = await _corpusTypeService.FetchCorpusTypesAsync(BaseUrl);
             return View(new TextProcessingViewModel() { CorpusTypes = corpusTypes });
         }
+
         public async Task<IActionResult> LoadCorpusTypeData([FromQuery] int corpusTypeId)
         {
             var corpusTypes = await _corpusTypeService.FetchCorpusTypesAsync(BaseUrl);
@@ -50,7 +53,8 @@ namespace SentimentAnalysisTool.Web.Controllers
                 Corpuses = corpuses,
                 CorpusTypes = corpusTypes
             };
-            return View(nameof(Index), textProcessingModel);
+
+            return PartialView("_CorpusDataPartial", textProcessingModel);
         }
     }
 }
