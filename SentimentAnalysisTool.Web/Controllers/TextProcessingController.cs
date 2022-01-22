@@ -15,24 +15,28 @@ namespace SentimentAnalysisTool.Web.Controllers
         private readonly ISlangRecordsService _slangRecordsService;
         private readonly ICorpusWordsService _corpusWordsService;
         private readonly IAbbreviationsService _abbreviationsService;
+        private readonly ICorpusTypeService _corpusTypeService;
         private readonly IConfiguration _configuration;
         public string BaseUrl { get; }
         public TextProcessingController(
             ISlangRecordsService slangRecordsService,
             IConfiguration configuration,
             ICorpusWordsService corpusWordsService,
-            IAbbreviationsService abbreviationsService)
+            IAbbreviationsService abbreviationsService,
+            ICorpusTypeService corpusTypeService)
         {
             _slangRecordsService = slangRecordsService;
             _configuration = configuration;
             BaseUrl = _configuration.GetValue<string>("BaseUrl");
             _corpusWordsService = corpusWordsService;
             _abbreviationsService = abbreviationsService;
+            _corpusTypeService = corpusTypeService;
         }
         public async Task<IActionResult> Index([FromQuery] int? corpusTypeId)
         {
+            var corpusTypes = await _corpusTypeService.FetchCorpusTypesAsync(BaseUrl);
             if (corpusTypeId == null)
-                return View(new TextProcessingViewModel());
+                return View(new TextProcessingViewModel() { CorpusTypes = corpusTypes });
 
             var slangs = await _slangRecordsService.FetchAllSlangRecordAsync(corpusTypeId, BaseUrl);
             var corpuses = await _corpusWordsService.FetchCorpusWordsAsync(corpusTypeId, BaseUrl);
@@ -41,7 +45,8 @@ namespace SentimentAnalysisTool.Web.Controllers
             {
                 Abbreviations = abbreviations,
                 SlangRecords = slangs,
-                Corpuses = corpuses
+                Corpuses = corpuses,
+                CorpusTypes = corpusTypes
             };
             return View(textProcessingModel);
         }

@@ -11,5 +11,6 @@ namespace SentimentAnalysisTool.Web.Models
         public IEnumerable<SlangRecordModel> SlangRecords { get; set; } = new List<SlangRecordModel>();
         public IEnumerable<AbbreviationModel> Abbreviations { get; set; } = new List<AbbreviationModel>();
         public IEnumerable<CorpusWordModel> Corpuses { get; set; } = new List<CorpusWordModel>();
+        public IEnumerable<CorpusTypeModel> CorpusTypes { get; set; } = new List<CorpusTypeModel>();
     }
 }

@@ -27,5 +27,16 @@ namespace SentimentAnalysisTool.Services.Implementations
 
             return false;
         }
+
+        public async Task<IEnumerable<CorpusTypeModel>> FetchCorpusTypesAsync(string baseUrl)
+        {
+            var response = await _httpClient.GetAsync($"{baseUrl}/api/CorpusType");
+            var responseCode = response.IsSuccessStatusCode;
+
+            if (responseCode)
+                return await response.Content.ReadAsAsync<IEnumerable<CorpusTypeModel>>();
+
+            return new List<CorpusTypeModel>();
+        }
     }
 }
