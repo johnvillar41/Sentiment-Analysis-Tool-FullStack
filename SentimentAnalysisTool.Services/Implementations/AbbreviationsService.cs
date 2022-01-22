@@ -17,6 +17,12 @@ namespace SentimentAnalysisTool.Services.Implementations
             _httpClient = httpClient;
             _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
         }
+
+        public Task<bool> DeleteAbbreviationAsync(int? corpusTypeId, string baseUrl)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<AbbreviationModel>> FetchAbbreviationsAsync(int? corpusTypeId, string baseUrl)
         {
             var response = await _httpClient.GetAsync($"{baseUrl}/api/Abbreviations/{corpusTypeId}");

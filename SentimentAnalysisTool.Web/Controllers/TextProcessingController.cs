@@ -69,5 +69,18 @@ namespace SentimentAnalysisTool.Web.Controllers
 
             return BadRequest("An error has occured!");
         }
+
+        public async Task<IActionResult> DeleteAbbreviation([FromQuery] int corpusTypeId, [FromQuery] int abbreviationId)
+        {
+            ViewBag.CorpusTypeId = corpusTypeId;
+            var result = await _abbreviationsService.DeleteAbbreviationAsync(abbreviationId, BaseUrl);
+            if (result)
+            {
+                var abbreviations = await _slangRecordsService.FetchAllSlangRecordAsync(corpusTypeId, BaseUrl);
+                return PartialView("_AbbreviationPartial", abbreviations);
+            }
+
+            return BadRequest("An error has occured!");
+        }
     }
 }

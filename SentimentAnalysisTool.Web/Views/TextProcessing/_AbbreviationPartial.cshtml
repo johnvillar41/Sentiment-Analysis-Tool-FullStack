@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SentimentAnalysisTool.Data.Models.AbbreviationModel>
+<button type="button" class="btn btn-secondary mb-1">Add Abbreviations <i class="fas fa-plus-circle"></i></button>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">CorpusType Id</th>
+            <th scope="col">Abbreviation Id</th>
+            <th scope="col">Abbreviation</th>
+            <th scope="col">Abbreviation word</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.CorpusType != null)
+                {
+                    <td>@item.CorpusType.CorpusTypeId</td>
+                }
+                else
+                {
+                    <td>Not loaded</td>
+                }
+                <td>@item.AbbreviationsId</td>
+                <td>@item.Abbreviation</td>
+                <td>@item.AbbreviationWord</td>
+                <td>
+                    <button class="btn btn-secondary">Update <i class="fas fa-edit"></i></button>
+                    <a class="btn btn-secondary"
+                       data-ajax="true"
+                       data-ajax-update="#abbrevs"
+                       asp-controller="TextProcessing"
+                       asp-action="DeleteAbbreviation"
+                       asp-route-corpusTypeId="@ViewBag.CorpusTypeId"
+                       asp-route-abbreviationId="@item.AbbreviationsId">
+                        Delete <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
