@@ -11,9 +11,13 @@
                     <div class="mr-auto">
                         @foreach (var item in Model.CorpusTypes)
                         {
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#upload-modal">
-                                @item.CorpusTypeName <i class="fas fa-paper-plane"></i>
-                            </button>
+                            <a type="button" class="btn btn-secondary"
+                               asp-controller="TextProcessing"
+                               asp-action="LoadCorpusTypeData"
+                               asp-route-corpusTypeId="@item.CorpusTypeId">
+                                @item.CorpusTypeName
+                                <i class="fas fa-paper-plane"></i>
+                            </a>
                         }
                     </div>
                 </div>
@@ -83,6 +87,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                           
                             @foreach (var item in Model.Abbreviations)
                             {
                                 <tr>

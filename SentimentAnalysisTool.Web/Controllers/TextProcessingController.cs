@@ -32,12 +32,14 @@ namespace SentimentAnalysisTool.Web.Controllers
             _abbreviationsService = abbreviationsService;
             _corpusTypeService = corpusTypeService;
         }
-        public async Task<IActionResult> Index([FromQuery] int? corpusTypeId)
+        public async Task<IActionResult> Index()
         {
             var corpusTypes = await _corpusTypeService.FetchCorpusTypesAsync(BaseUrl);
-            if (corpusTypeId == null)
-                return View(new TextProcessingViewModel() { CorpusTypes = corpusTypes });
-
+            return View(new TextProcessingViewModel() { CorpusTypes = corpusTypes });
+        }
+        public async Task<IActionResult> LoadCorpusTypeData([FromQuery] int corpusTypeId)
+        {
+            var corpusTypes = await _corpusTypeService.FetchCorpusTypesAsync(BaseUrl);
             var slangs = await _slangRecordsService.FetchAllSlangRecordAsync(corpusTypeId, BaseUrl);
             var corpuses = await _corpusWordsService.FetchCorpusWordsAsync(corpusTypeId, BaseUrl);
             var abbreviations = await _abbreviationsService.FetchAbbreviationsAsync(corpusTypeId, BaseUrl);
@@ -48,7 +50,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                 Corpuses = corpuses,
                 CorpusTypes = corpusTypes
             };
-            return View(textProcessingModel);
+            return View(nameof(Index), textProcessingModel);
         }
     }
 }
