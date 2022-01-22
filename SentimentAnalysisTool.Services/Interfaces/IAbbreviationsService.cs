@@ -10,6 +10,6 @@ namespace SentimentAnalysisTool.Services.Interfaces
     public interface IAbbreviationsService
     {
         Task<IEnumerable<AbbreviationModel>> FetchAbbreviationsAsync(int? corpusTypeId, string baseUrl);
-        Task<bool> DeleteAbbreviationAsync(int? corpusTypeId, string baseUrl);
+        Task<bool> DeleteAbbreviationAsync(int? abbreviationId, string baseUrl);
     }
 }

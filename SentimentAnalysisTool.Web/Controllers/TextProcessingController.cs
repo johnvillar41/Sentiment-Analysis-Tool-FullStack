@@ -76,8 +76,21 @@ namespace SentimentAnalysisTool.Web.Controllers
             var result = await _abbreviationsService.DeleteAbbreviationAsync(abbreviationId, BaseUrl);
             if (result)
             {
-                var abbreviations = await _slangRecordsService.FetchAllSlangRecordAsync(corpusTypeId, BaseUrl);
+                var abbreviations = await _abbreviationsService.FetchAbbreviationsAsync(corpusTypeId, BaseUrl);
                 return PartialView("_AbbreviationPartial", abbreviations);
+            }
+
+            return BadRequest("An error has occured!");
+        }
+
+        public async Task<IActionResult> DeleteCorpusWord([FromQuery] int corpusTypeId, [FromQuery] int corpusWordId)
+        {
+            ViewBag.CorpusTypeId = corpusTypeId;
+            var result = await _corpusWordsService.DeleteCorpusWordAsync(corpusWordId, BaseUrl);
+            if (result)
+            {
+                var corpuses = await _corpusWordsService.FetchCorpusWordsAsync(corpusTypeId, BaseUrl);
+                return PartialView("_CorpusWordPartial", corpuses);
             }
 
             return BadRequest("An error has occured!");

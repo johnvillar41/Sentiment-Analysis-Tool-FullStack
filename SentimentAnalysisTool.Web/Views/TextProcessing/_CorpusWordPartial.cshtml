@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SentimentAnalysisTool.Data.Models.CorpusWordModel>
+<button type="button" class="btn btn-secondary mb-1">Add Corpus words <i class="fas fa-plus-circle"></i></button>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">CorpusType Id</th>
+            <th scope="col">Corpus Word Id</th>
+            <th scope="col">Corpus Word</th>
+            <th scope="col">Synonym Word</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.CorpusType != null)
+                {
+                    <td>@item.CorpusType.CorpusTypeId</td>
+                }
+                else
+                {
+                    <td>Not loaded</td>
+                }
+                <td>@item.CorpusWordId</td>
+                <td>@item.CorpusWord</td>
+                <td>@item.SynonymWord</td>
+                <td>
+                    <button class="btn btn-secondary">Update <i class="fas fa-edit"></i></button>
+                    <button class="btn btn-secondary">Delete <i class="fas fa-trash-alt"></i></button>
+                    <a class="btn btn-secondary"
+                       data-ajax="true"
+                       data-ajax-update="#corpus-words"
+                       asp-controller="TextProcessing"
+                       asp-action="DeleteCorpusWord"
+                       asp-route-corpusTypeId="@ViewBag.CorpusTypeId"
+                       asp-route-corpusWordId="@item.CorpusWordId">
+                        Delete <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

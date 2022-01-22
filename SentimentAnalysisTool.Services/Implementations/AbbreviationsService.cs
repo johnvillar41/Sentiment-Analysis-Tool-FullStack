@@ -18,9 +18,9 @@ namespace SentimentAnalysisTool.Services.Implementations
             _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
         }
 
-        public async Task<bool> DeleteAbbreviationAsync(int? corpusTypeId, string baseUrl)
+        public async Task<bool> DeleteAbbreviationAsync(int? abbreviationId, string baseUrl)
         {
-            var response = await _httpClient.DeleteAsync($"{baseUrl}/api/Abbreviation/{corpusTypeId}");
+            var response = await _httpClient.DeleteAsync($"{baseUrl}/api/Abbreviations/{abbreviationId}");
             var responseCode = response.IsSuccessStatusCode;
 
             if (responseCode)
