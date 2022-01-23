@@ -9,7 +9,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>TODO: CREATE SLANG RECORD FORM</p>
+                <form>
+                    <div class="form-group">
+                        <label>Type Slang Word</label>
+                        <input type="text" class="form-control" placeholder="Enter Slang Record">
+                    </div>
+                    <label><b>Or</b></label>
+                    <div class="form-group">
+                        <label>Upload txt file</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="file" id="customfile" required />
+                                <label class="custom-file-label" for="customfile">Choose file</label>
+                            </div>
+                        </div>
+                    </div>                    
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
