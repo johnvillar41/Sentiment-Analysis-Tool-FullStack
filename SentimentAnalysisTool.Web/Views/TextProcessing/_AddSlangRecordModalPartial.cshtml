@@ -10,6 +10,9 @@
             </div>
             <div class="modal-body">
                 <form id="upload-slang-txt"
+                      data-ajax="true"
+                      data-ajax-update="slang"
+                      data-ajax-loading="spinner-upload"
                       asp-action="UploadSlangTextFile"
                       asp-controller="TextProcessing" enctype="multipart/form-data">
                     <div class="form-group">

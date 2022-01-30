@@ -49,11 +49,10 @@ namespace SentimentAnalysisTool.Web.Controllers
             if (slangFile == null)
                 return BadRequest();
 
-            var result = await _slangRecordsService.AddSlangRecordsAsync(slangFile.File, slangFile.CorpusTypeId, BaseUrl);
-            if (result)
-                return Ok();
-
-            return BadRequest();
+            _ = await _slangRecordsService.AddSlangRecordsAsync(slangFile.File, slangFile.CorpusTypeId, BaseUrl);
+            var slangs = await _slangRecordsService.FetchAllSlangRecordAsync(slangFile.CorpusTypeId, BaseUrl);
+            ViewBag.CorpusTypeId = slangFile.CorpusTypeId;
+            return PartialView("_SlangRecordPartial", slangs);
         }
 
         public async Task<IActionResult> LoadCorpusTypeData([FromQuery] int corpusTypeId)
