@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SentimentAnalysisTool.Services.Interfaces;
 using SentimentAnalysisTool.Web.Helpers;
@@ -37,7 +38,22 @@ namespace SentimentAnalysisTool.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var corpusTypes = await _corpusTypeService.FetchCorpusTypesAsync(BaseUrl);
+            ViewBag.CorpusTypeId = corpusTypes.FirstOrDefault().CorpusTypeId;
             return View(new TextProcessingViewModel() { CorpusTypes = corpusTypes });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadSlangTextFile([FromForm] UploadSlangFileViewModel slangFile)
+        {
+            if (slangFile == null)
+                return BadRequest();
+
+            var result = await _slangRecordsService.AddSlangRecordsAsync(slangFile.File, slangFile.CorpusTypeId, BaseUrl);
+            if (result)
+                return Ok();
+
+            return BadRequest();
         }
 
         public async Task<IActionResult> LoadCorpusTypeData([FromQuery] int corpusTypeId)

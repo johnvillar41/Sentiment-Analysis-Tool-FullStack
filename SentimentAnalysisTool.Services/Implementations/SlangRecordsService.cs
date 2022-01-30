@@ -1,7 +1,9 @@
-﻿using SentimentAnalysisTool.Data.Models;
+﻿using Microsoft.AspNetCore.Http;
+using SentimentAnalysisTool.Data.Models;
 using SentimentAnalysisTool.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -33,6 +35,22 @@ namespace SentimentAnalysisTool.Services.Implementations
             var response = await _httpClient.PostAsJsonAsync<IEnumerable<SlangRecordModel>>($"{baseUrl}/api/SlangRecords", slangRecords);
             var responseCode = response.IsSuccessStatusCode;
 
+            if (responseCode)
+                return true;
+
+            return false;
+        }
+
+        public async Task<bool> AddSlangRecordsAsync(IFormFile file, int corpusTypeId, string baseUrl)
+        {
+            var form = new MultipartFormDataContent();
+            var ms = new MemoryStream();
+            file.CopyTo(ms);
+            var fileBytes = ms.ToArray();
+            form.Add(new ByteArrayContent(fileBytes, 0, fileBytes.Length), "file", file.FileName);
+
+            var response = await _httpClient.PostAsync($"{baseUrl}/api/SlangRecords/AddSlangRecords/{corpusTypeId}", form);
+            var responseCode = response.IsSuccessStatusCode;
             if (responseCode)
                 return true;
 
