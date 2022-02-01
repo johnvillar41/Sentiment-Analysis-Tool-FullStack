@@ -8,12 +8,11 @@
         }
         $(".custom-file-label").html(name);
     });
-
     $('#slang-upload-file').change(function () {
         var fileExtension = ['txt'];
         if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
             $('#warningMessage').show();
-            $('#customfile').val("");
+            $('#slang-upload-file').val("");
         } else {
             $('#warningMessage').hide();
         }
