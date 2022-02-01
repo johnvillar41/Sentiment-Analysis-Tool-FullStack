@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<SentimentAnalysisTool.Data.Models.AbbreviationModel>
-<button type="button" class="btn btn-secondary mb-1">Add Abbreviations <i class="fas fa-plus-circle"></i></button>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#abbrev-record-modal">
+    Add Abbreviation words <i class="fas fa-plus-circle"></i>
+</button>
+@await Html.PartialAsync("_AddAbbreviationModalPartial", new UploadAbbreviationViewModel())
 <table class="table">
     <thead>
         <tr>
