@@ -1,4 +1,5 @@
-﻿using SentimentAnalysisTool.Data.Models;
+﻿using Microsoft.AspNetCore.Http;
+using SentimentAnalysisTool.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace SentimentAnalysisTool.Services.Interfaces
     {
         Task<IEnumerable<AbbreviationModel>> FetchAbbreviationsAsync(int? corpusTypeId, string baseUrl);
         Task<bool> DeleteAbbreviationAsync(int? abbreviationId, string baseUrl);
+        Task<bool> AddAbbreviationsAsync(IFormFile file, int corpusTypeId, string baseUrl);
     }
 }

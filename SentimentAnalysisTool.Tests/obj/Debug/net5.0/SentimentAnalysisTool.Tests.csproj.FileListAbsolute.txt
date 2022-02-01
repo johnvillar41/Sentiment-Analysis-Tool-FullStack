@@ -97,3 +97,4 @@ C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Test
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Tests\obj\Debug\net5.0\ref\SentimentAnalysisTool.Tests.dll
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Tests\obj\Debug\net5.0\SentimentAnalysisTool.Tests.pdb
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Tests\obj\Debug\net5.0\SentimentAnalysisTool.Tests.genruntimeconfig.cache
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Tests\obj\Debug\net5.0\SentimentAnalysisTool.Tests.csprojAssemblyReference.cache

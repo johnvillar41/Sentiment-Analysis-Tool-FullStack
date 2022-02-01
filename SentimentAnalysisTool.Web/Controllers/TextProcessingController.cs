@@ -55,6 +55,19 @@ namespace SentimentAnalysisTool.Web.Controllers
             return PartialView("_SlangRecordPartial", slangs);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadAbbreviationFile([FromForm] UploadAbbreviationViewModel abbreviationFile)
+        {
+            if (abbreviationFile == null)
+                return BadRequest();
+
+            _ = await _abbreviationsService.AddAbbreviationsAsync(abbreviationFile.File, abbreviationFile.CorpusTypeId, BaseUrl);
+            var abbreviations = _abbreviationsService.FetchAbbreviationsAsync(abbreviationFile.CorpusTypeId, BaseUrl);
+            ViewBag.CorpusTypeId = abbreviationFile.CorpusTypeId;
+            return PartialView("_AbbreviationPartial", abbreviations);
+        }
+
         public async Task<IActionResult> LoadCorpusTypeData([FromQuery] int corpusTypeId)
         {
             var corpusTypes = await _corpusTypeService.FetchCorpusTypesAsync(BaseUrl);
