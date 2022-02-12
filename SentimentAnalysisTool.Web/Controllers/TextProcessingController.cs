@@ -72,7 +72,13 @@ namespace SentimentAnalysisTool.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UploadCorpusWordsFile([FromForm] UploadCorpusWordViewModel corpusFile)
         {
-            throw new NotImplementedException();
+            if (corpusFile == null)
+                return BadRequest();
+
+            _ = await _corpusWordsService.AddCorpusWordsAsync(corpusFile.File, corpusFile.CorpusTypeId, BaseUrl);
+            var corpusWords = _corpusWordsService.FetchCorpusWordsAsync(corpusFile.CorpusTypeId, BaseUrl);
+            ViewBag.CorpusTypeId = corpusFile.CorpusTypeId;
+            return PartialView("_CorpusWordPartial", corpusWords);
         }
 
         public async Task<IActionResult> LoadCorpusTypeData([FromQuery] int corpusTypeId)

@@ -1,4 +1,5 @@
-﻿using SentimentAnalysisTool.Data.Models;
+﻿using Microsoft.AspNetCore.Http;
+using SentimentAnalysisTool.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace SentimentAnalysisTool.Services.Interfaces
         Task<bool> AddCorpusWordsAsync(IEnumerable<CorpusWordModel> corpusWords, string baseUrl);
         Task<bool> AddCorpusWordAsync(CorpusWordModel corpusWord, string baseUrl);
         Task<bool> DeleteCorpusWordAsync(int corpusWordId, string baseUrl);
+        Task<bool> AddCorpusWordsAsync(IFormFile file, int corpusTypeId, string baseUrl);
     }
 }

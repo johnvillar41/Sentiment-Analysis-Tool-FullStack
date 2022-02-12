@@ -1,7 +1,9 @@
-﻿using SentimentAnalysisTool.Data.Models;
+﻿using Microsoft.AspNetCore.Http;
+using SentimentAnalysisTool.Data.Models;
 using SentimentAnalysisTool.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -39,6 +41,22 @@ namespace SentimentAnalysisTool.Services.Implementations
             return false;
         }
 
+        public async Task<bool> AddCorpusWordsAsync(IFormFile file, int corpusTypeId, string baseUrl)
+        {
+            var form = new MultipartFormDataContent();
+            var ms = new MemoryStream();
+            file.CopyTo(ms);
+            var fileBytes = ms.ToArray();
+            form.Add(new ByteArrayContent(fileBytes, 0, fileBytes.Length), "file", file.FileName);
+
+            var response = await _httpClient.PostAsync($"{baseUrl}/api/CorpusWords/{corpusTypeId}", form);
+            var responseCode = response.IsSuccessStatusCode;
+            if (responseCode)
+                return true;
+
+            return false;
+        }
+
         public async Task<bool> DeleteCorpusWordAsync(int corpusWordId, string baseUrl)
         {
             var response = await _httpClient.DeleteAsync($"{baseUrl}/api/CorpusWords/{corpusWordId}");
@@ -62,7 +80,7 @@ namespace SentimentAnalysisTool.Services.Implementations
         }
 
         public async Task<IEnumerable<CorpusWordModel>> FetchCorpusWordsAsync(int? corpusTypeId, string baseUrl)
-        {            
+        {
             var response = await _httpClient.GetAsync($"{baseUrl}/api/CorpusWords/{corpusTypeId}");
             var responseCode = response.IsSuccessStatusCode;
 
