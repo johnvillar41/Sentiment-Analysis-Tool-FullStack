@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<SentimentAnalysisTool.Data.Models.CorpusWordModel>
-<button type="button" class="btn btn-secondary mb-1">Add Corpus words <i class="fas fa-plus-circle"></i></button>
+<button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#corpus-record-modal">
+    Add Corpus words <i class="fas fa-plus-circle"></i>
+</button>
+@await Html.PartialAsync("_AddCorpusWordModalPartial", new UploadCorpusWordViewModel())
 <table class="table">
     <thead>
         <tr>

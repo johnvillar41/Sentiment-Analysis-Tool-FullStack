@@ -386,3 +386,4 @@ C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\TextProcessing\_CorpusWordPartial.cshtml.g.cs
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\TextProcessing\_AddSlangRecordModalPartial.cshtml.g.cs
 C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\TextProcessing\_AddAbbreviationModalPartial.cshtml.g.cs
+C:\Users\Villar\Desktop\SentimentAnalysisToolFrontEnd\SentimentAnalysisTool.Web\obj\Debug\net5.0\Razor\Views\TextProcessing\_AddCorpusWordModalPartial.cshtml.g.cs
