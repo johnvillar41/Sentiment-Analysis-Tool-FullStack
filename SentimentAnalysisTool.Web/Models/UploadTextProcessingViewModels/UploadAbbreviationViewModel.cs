@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using SentimentAnalysisTool.Web.Models.UploadTextProcessingViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace SentimentAnalysisTool.Web.Models
 {
-    public class UploadSlangFileViewModel
+    public class UploadAbbreviationViewModel : UploadTextProcessingViewModel
     {
-        public IFormFile File { get; set; }
-        public int CorpusTypeId { get; set; }
+
     }
 }

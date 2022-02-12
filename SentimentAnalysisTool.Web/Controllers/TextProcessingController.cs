@@ -68,6 +68,13 @@ namespace SentimentAnalysisTool.Web.Controllers
             return PartialView("_AbbreviationPartial", abbreviations);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadCorpusWordsFile([FromForm] UploadCorpusWordViewModel corpusFile)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IActionResult> LoadCorpusTypeData([FromQuery] int corpusTypeId)
         {
             var corpusTypes = await _corpusTypeService.FetchCorpusTypesAsync(BaseUrl);
