@@ -48,7 +48,7 @@
         $(".custom-file-label").html(name);
     });
     $('#corpus-record-file').change(function () {
-        var fileExtension = ['txt'];
+        var fileExtension = ['csv', 'xlsx'];
         if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
             $('#warningMessage').show();
             $('#abbrev-upload-file').val("");
