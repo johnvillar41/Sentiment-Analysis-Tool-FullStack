@@ -34,7 +34,7 @@ namespace SentimentAnalysisTool.Web.Helpers.Implementations
                         {
                             falsePositives++;
                         }
-                        if (item.CommentPolarity.Equals(SentimentType.Negative)
+                        if (item.CommentPolarity.Equals(SentimentType.Positive)
                             && item.AlgorithmnGrade.SentimentScore.Equals(SentimentType.Negative.ToString()))
                         {
                             falseNegatives++;
@@ -59,7 +59,7 @@ namespace SentimentAnalysisTool.Web.Helpers.Implementations
                         {
                             falsePositives++;
                         }
-                        if (item.CommentPolarity.Equals(SentimentType.Negative)
+                        if (item.CommentPolarity.Equals(SentimentType.Positive)
                             && item.AlgorithmnGrade.HybridScore.Equals(SentimentType.Negative.ToString()))
                         {
                             falseNegatives++;
@@ -84,7 +84,7 @@ namespace SentimentAnalysisTool.Web.Helpers.Implementations
                         {
                             falsePositives++;
                         }
-                        if (item.CommentPolarity.Equals(SentimentType.Negative)
+                        if (item.CommentPolarity.Equals(SentimentType.Positive)
                             && item.AlgorithmnGrade.CompoundScore.Equals(SentimentType.Negative.ToString()))
                         {
                             falseNegatives++;
