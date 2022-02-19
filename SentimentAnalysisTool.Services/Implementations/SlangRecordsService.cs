@@ -18,6 +18,7 @@ namespace SentimentAnalysisTool.Services.Implementations
         {
             _httpClient = httpClient;
             _httpClient.DefaultRequestHeaders.Add("Apikey", "MyUltimateSecretKeyNYAHAHAHAHAHAHAHA");
+            _httpClient.Timeout = TimeSpan.FromMinutes(15);
         }
         public async Task<bool> AddSlangRecordAsync(SlangRecordModel slangRecord, string baseUrl)
         {
