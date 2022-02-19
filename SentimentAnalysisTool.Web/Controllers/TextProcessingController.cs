@@ -63,7 +63,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                 return BadRequest();
 
             _ = await _abbreviationsService.AddAbbreviationsAsync(abbreviationFile.File, abbreviationFile.CorpusTypeId, BaseUrl);
-            var abbreviations = _abbreviationsService.FetchAbbreviationsAsync(abbreviationFile.CorpusTypeId, BaseUrl);
+            var abbreviations = await _abbreviationsService.FetchAbbreviationsAsync(abbreviationFile.CorpusTypeId, BaseUrl);
             ViewBag.CorpusTypeId = abbreviationFile.CorpusTypeId;
             return PartialView("_AbbreviationPartial", abbreviations);
         }
@@ -76,7 +76,7 @@ namespace SentimentAnalysisTool.Web.Controllers
                 return BadRequest();
 
             _ = await _corpusWordsService.AddCorpusWordsAsync(corpusFile.File, corpusFile.CorpusTypeId, BaseUrl);
-            var corpusWords = _corpusWordsService.FetchCorpusWordsAsync(corpusFile.CorpusTypeId, BaseUrl);
+            var corpusWords = await _corpusWordsService.FetchCorpusWordsAsync(corpusFile.CorpusTypeId, BaseUrl);
             ViewBag.CorpusTypeId = corpusFile.CorpusTypeId;
             return PartialView("_CorpusWordPartial", corpusWords);
         }
