@@ -8,20 +8,27 @@
             </div>
             <div class="card-body">
                 <div class="d-flex">
-                    <div class="mr-auto">
-                        @foreach (var item in Model.CorpusTypes)
-                        {
-                            <a type="button" class="btn btn-secondary"
-                               data-ajax="true"
-                               data-ajax-update="#corpus-data-panel"
-                               data-ajax-loading="#spinner-upload"
-                               asp-controller="TextProcessing"
-                               asp-action="LoadCorpusTypeData"
-                               asp-route-corpusTypeId="@item.CorpusTypeId">
-                                @item.CorpusTypeName
-                                <i class="fas fa-book"></i>
-                            </a>
-                        }
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Choose Corpus Type  <i class="fas fa-book"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            @foreach (var item in Model.CorpusTypes)
+                            {
+                                <a class="dropdown-item"
+                                   data-ajax="true"
+                                   data-ajax-update="#corpus-data-panel"
+                                   data-ajax-loading="#spinner-upload"
+                                   asp-controller="TextProcessing"
+                                   asp-action="LoadCorpusTypeData"
+                                   asp-route-corpusTypeId="@item.CorpusTypeId">
+                                    @item.CorpusTypeName
+                                   
+                                </a>
+
+
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
