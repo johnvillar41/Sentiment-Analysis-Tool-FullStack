@@ -20,10 +20,11 @@
     });
 
     promptNoNetwork = function (response) {
+        console.log(response);
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Cannot connect to server! Please try again later..',
+            text: response.responseText,
         });
     }
     promptHasNetwork = function (response) {

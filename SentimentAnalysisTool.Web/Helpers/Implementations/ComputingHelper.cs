@@ -92,13 +92,14 @@ namespace SentimentAnalysisTool.Web.Helpers.Implementations
                     }
                     break;
             }
-            return new ConfusionMatrixViewModel()
+            var value = new ConfusionMatrixViewModel()
             {
                 Accuracy = ((truePositives + trueNegatives) / (truePositives + trueNegatives + falsePositives + falseNegatives)) * 100,
-                Precision = ((truePositives)/(truePositives + falsePositives)) * 100,
+                Precision = ((truePositives) / (truePositives + falsePositives)) * 100,
                 Recall = ((truePositives) / (truePositives + falseNegatives)) * 100,
-                F1_Score = ((2*truePositives)/(2*truePositives + falsePositives + falseNegatives)) * 100
+                F1_Score = ((2 * truePositives) / (2 * truePositives + falsePositives + falseNegatives)) * 100
             };
+            return value;
         }
 
         public double ComputeTextProcessingAccuracy(RecordDisplayViewModel record)
