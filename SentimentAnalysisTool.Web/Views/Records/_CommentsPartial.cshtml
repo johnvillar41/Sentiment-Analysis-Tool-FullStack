@@ -14,8 +14,6 @@ else
                     <th scope="col">Comment </th>
                     <th scope="col">Transformed Comment </th>
                     <th scope="col">Score </th>
-                    <th scope="col">Sentiment </th>
-                    <th scope="col">Date </th>
                     <th scope="col">Action </th>
                 </tr>
             </thead>
@@ -37,11 +35,6 @@ else
                         {
                             <td><span class="badge badge-pill badge-secondary">@Model[i].CommentScore / 5</span></td>
                         }
-
-                        @if (Model[i].CommentPolarity == SentimentAnalysisTool.Data.Enums.SentimentType.Positive)
-                        {
-                            <td><span class="badge badge-light">@Model[i].CommentPolarity <i class="fas fa-smile"></i></span></td>
-                        }
                         else if (Model[i].CommentPolarity == SentimentAnalysisTool.Data.Enums.SentimentType.Negative)
                         {
                             <td><span class="badge badge-secondary">@Model[i].CommentPolarity <i class="fas fa-sad-tear"></i></span></td>
@@ -49,9 +42,7 @@ else
                         else
                         {
                             <td><span class="badge badge-secondary">@Model[i].CommentPolarity</span></td>
-                        }
-
-                        <td>@Model[i].Date</td>
+                        }                       
                         <td>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#resultModal_@i">
