@@ -55,29 +55,29 @@
                     <p>Delete Slang Words? </p>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" asp-for="@Model.ShouldDeleteSlangs" value="true" required>
-                        <label class="form-check-label">True</label>
+                        <label class="form-check-label">Yes</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" asp-for="@Model.ShouldDeleteSlangs" value="false" required>
-                        <label class="form-check-label">False</label>
+                        <label class="form-check-label">No</label>
                     </div>
                     <p class="mt-3">Convert Abbreviations? </p>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" asp-for="@Model.ShouldConvertAbbreviations" value="true" required>
-                        <label class="form-check-label">True</label>
+                        <label class="form-check-label">Yes</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" asp-for="@Model.ShouldConvertAbbreviations" value="false" required>
-                        <label class="form-check-label">False</label>
+                        <label class="form-check-label">No</label>
                     </div>
                     <p class="mt-3">Convert words that are not in wordnet? </p>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" asp-for="@Model.ShouldConvertSynonyms" value="true" required>
-                        <label class="form-check-label">True</label>
+                        <label class="form-check-label">Yes</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" asp-for="@Model.ShouldConvertSynonyms" value="false" required>
-                        <label class="form-check-label">False</label>
+                        <label class="form-check-label">No</label>
                     </div>
                     <p class="mt-3">Subject Matter</p>
                     <input type="text" class="form-control" name="subjectMatter" />
