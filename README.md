@@ -16,5 +16,14 @@
   - Modal for Confusion Matrix Percentage
 
 # Screenshots
-
+<b>Main Screen</b>
+![CHEESE!](Login.png)
+<b>Parameters</b>
+![CHEESE!](Parameters.png)
+<b>Dashboard</b>
+![CHEESE!](Dashboard.png)
+<b>TextProcessing Accuracy Percentage</b>
+![CHEESE!](TextAccuracy.png)
+<b>Confusion Matrix Percentage</b>
+![CHEESE!](Confusion.png)
 <br/>
